@@ -19,6 +19,7 @@ specifiers:
   prettier: ^2.5.1
   react: ^17.0.2
   react-dom: ^17.0.2
+  react-location: ^3.3.4
   typescript: ^4.4.4
   vite: ^2.7.2
 
@@ -29,6 +30,7 @@ dependencies:
   '@mui/material': 5.4.0_6226f8758b5b21b5515ad844c1caeb22
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
+  react-location: 3.3.4_react-dom@17.0.2+react@17.0.2
 
 devDependencies:
   '@types/react': 17.0.39
@@ -2250,6 +2252,18 @@ packages:
 
   /react-is/17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
+    dev: false
+
+  /react-location/3.3.4_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-XA1FLPh8qAO1aMmw80nY+QvLiPnQ1E2nXEWCpTTlqk1kQ+s9LsixMInGgzt/6AC6NnHW6PavpwnCZjs3e/ezow==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@babel/runtime': 7.17.0
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
     dev: false
 
   /react-refresh/0.11.0:
