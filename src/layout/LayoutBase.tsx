@@ -15,7 +15,7 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useState, useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 type navigationItem = { title: string; icon: JSX.Element; path: string };
@@ -38,7 +38,12 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [bottomNavPath, setBottomNavPath] = useState(navigation[0].path);
+  const [navCurrentPath, setNavCurrentPath] = useState<string>('');
+
+  useEffect(() => {
+    // slice `/path` to `path`
+    setNavCurrentPath(location.pathname.slice(1));
+  }, [location]);
 
   return (
     <>
@@ -104,7 +109,7 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
                 <ListItemButton
                   key={index}
                   onClick={() => navigate(path)}
-                  selected={path === location.pathname.slice(1)}
+                  selected={path === navCurrentPath}
                   sx={{
                     '&.Mui-selected': {
                       color: 'primary.main',
@@ -150,10 +155,9 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
       >
         <BottomNavigation
           showLabels
-          value={bottomNavPath}
+          value={navCurrentPath}
           onChange={(_, newPath) => {
             navigate(newPath);
-            setBottomNavPath(newPath);
           }}
         >
           {navigation.map(({ title, icon, path }, index) => (
