@@ -5,18 +5,21 @@ import {
   Button,
   Checkbox,
   FormControlLabel,
-  Grid,
   IconButton,
   InputAdornment,
-  Link,
   TextField,
   Typography,
 } from '@mui/material';
-import React from 'react';
 import { useBoolean } from 'ahooks';
+import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
 
 const Login: React.FC = () => {
   const [showPassword, { toggle }] = useBoolean();
+
+  const { control, handleSubmit } = useForm({
+    defaultValues: { username: '', password: '', rememberMe: true },
+  });
 
   return (
     <Box
@@ -35,58 +38,73 @@ const Login: React.FC = () => {
       </Typography>
       <Box
         component="form"
-        onSubmit={() => console.log('submit')}
+        onSubmit={handleSubmit((data) => console.log(data))}
         noValidate
         sx={{ mt: 1 }}
       >
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="username"
-          label="用户名"
+        <Controller
           name="username"
-          autoComplete="username"
-          autoFocus
+          control={control}
+          rules={{ required: '必填' }}
+          render={({ field, fieldState: { invalid, error } }) => (
+            <TextField
+              margin="normal"
+              fullWidth
+              id="username"
+              label="用户名"
+              autoComplete="username"
+              autoFocus
+              error={invalid}
+              helperText={invalid && error?.message}
+              {...field}
+            />
+          )}
         />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
+        <Controller
           name="password"
-          label="密码"
-          type={showPassword ? 'text' : 'password'}
-          id="password"
-          autoComplete="current-password"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={toggle}>
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
+          control={control}
+          rules={{ required: '必填' }}
+          render={({ field, fieldState: { invalid, error } }) => (
+            <TextField
+              margin="normal"
+              fullWidth
+              label="密码"
+              type={showPassword ? 'text' : 'password'}
+              id="password"
+              autoComplete="current-password"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={toggle}>
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              error={invalid}
+              helperText={invalid ? error?.message : '忘记密码? 联系管理员重置'}
+              {...field}
+            />
+          )}
         />
-        <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
-          label="记住我"
+        <Controller
+          name="rememberMe"
+          control={control}
+          render={({ field: { value, ...field } }) => (
+            <FormControlLabel
+              control={<Checkbox color="primary" checked={value} {...field} />}
+              label="记住我"
+            />
+          )}
         />
         <Button
           type="submit"
           fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2 }}
+          sx={{ mt: 1, mb: 2 }}
         >
           登录
         </Button>
-        <Grid container>
-          <Grid item xs>
-            <Link variant="body2" component="button">
-              忘记密码
-            </Link>
-          </Grid>
-        </Grid>
       </Box>
     </Box>
   );
