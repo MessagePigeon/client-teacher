@@ -4,10 +4,14 @@ import {
   History,
   ManageAccountsOutlined,
 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import LayoutBase from './LayoutBase';
 
 const UserLayout: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <LayoutBase
       navigation={[
@@ -21,8 +25,16 @@ const UserLayout: React.FC = () => {
         },
       ]}
       isLogin
-      logout={() => console.log('logout')}
+      logout={() => navigate('login')}
       teacherName="XXX"
+      MainContainer={({ children }) => (
+        <Box
+          component="main"
+          sx={{ mt: 10, ml: { xs: 2, md: '216px' }, mr: 2 }}
+        >
+          {children}
+        </Box>
+      )}
     />
   );
 };

@@ -15,15 +15,17 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 type navigationItem = { title: string; icon: JSX.Element; path: string };
+
 interface LayoutBaseProps {
   navigation: navigationItem[];
   isLogin?: boolean;
   logout?: () => void;
   teacherName?: string;
+  MainContainer: React.FC<{ children: ReactNode }>;
 }
 
 const LayoutBase: React.FC<LayoutBaseProps> = ({
@@ -31,6 +33,7 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
   isLogin,
   logout,
   teacherName,
+  MainContainer,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -124,9 +127,9 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
           </Box>
         </Drawer>
       </Box>
-      <Box component="main" sx={{ mt: 10, ml: { xs: 2, md: '216px' }, mr: 2 }}>
+      <MainContainer>
         <Outlet />
-      </Box>
+      </MainContainer>
       <Paper
         sx={{
           position: 'fixed',
