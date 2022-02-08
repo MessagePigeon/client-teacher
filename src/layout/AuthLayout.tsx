@@ -11,7 +11,11 @@ const AuthLayout: React.FC = () => {
         { title: '注册', icon: <HistoryEdu />, path: 'register' },
       ]}
       MainContainer={({ children }) => (
-        <Container component="main" maxWidth="xs" sx={{ mt: 10 }}>
+        <Container
+          component="main"
+          maxWidth="xs"
+          sx={{ mt: 10, mb: { xs: 10, md: 2 } }}
+        >
           {children}
         </Container>
       )}

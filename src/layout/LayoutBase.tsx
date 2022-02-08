@@ -144,6 +144,7 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
           left: 0,
           right: 0,
           display: { xs: 'block', md: 'none' },
+          zIndex: (theme) => theme.zIndex.drawer + 1,
         }}
         elevation={3}
       >

@@ -30,7 +30,12 @@ const UserLayout: React.FC = () => {
       MainContainer={({ children }) => (
         <Box
           component="main"
-          sx={{ mt: 10, ml: { xs: 2, md: '216px' }, mr: 2 }}
+          sx={{
+            mt: 10,
+            mb: { xs: 10, md: 2 },
+            ml: { xs: 2, md: '216px' },
+            mr: 2,
+          }}
         >
           {children}
         </Box>
