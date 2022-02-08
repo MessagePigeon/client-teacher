@@ -105,6 +105,12 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
                   key={index}
                   onClick={() => navigate(path)}
                   selected={path === location.pathname.slice(1)}
+                  sx={{
+                    '&.Mui-selected': {
+                      color: 'primary.main',
+                      '& .MuiListItemIcon-root': { color: 'primary.main' },
+                    },
+                  }}
                 >
                   <ListItemIcon>{icon}</ListItemIcon>
                   <ListItemText primary={title} />
@@ -118,6 +124,7 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
                     variant="contained"
                     sx={{ width: '100%' }}
                     onClick={logout}
+                    startIcon={<Logout />}
                   >
                     退出登录
                   </Button>
