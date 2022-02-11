@@ -15,7 +15,7 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import React, { ReactNode, useState, useEffect } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 type navigationItem = { title: string; icon: JSX.Element; path: string };
