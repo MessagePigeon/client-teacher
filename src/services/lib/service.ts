@@ -3,16 +3,20 @@ import { toast } from 'react-toastify';
 
 const service = axios.create({ baseURL: '/teacher' });
 
-const handleError = (error: AxiosError) => {
-  const { response } = error;
-  if (response) {
-    toast.error(`${response?.status}: ${response?.data.message}`);
-  } else {
-    toast.error('Server Error');
-  }
-  return Promise.reject(error);
-};
+service.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  config.headers!.Authorization = `Bearer ${token}`;
+  return config;
+});
 
-service.interceptors.response.use(undefined, handleError);
+service.interceptors.response.use(undefined, (error: AxiosError) => {
+  const { response } = error;
+  toast.error(
+    response
+      ? `${response?.status}: ${response?.data.message}`
+      : 'Server Error',
+  );
+  return Promise.reject(error);
+});
 
 export default service;
