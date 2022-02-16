@@ -10,15 +10,35 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useBoolean } from 'ahooks';
+import { useBoolean, useRequest } from 'ahooks';
+import { AxiosResponse } from 'axios';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { API, LoginResponse } from '../../services/api';
 
 const Login: React.FC = () => {
-  const [showPassword, { toggle }] = useBoolean();
+  const [showPassword, { toggle: toggleShowPassword }] = useBoolean();
+  const [rememberMe, { toggle: toggleRememberMe }] = useBoolean(true);
 
   const { control, handleSubmit } = useForm({
     defaultValues: { username: '', password: '', rememberMe: true },
+  });
+
+  const navigate = useNavigate();
+
+  const onRequestSuccess = (response: AxiosResponse<LoginResponse, any>) => {
+    if (rememberMe) {
+      localStorage.setItem('token', response.data.token);
+    }
+    toast.success('Login Success');
+    navigate('/send-message');
+  };
+
+  const { run, loading } = useRequest(API.login, {
+    manual: true,
+    onSuccess: onRequestSuccess,
   });
 
   return (
@@ -38,7 +58,7 @@ const Login: React.FC = () => {
       </Typography>
       <Box
         component="form"
-        onSubmit={handleSubmit((data) => console.log(data))}
+        onSubmit={handleSubmit((formData) => run(formData))}
         noValidate
         sx={{ mt: 1 }}
       >
@@ -75,7 +95,7 @@ const Login: React.FC = () => {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton onClick={toggle}>
+                    <IconButton onClick={toggleShowPassword}>
                       {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
@@ -87,21 +107,22 @@ const Login: React.FC = () => {
             />
           )}
         />
-        <Controller
-          name="rememberMe"
-          control={control}
-          render={({ field: { value, ...field } }) => (
-            <FormControlLabel
-              control={<Checkbox color="primary" checked={value} {...field} />}
-              label="记住我"
+        <FormControlLabel
+          control={
+            <Checkbox
+              color="primary"
+              checked={rememberMe}
+              onChange={toggleRememberMe}
             />
-          )}
+          }
+          label="记住我"
         />
         <Button
           type="submit"
           fullWidth
           variant="contained"
           sx={{ mt: 1, mb: 2 }}
+          disabled={loading}
         >
           登录
         </Button>

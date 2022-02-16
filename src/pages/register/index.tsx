@@ -8,9 +8,12 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useBoolean } from 'ahooks';
+import { useBoolean, useRequest } from 'ahooks';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { API } from '../../services/api';
 
 const Register: React.FC = () => {
   const [showPassword, { toggle: toggleShowPassword }] = useBoolean();
@@ -26,6 +29,15 @@ const Register: React.FC = () => {
     },
   });
   const watchOriginPassword = watch('password');
+
+  const navigate = useNavigate();
+  const { run, loading } = useRequest(API.register, {
+    manual: true,
+    onSuccess() {
+      toast.success('Register Success. Please Login');
+      navigate('/login');
+    },
+  });
 
   return (
     <Box
@@ -44,7 +56,7 @@ const Register: React.FC = () => {
       </Typography>
       <Box
         component="form"
-        onSubmit={handleSubmit((data) => console.log(data))}
+        onSubmit={handleSubmit(({ rePassword, ...formData }) => run(formData))}
         noValidate
         sx={{ mt: 1 }}
       >
@@ -188,6 +200,7 @@ const Register: React.FC = () => {
           fullWidth
           variant="contained"
           sx={{ mt: 1, mb: 2 }}
+          disabled={loading}
         >
           注册
         </Button>
