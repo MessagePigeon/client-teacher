@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
 
-type Student = { online: boolean; studentId: string; remark: string };
+type Student = { id: string; online: boolean; remark: string };
 
-export const students = atom<Student[]>({ key: 'students', default: [] });
+export const studentsState = atom<Student[]>({ key: 'students', default: [] });

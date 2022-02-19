@@ -12,7 +12,7 @@ export type RegisterRequestBody = {
 
 export type InitResponse = { username: string; name: string };
 
-export type Student = { online: boolean; studentId: string; remark: string };
+type Student = { id: string; online: boolean; remark: string };
 
 export class API {
   static async login(body: LoginRequestBody) {
