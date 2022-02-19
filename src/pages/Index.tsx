@@ -1,9 +1,9 @@
 import { useMount } from 'ahooks';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoadingModal from '../../components/LoadingModal';
+import LoadingModal from '../components/LoadingModal';
 
-const NotFound: React.FC = () => {
+const Index: React.FC = () => {
   const navigate = useNavigate();
   useMount(() => {
     const token = localStorage.getItem('token');
@@ -16,4 +16,4 @@ const NotFound: React.FC = () => {
   return <LoadingModal open />;
 };
 
-export default NotFound;
+export default Index;

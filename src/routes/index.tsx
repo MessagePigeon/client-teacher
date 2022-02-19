@@ -4,7 +4,7 @@ import AuthLayout from '../layout/AuthLayout';
 import UserLayout from '../layout/UserLayout';
 import Login from '../pages/auth/login';
 import Register from '../pages/auth/register';
-import NotFound from '../pages/error/NotFound';
+import Index from '../pages/Index';
 import AddDevice from '../pages/user/add-device';
 import History from '../pages/user/history';
 import PersonalSettings from '../pages/user/personal-settings';
@@ -13,7 +13,7 @@ import SendMessage from '../pages/user/send-message';
 const Routers: React.FC = () => {
   return (
     <Routes>
-      <Route path="*" element={<NotFound />} />
+      <Route path="" element={<Index />} />
       <Route element={<UserLayout />}>
         <Route path="send-message" element={<SendMessage />} />
         <Route path="history" element={<History />} />
@@ -21,6 +21,7 @@ const Routers: React.FC = () => {
         <Route path="personal-settings" element={<PersonalSettings />} />
       </Route>
       <Route element={<AuthLayout />}>
+        <Route path="" element={<Login />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
       </Route>
