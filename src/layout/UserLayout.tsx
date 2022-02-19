@@ -5,13 +5,24 @@ import {
   ManageAccountsOutlined,
 } from '@mui/icons-material';
 import { Box } from '@mui/material';
+import { useRequest } from 'ahooks';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import LoadingModal from '../components/LoadingModal';
+import { API } from '../services/api';
 import NetworkErrorModal from './components/NetworkErrorModal';
 import LayoutBase from './LayoutBase';
 
 const UserLayout: React.FC = () => {
   const navigate = useNavigate();
+
+  const { data: requestData, loading } = useRequest(API.init, {
+    onError() {
+      localStorage.removeItem('token');
+      navigate('login');
+    },
+  });
 
   return (
     <>
@@ -27,8 +38,12 @@ const UserLayout: React.FC = () => {
           },
         ]}
         isLogin
-        logout={() => navigate('login')}
-        teacherName="XXX"
+        logout={() => {
+          localStorage.removeItem('token');
+          navigate('login');
+          toast.info('Logout Success');
+        }}
+        teacherName={requestData?.data.name}
         MainContainer={({ children }) => (
           <Box
             component="main"
@@ -44,6 +59,7 @@ const UserLayout: React.FC = () => {
         )}
       />
       <NetworkErrorModal />
+      <LoadingModal open={loading} />
     </>
   );
 };
