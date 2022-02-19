@@ -1,25 +1,22 @@
-import { LockOutlined, Visibility, VisibilityOff } from '@mui/icons-material';
+import { LockOutlined } from '@mui/icons-material';
 import {
   Avatar,
   Box,
   Button,
   Checkbox,
   FormControlLabel,
-  IconButton,
-  InputAdornment,
-  TextField,
   Typography,
 } from '@mui/material';
 import { useBoolean, useRequest } from 'ahooks';
 import { AxiosResponse } from 'axios';
 import React from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import FormTextField from '../../../components/FormTextField';
 import { API, LoginResponse } from '../../../services/api';
 
 const Login: React.FC = () => {
-  const [showPassword, { toggle: toggleShowPassword }] = useBoolean();
   const [rememberMe, { toggle: toggleRememberMe }] = useBoolean(true);
 
   const { control, handleSubmit } = useForm({
@@ -62,50 +59,20 @@ const Login: React.FC = () => {
         noValidate
         sx={{ mt: 1 }}
       >
-        <Controller
+        <FormTextField
           name="username"
           control={control}
-          rules={{ required: '必填' }}
-          render={({ field, fieldState: { invalid, error } }) => (
-            <TextField
-              margin="normal"
-              fullWidth
-              id="username"
-              label="用户名"
-              autoComplete="username"
-              autoFocus
-              error={invalid}
-              helperText={invalid && error?.message}
-              {...field}
-            />
-          )}
+          label="用户名"
+          autoComplete="username"
+          autoFocus
         />
-        <Controller
+        <FormTextField
           name="password"
           control={control}
-          rules={{ required: '必填' }}
-          render={({ field, fieldState: { invalid, error } }) => (
-            <TextField
-              margin="normal"
-              fullWidth
-              label="密码"
-              type={showPassword ? 'text' : 'password'}
-              id="password"
-              autoComplete="current-password"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={toggleShowPassword}>
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              error={invalid}
-              helperText={invalid ? error?.message : '忘记密码? 联系管理员重置'}
-              {...field}
-            />
-          )}
+          label="密码"
+          autoComplete="current-password"
+          defaultHelperText="忘记密码? 联系管理员重置"
+          password
         />
         <FormControlLabel
           control={

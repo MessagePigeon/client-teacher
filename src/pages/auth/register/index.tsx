@@ -1,24 +1,14 @@
-import { LockOutlined, Visibility, VisibilityOff } from '@mui/icons-material';
-import {
-  Avatar,
-  Box,
-  Button,
-  IconButton,
-  InputAdornment,
-  TextField,
-  Typography,
-} from '@mui/material';
-import { useBoolean, useRequest } from 'ahooks';
+import { LockOutlined } from '@mui/icons-material';
+import { Avatar, Box, Button, Typography } from '@mui/material';
+import { useRequest } from 'ahooks';
 import React from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import FormTextField from '../../../components/FormTextField';
 import { API } from '../../../services/api';
 
 const Register: React.FC = () => {
-  const [showPassword, { toggle: toggleShowPassword }] = useBoolean();
-  const [showRegisterCode, { toggle: toggleShowRegisterCode }] = useBoolean();
-
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
       username: '',
@@ -60,140 +50,57 @@ const Register: React.FC = () => {
         noValidate
         sx={{ mt: 1 }}
       >
-        <Controller
+        <FormTextField
           name="username"
+          label="用户名"
           control={control}
           rules={{
-            required: '必填',
             pattern: {
               value: /^([a-zA-Z]+[0-9-_]*)+$/,
               message: '请使用大小写字母、数字、中划线、下划线',
             },
           }}
-          render={({ field, fieldState: { invalid, error } }) => (
-            <TextField
-              margin="normal"
-              fullWidth
-              id="username"
-              label="用户名"
-              autoComplete="username"
-              autoFocus
-              error={invalid}
-              helperText={invalid ? error?.message : '注册后无法修改'}
-              {...field}
-            />
-          )}
+          autoFocus
+          autoComplete="username"
+          defaultHelperText="注册后无法修改"
         />
-        <Controller
+        <FormTextField
           name="name"
+          label="真实姓名"
           control={control}
-          rules={{ required: '必填' }}
-          render={({ field, fieldState: { invalid, error } }) => (
-            <TextField
-              margin="normal"
-              fullWidth
-              id="name"
-              label="真实姓名"
-              autoComplete="name"
-              error={invalid}
-              helperText={invalid ? error?.message : '将用于显示在消息标题中'}
-              {...field}
-            />
-          )}
+          autoComplete="name"
+          defaultHelperText="将用于显示在消息标题中"
         />
-        <Controller
+        <FormTextField
           name="password"
+          label="密码"
           control={control}
           rules={{
-            required: '必填',
             minLength: { value: 5, message: '至少五个字符' },
           }}
-          render={({ field, fieldState: { invalid, error } }) => (
-            <TextField
-              margin="normal"
-              fullWidth
-              label="密码"
-              type={showPassword ? 'text' : 'password'}
-              id="password"
-              autoComplete="new-password"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={toggleShowPassword}>
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              error={invalid}
-              helperText={invalid && error?.message}
-              {...field}
-            />
-          )}
+          autoComplete="new-password"
+          password
         />
-        <Controller
+        <FormTextField
           name="rePassword"
+          label="重复密码"
           control={control}
           rules={{
-            required: '必填',
             validate: (value) =>
               value === watchOriginPassword || '重复密码不正确',
           }}
-          render={({ field, fieldState: { invalid, error } }) => (
-            <TextField
-              margin="normal"
-              fullWidth
-              label="重复密码"
-              type={showPassword ? 'text' : 'password'}
-              id="re-password"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={toggleShowPassword}>
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              error={invalid}
-              helperText={invalid && error?.message}
-              {...field}
-            />
-          )}
+          password
         />
-        <Controller
+        <FormTextField
           name="registerCode"
+          label="注册码"
           control={control}
           rules={{
-            required: '必填',
             minLength: { value: 32, message: '注册码长度需32位' },
             maxLength: { value: 32, message: '注册码长度仅32位' },
           }}
-          render={({ field, fieldState: { invalid, error } }) => (
-            <TextField
-              margin="normal"
-              fullWidth
-              label="注册码"
-              type={showRegisterCode ? 'text' : 'password'}
-              id="register-code"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={toggleShowRegisterCode}>
-                      {showRegisterCode ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              error={invalid}
-              helperText={
-                invalid
-                  ? error?.message
-                  : field.value.length === 0 && '联系管理员可获取注册码'
-              }
-              {...field}
-            />
-          )}
+          password
+          defaultHelperText="联系管理员可获取注册码"
         />
         <Button
           type="submit"
