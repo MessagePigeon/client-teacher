@@ -19,10 +19,10 @@ const NetworkErrorModal: React.FC = () => {
   return (
     <Backdrop
       open={!online}
-      sx={{ zIndex: (theme) => theme.zIndex.drawer + 999, color: '#fff' }}
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 999 }}
     >
       <Alert severity="warning" variant="filled">
-        Network Error
+        Network Offline
       </Alert>
     </Backdrop>
   );
