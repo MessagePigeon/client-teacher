@@ -47,7 +47,7 @@ const UserLayout: React.FC = () => {
           {
             title: '个人设置',
             icon: <ManageAccountsOutlined />,
-            path: 'personal-settings',
+            path: 'settings',
           },
         ]}
         isLogin

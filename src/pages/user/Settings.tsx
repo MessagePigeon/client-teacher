@@ -1,7 +1,7 @@
 import React from 'react';
 
-const PersonalSettings = () => {
+const Settings: React.FC = () => {
   return <div>个人设置</div>;
 };
 
-export default PersonalSettings;
+export default Settings;

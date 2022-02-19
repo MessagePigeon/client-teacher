@@ -5,10 +5,10 @@ import UserLayout from '../layout/UserLayout';
 import Login from './auth/Login';
 import Register from './auth/Register';
 import Index from './Index';
-import AddDevice from './user/add-device';
-import History from './user/history';
-import PersonalSettings from './user/personal-settings';
-import SendMessage from './user/send-message';
+import AddDevice from './user/AddDevice';
+import History from './user/History';
+import Settings from './user/Settings';
+import SendMessage from './user/SendMessage';
 
 const Routers: React.FC = () => {
   return (
@@ -18,7 +18,7 @@ const Routers: React.FC = () => {
         <Route path="send-message" element={<SendMessage />} />
         <Route path="history" element={<History />} />
         <Route path="add-device" element={<AddDevice />} />
-        <Route path="personal-settings" element={<PersonalSettings />} />
+        <Route path="settings" element={<Settings />} />
       </Route>
       <Route element={<AuthLayout />}>
         <Route path="" element={<Login />} />
