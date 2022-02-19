@@ -17,10 +17,14 @@ import LayoutBase from './LayoutBase';
 const UserLayout: React.FC = () => {
   const navigate = useNavigate();
 
-  const { data: requestData, loading } = useRequest(API.init, {
+  const {
+    data: requestData,
+    loading,
+    run,
+  } = useRequest(API.init, {
     onError() {
       localStorage.removeItem('token');
-      navigate('login');
+      navigate('/login');
     },
   });
 
@@ -40,7 +44,7 @@ const UserLayout: React.FC = () => {
         isLogin
         logout={() => {
           localStorage.removeItem('token');
-          navigate('login');
+          navigate('/login');
           toast.info('Logout Success');
         }}
         teacherName={requestData?.data.name}
@@ -57,6 +61,10 @@ const UserLayout: React.FC = () => {
             {children}
           </Box>
         )}
+        navigate={(path) => {
+          run();
+          navigate(path);
+        }}
       />
       <NetworkErrorModal />
       <LoadingModal open={loading} />

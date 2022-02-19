@@ -11,7 +11,7 @@ const AuthLayout: React.FC = () => {
   useMount(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      navigate('send-message');
+      navigate('/send-message');
     }
   });
 
@@ -30,6 +30,7 @@ const AuthLayout: React.FC = () => {
           {children}
         </Container>
       )}
+      navigate={(path) => navigate(path)}
     />
   );
 };

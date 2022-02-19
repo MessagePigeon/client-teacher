@@ -16,7 +16,7 @@ import {
   Typography,
 } from '@mui/material';
 import React, { ReactNode, useEffect, useState } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 type navigationItem = { title: string; icon: JSX.Element; path: string };
 
@@ -26,6 +26,7 @@ interface LayoutBaseProps {
   logout?: () => void;
   teacherName?: string;
   MainContainer: React.FC<{ children: ReactNode }>;
+  navigate: (path: string) => void;
 }
 
 const LayoutBase: React.FC<LayoutBaseProps> = ({
@@ -34,8 +35,8 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
   logout,
   teacherName,
   MainContainer,
+  navigate,
 }) => {
-  const navigate = useNavigate();
   const location = useLocation();
 
   const [navCurrentPath, setNavCurrentPath] = useState<string>('');
