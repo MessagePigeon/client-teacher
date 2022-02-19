@@ -2,13 +2,13 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AuthLayout from '../layout/AuthLayout';
 import UserLayout from '../layout/UserLayout';
-import Login from '../pages/auth/Login';
-import Register from '../pages/auth/Register';
-import Index from '../pages/Index';
-import AddDevice from '../pages/user/add-device';
-import History from '../pages/user/history';
-import PersonalSettings from '../pages/user/personal-settings';
-import SendMessage from '../pages/user/send-message';
+import Login from './auth/Login';
+import Register from './auth/Register';
+import Index from './Index';
+import AddDevice from './user/add-device';
+import History from './user/history';
+import PersonalSettings from './user/personal-settings';
+import SendMessage from './user/send-message';
 
 const Routers: React.FC = () => {
   return (

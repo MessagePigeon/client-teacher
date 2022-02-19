@@ -3,7 +3,7 @@ import { indigo, pink } from '@mui/material/colors';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Routers from './routes';
+import Routers from './pages/Routers';
 
 const theme = createTheme({ palette: { primary: indigo, secondary: pink } });
 
