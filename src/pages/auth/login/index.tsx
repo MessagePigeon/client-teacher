@@ -16,7 +16,7 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { API, LoginResponse } from '../../services/api';
+import { API, LoginResponse } from '../../../services/api';
 
 const Login: React.FC = () => {
   const [showPassword, { toggle: toggleShowPassword }] = useBoolean();

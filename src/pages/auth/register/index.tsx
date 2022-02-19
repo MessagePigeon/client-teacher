@@ -13,7 +13,7 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { API } from '../../services/api';
+import { API } from '../../../services/api';
 
 const Register: React.FC = () => {
   const [showPassword, { toggle: toggleShowPassword }] = useBoolean();
