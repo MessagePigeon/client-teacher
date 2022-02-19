@@ -8,9 +8,9 @@ const Index: React.FC = () => {
   useMount(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      navigate('send-message');
+      navigate('/send-message');
     } else {
-      navigate('login');
+      navigate('/login');
     }
   });
   return <LoadingModal open />;

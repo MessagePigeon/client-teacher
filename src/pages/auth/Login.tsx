@@ -30,7 +30,7 @@ const Login: React.FC = () => {
       localStorage.setItem('token', response.data.token);
     }
     toast.success('Login Success');
-    navigate('send-message');
+    navigate('/send-message');
   };
 
   const { run, loading } = useRequest(API.login, {
