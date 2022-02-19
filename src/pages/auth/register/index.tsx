@@ -25,7 +25,7 @@ const Register: React.FC = () => {
     manual: true,
     onSuccess() {
       toast.success('Register Success. Please Login');
-      navigate('/login');
+      navigate('login');
     },
   });
 
