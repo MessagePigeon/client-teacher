@@ -1,9 +1,20 @@
 import { HistoryEdu, Login } from '@mui/icons-material';
 import { Container } from '@mui/material';
+import { useMount } from 'ahooks';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import LayoutBase from './LayoutBase';
 
 const AuthLayout: React.FC = () => {
+  const navigate = useNavigate();
+
+  useMount(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('send-message');
+    }
+  });
+
   return (
     <LayoutBase
       navigation={[
