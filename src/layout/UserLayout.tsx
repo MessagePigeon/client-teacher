@@ -9,8 +9,10 @@ import { useRequest } from 'ahooks';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 import LoadingModal from '../components/LoadingModal';
 import { API } from '../services/api';
+import { students } from '../state/students';
 import NetworkErrorModal from './components/NetworkErrorModal';
 import LayoutBase from './LayoutBase';
 
@@ -25,6 +27,13 @@ const UserLayout: React.FC = () => {
     onError() {
       localStorage.removeItem('token');
       navigate('/login');
+    },
+  });
+
+  const setStudents = useSetRecoilState(students);
+  const { loading: getStudentsLoading } = useRequest(API.getStudents, {
+    onSuccess(response) {
+      setStudents(response.data);
     },
   });
 
@@ -67,7 +76,7 @@ const UserLayout: React.FC = () => {
         }}
       />
       <NetworkErrorModal />
-      <LoadingModal open={loading} />
+      <LoadingModal open={loading || getStudentsLoading} />
     </>
   );
 };

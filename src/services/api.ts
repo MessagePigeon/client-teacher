@@ -12,6 +12,8 @@ export type RegisterRequestBody = {
 
 export type InitResponse = { username: string; name: string };
 
+export type Student = { online: boolean; studentId: string; remark: string };
+
 export class API {
   static async login(body: LoginRequestBody) {
     return await service.post<LoginResponse>('/login', body);
@@ -23,5 +25,9 @@ export class API {
 
   static async init() {
     return await service.get<InitResponse>('/init');
+  }
+
+  static async getStudents() {
+    return await service.get<Student[]>('/students');
   }
 }
