@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 
-const service = axios.create({ baseURL: '/teacher' });
+const service = axios.create({ baseURL: '/api/teacher' });
 
 service.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
