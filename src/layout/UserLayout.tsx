@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 import LoadingModal from '../components/LoadingModal';
 import { API } from '../services/api';
-import { studentsState } from '../state/students';
+import { connectedStudentsState } from '../state/students';
 import NetworkErrorModal from './components/NetworkErrorModal';
 import LayoutBase from './LayoutBase';
 
@@ -30,7 +30,7 @@ const UserLayout: React.FC = () => {
     },
   });
 
-  const setStudents = useSetRecoilState(studentsState);
+  const setStudents = useSetRecoilState(connectedStudentsState);
   const { loading: getStudentsLoading } = useRequest(API.getStudents, {
     onSuccess(response) {
       setStudents(response.data);
