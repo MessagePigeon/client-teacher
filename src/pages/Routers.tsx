@@ -5,7 +5,7 @@ import UserLayout from '../layout/UserLayout';
 import Login from './auth/Login';
 import Register from './auth/Register';
 import Index from './Index';
-import AddDevice from './user/AddDevice';
+import AddDevice from './user/add-device';
 import History from './user/History';
 import Settings from './user/Settings';
 import SendMessage from './user/SendMessage';
