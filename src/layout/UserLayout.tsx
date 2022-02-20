@@ -4,7 +4,7 @@ import {
   History,
   ManageAccountsOutlined,
 } from '@mui/icons-material';
-import { Box } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { useRequest } from 'ahooks';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -63,11 +63,10 @@ const UserLayout: React.FC = () => {
             sx={{
               mt: 10,
               mb: { xs: 10, md: 2 },
-              ml: { xs: 2, md: '216px' },
-              mr: 2,
+              ml: { md: '200px' },
             }}
           >
-            {children}
+            <Container maxWidth="md">{children}</Container>
           </Box>
         )}
         navigate={(path) => {
