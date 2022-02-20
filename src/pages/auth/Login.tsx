@@ -20,7 +20,7 @@ const Login: React.FC = () => {
   const [rememberMe, { toggle: toggleRememberMe }] = useBoolean(true);
 
   const { control, handleSubmit } = useForm({
-    defaultValues: { username: '', password: '', rememberMe: true },
+    defaultValues: { username: '', password: '' },
   });
 
   const navigate = useNavigate();
