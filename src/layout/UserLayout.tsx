@@ -20,8 +20,8 @@ const UserLayout: React.FC = () => {
   const navigate = useNavigate();
 
   const {
-    data: requestData,
-    loading,
+    data: initData,
+    loading: initLoading,
     run,
   } = useRequest(API.init, {
     onError() {
@@ -56,7 +56,7 @@ const UserLayout: React.FC = () => {
           navigate('/login');
           toast.info('Logout Success');
         }}
-        teacherName={requestData?.data.name}
+        teacherName={initData?.data.name}
         MainContainer={({ children }) => (
           <Box
             component="main"
@@ -75,7 +75,7 @@ const UserLayout: React.FC = () => {
         }}
       />
       <NetworkErrorModal />
-      <LoadingModal open={loading || getStudentsLoading} />
+      <LoadingModal open={initLoading || getStudentsLoading} />
     </>
   );
 };
