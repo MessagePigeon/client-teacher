@@ -12,8 +12,13 @@ export type RegisterRequestBody = {
 
 export type InitResponse = { username: string; name: string };
 
-type Student = { id: string; online: boolean; remark: string };
+export type StudentResponse = { id: string; online: boolean; remark: string };
 
+export type ConnectRequestBody = { connectCode: string; remark: string };
+
+export type ModifyStudentRemarkBody = { studentId: string; newRemark: string };
+
+export type DeleteStudentBody = { studentId: string };
 export class API {
   static async login(body: LoginRequestBody) {
     return await service.post<LoginResponse>('/login', body);
@@ -28,6 +33,18 @@ export class API {
   }
 
   static async getStudents() {
-    return await service.get<Student[]>('/students');
+    return await service.get<StudentResponse[]>('/students');
+  }
+
+  static async connectStudent(body: ConnectRequestBody) {
+    return await service.post('/connect-request', body);
+  }
+
+  static async modifyStudentRemark(body: ModifyStudentRemarkBody) {
+    return await service.patch('/student/remark', body);
+  }
+
+  static async deleteStudent(studentId: string) {
+    return await service.delete('/student', { params: { studentId } });
   }
 }
