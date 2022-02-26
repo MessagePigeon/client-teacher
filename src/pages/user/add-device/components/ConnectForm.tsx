@@ -2,6 +2,7 @@ import { Button, Grid, Theme, useMediaQuery } from '@mui/material';
 import { useRequest } from 'ahooks';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useRecoilState } from 'recoil';
 import FormTextField from '~/components/FormTextField';
@@ -10,6 +11,14 @@ import { pendingStudentsState } from '~/state/students';
 
 const ConnectForm = () => {
   const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.only('xs'));
+
+  const { control, handleSubmit, reset, setValue } = useForm({
+    defaultValues: { connectCode: '', remark: '' },
+  });
+
+  const [searchParams] = useSearchParams();
+  const defaultConnectCode = searchParams.get('connectCode');
+  setValue('connectCode', defaultConnectCode || '');
 
   const [pendingStudents, setPendingStudents] =
     useRecoilState(pendingStudentsState);
@@ -20,10 +29,6 @@ const ConnectForm = () => {
       setPendingStudents([...pendingStudents, response.data]);
       toast.success('Send Connect Request Success');
     },
-  });
-
-  const { control, handleSubmit, reset } = useForm({
-    defaultValues: { connectCode: '', remark: '' },
   });
 
   return (
@@ -42,11 +47,16 @@ const ConnectForm = () => {
           control={control}
           name="connectCode"
           label="设备代码"
-          autoFocus
+          autoFocus={!defaultConnectCode}
         />
       </Grid>
       <Grid item md={6} xs={12}>
-        <FormTextField control={control} name="remark" label="备注名" />
+        <FormTextField
+          control={control}
+          name="remark"
+          label="备注名"
+          autoFocus={!!defaultConnectCode}
+        />
       </Grid>
       <Grid item container md={12} xs={12} justifyContent="end">
         <Button variant="contained" fullWidth={isXs} type="submit">
