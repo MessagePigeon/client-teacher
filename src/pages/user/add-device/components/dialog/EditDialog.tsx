@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 import { useRecoilState } from 'recoil';
 import { API } from '~/services/api';
 import { connectedStudentsState } from '~/state/students';
-import getUpdateArrayByIndex from '~/utils/getUpdateArrayByIndex';
+import getUpdateArrayByIndex from '~/utils/get-update-array-by-index';
 
 interface EditDialogProps {
   open: boolean;
