@@ -7,11 +7,12 @@ import {
 import { Box, Container } from '@mui/material';
 import { useRequest } from 'ahooks';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { nameState } from '~/state/name';
 import { connectedStudentsState } from '~/state/students';
+import { unauthorizedHistoryPathState } from '~/state/unauthorized-history-path';
 import LoadingModal from '../components/LoadingModal';
 import { API } from '../services/api';
 import NetworkErrorModal from './components/NetworkErrorModal';
@@ -21,8 +22,15 @@ const UserLayout: React.FC = () => {
   const navigate = useNavigate();
 
   const [name, setName] = useRecoilState(nameState);
+  const location = useLocation();
+  const setUnauthorizedHistoryPath = useSetRecoilState(
+    unauthorizedHistoryPathState,
+  );
   const { loading: initLoading, run } = useRequest(API.init, {
     onError() {
+      setUnauthorizedHistoryPath(location.pathname);
+      console.log(location.pathname);
+
       localStorage.removeItem('token');
       navigate('/login');
     },

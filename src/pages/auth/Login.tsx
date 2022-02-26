@@ -13,8 +13,10 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useRecoilValue } from 'recoil';
 import FormTextField from '~/components/FormTextField';
 import { API, LoginResponse } from '~/services/api';
+import { unauthorizedHistoryPathState } from '~/state/unauthorized-history-path';
 
 const Login: React.FC = () => {
   const [rememberMe, { toggle: toggleRememberMe }] = useBoolean(true);
@@ -25,12 +27,13 @@ const Login: React.FC = () => {
 
   const navigate = useNavigate();
 
+  const unauthorizedHistoryPath = useRecoilValue(unauthorizedHistoryPathState);
   const onRequestSuccess = (response: AxiosResponse<LoginResponse, any>) => {
     if (rememberMe) {
       localStorage.setItem('token', response.data.token);
     }
     toast.success('Login Success');
-    navigate('/send-message');
+    navigate(unauthorizedHistoryPath);
   };
 
   const { run, loading } = useRequest(API.login, {
