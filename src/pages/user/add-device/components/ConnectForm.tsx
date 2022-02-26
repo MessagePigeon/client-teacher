@@ -4,9 +4,9 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { useRecoilState } from 'recoil';
-import FormTextField from '../../../../components/FormTextField';
-import { API } from '../../../../services/api';
-import { pendingStudentsState } from '../../../../state/students';
+import FormTextField from '~/components/FormTextField';
+import { API } from '~/services/api';
+import { pendingStudentsState } from '~/state/students';
 
 const ConnectForm = () => {
   const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.only('xs'));

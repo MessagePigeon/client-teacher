@@ -12,10 +12,7 @@ import {
 import { useBoolean } from 'ahooks';
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import {
-  connectedStudentsState,
-  pendingStudentsState,
-} from '../../../../state/students';
+import { connectedStudentsState, pendingStudentsState } from '~/state/students';
 import DeleteDialog from './dialog/DeleteDialog';
 import EditDialog from './dialog/EditDialog';
 

@@ -13,8 +13,6 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:import/recommended',
-    'plugin:import/typescript',
   ],
   env: {
     browser: true,

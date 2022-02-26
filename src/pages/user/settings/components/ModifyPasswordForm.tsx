@@ -3,8 +3,8 @@ import { useRequest } from 'ahooks';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import FormTextField from '../../../../components/FormTextField';
-import { API } from '../../../../services/api';
+import FormTextField from '~/components/FormTextField';
+import { API } from '~/services/api';
 
 const ModifyPasswordForm: React.FC = () => {
   const { control, handleSubmit, reset } = useForm({

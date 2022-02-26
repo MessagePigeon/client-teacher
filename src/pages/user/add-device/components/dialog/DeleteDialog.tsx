@@ -3,9 +3,9 @@ import { useRequest } from 'ahooks';
 import React from 'react';
 import { toast } from 'react-toastify';
 import { useRecoilState } from 'recoil';
-import { API } from '../../../../../services/api';
-import { connectedStudentsState } from '../../../../../state/students';
-import getDeleteArrayByIndex from '../../../../../utils/getDeleteArrayByIndex';
+import { API } from '~/services/api';
+import { connectedStudentsState } from '~/state/students';
+import getDeleteArrayByIndex from '~/utils/getDeleteArrayByIndex';
 
 interface DeleteDialogProps {
   open: boolean;

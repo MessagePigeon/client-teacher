@@ -13,8 +13,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import FormTextField from '../../components/FormTextField';
-import { API, LoginResponse } from '../../services/api';
+import FormTextField from '~/components/FormTextField';
+import { API, LoginResponse } from '~/services/api';
 
 const Login: React.FC = () => {
   const [rememberMe, { toggle: toggleRememberMe }] = useBoolean(true);
