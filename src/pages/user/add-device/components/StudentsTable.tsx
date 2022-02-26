@@ -11,13 +11,17 @@ import {
 } from '@mui/material';
 import { useBoolean } from 'ahooks';
 import React, { useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { connectedStudentsState } from '../../../../state/students';
+import { useRecoilValue } from 'recoil';
+import {
+  connectedStudentsState,
+  pendingStudentsState,
+} from '../../../../state/students';
 import DeleteDialog from './dialog/DeleteDialog';
 import EditDialog from './dialog/EditDialog';
 
-const ConnectedStudentsTable: React.FC = () => {
-  const [students] = useRecoilState(connectedStudentsState);
+const StudentsTable: React.FC = () => {
+  const pendingStudents = useRecoilValue(pendingStudentsState);
+  const connectedStudents = useRecoilValue(connectedStudentsState);
 
   const [openDeleteDialog, { set: setOpenDeleteDialog }] = useBoolean();
   const [openEditDialog, { set: setOpenEditDialog }] = useBoolean();
@@ -30,11 +34,6 @@ const ConnectedStudentsTable: React.FC = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align="center" colSpan={3} sx={{ fontWeight: 'bold' }}>
-                已连接设备
-              </TableCell>
-            </TableRow>
-            <TableRow>
               <TableCell sx={{ fontWeight: 'bold' }}>备注</TableCell>
               <TableCell sx={{ fontWeight: 'bold' }} align="center">
                 状态
@@ -45,7 +44,27 @@ const ConnectedStudentsTable: React.FC = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {students.map((student) => (
+            {pendingStudents.map((student) => (
+              <TableRow key={student.requestId}>
+                <TableCell>{student.remark}</TableCell>
+                <TableCell
+                  align="center"
+                  sx={{ color: (theme) => theme.palette.text.secondary }}
+                >
+                  等待中
+                </TableCell>
+                <TableCell align="right">
+                  <IconButton size="small" disabled>
+                    <Edit fontSize="inherit" />
+                  </IconButton>
+                  <IconButton size="small" disabled>
+                    <Delete fontSize="inherit" />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))}
+
+            {connectedStudents.map((student) => (
               <TableRow key={student.id}>
                 <TableCell>{student.remark}</TableCell>
                 <TableCell
@@ -100,4 +119,4 @@ const ConnectedStudentsTable: React.FC = () => {
   );
 };
 
-export default ConnectedStudentsTable;
+export default StudentsTable;

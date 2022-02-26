@@ -16,6 +16,8 @@ export type StudentResponse = { id: string; online: boolean; remark: string };
 
 export type ConnectRequestBody = { connectCode: string; remark: string };
 
+export type ConnectRequestResponse = { requestId: string; remark: string };
+
 export type ModifyStudentRemarkBody = { studentId: string; newRemark: string };
 
 export type DeleteStudentBody = { studentId: string };
@@ -37,7 +39,7 @@ export class API {
   }
 
   static async connectStudent(body: ConnectRequestBody) {
-    return await service.post('/connect-request', body);
+    return await service.post<ConnectRequestResponse>('/connect-request', body);
   }
 
   static async modifyStudentRemark(body: ModifyStudentRemarkBody) {

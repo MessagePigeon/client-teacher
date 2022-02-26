@@ -1,12 +1,12 @@
 import React from 'react';
-import ConnectedStudentsTable from './components/ConnectedStudentsTable';
+import StudentsTable from './components/StudentsTable';
 import ConnectForm from './components/ConnectForm';
 
 const AddDevice: React.FC = () => {
   return (
     <>
       <ConnectForm />
-      <ConnectedStudentsTable />
+      <StudentsTable />
     </>
   );
 };
