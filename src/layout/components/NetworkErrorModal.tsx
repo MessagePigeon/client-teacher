@@ -4,7 +4,7 @@ import React from 'react';
 
 const NetworkErrorModal: React.FC = () => {
   const { online } = useNetwork();
-  const [shouldRefresh, { set: setShouldRefresh }] = useBoolean();
+  const [shouldRefresh, { setTrue: setShouldRefreshTrue }] = useBoolean();
 
   useUpdateEffect(() => {
     if (online && shouldRefresh) {
@@ -12,7 +12,7 @@ const NetworkErrorModal: React.FC = () => {
       location.reload();
     }
     if (!online) {
-      setShouldRefresh(true);
+      setShouldRefreshTrue();
     }
   }, [online, shouldRefresh]);
 
