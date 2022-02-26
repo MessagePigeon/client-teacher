@@ -7,7 +7,7 @@ import Register from './auth/Register';
 import Index from './Index';
 import AddDevice from './user/add-device';
 import History from './user/History';
-import Settings from './user/Settings';
+import Settings from './user/settings';
 import SendMessage from './user/SendMessage';
 
 const Routers: React.FC = () => {

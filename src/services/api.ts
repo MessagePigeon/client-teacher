@@ -1,9 +1,9 @@
 import service from './lib/service';
 
-export type LoginRequestBody = { username: string; password: string };
+export type LoginBody = { username: string; password: string };
 export type LoginResponse = { token: string };
 
-export type RegisterRequestBody = {
+export type RegisterBody = {
   username: string;
   name: string;
   password: string;
@@ -20,13 +20,16 @@ export type ConnectRequestResponse = { requestId: string; remark: string };
 
 export type ModifyStudentRemarkBody = { studentId: string; newRemark: string };
 
-export type DeleteStudentBody = { studentId: string };
+export type ModifyNameBody = { newName: string };
+
+export type ModifyPasswordBody = { oldPassword: string; newPassword: string };
+
 export class API {
-  static async login(body: LoginRequestBody) {
+  static async login(body: LoginBody) {
     return await service.post<LoginResponse>('/login', body);
   }
 
-  static async register(body: RegisterRequestBody) {
+  static async register(body: RegisterBody) {
     return await service.post('/register', body);
   }
 
@@ -48,5 +51,13 @@ export class API {
 
   static async deleteStudent(studentId: string) {
     return await service.delete('/student', { params: { studentId } });
+  }
+
+  static async modifyName(body: ModifyNameBody) {
+    return await service.patch('/name', body);
+  }
+
+  static async modifyPassword(body: ModifyPasswordBody) {
+    return await service.patch('/password', body);
   }
 }
