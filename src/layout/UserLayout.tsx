@@ -9,24 +9,25 @@ import { useRequest } from 'ahooks';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { nameState } from '~/state/name';
+import { connectedStudentsState } from '~/state/students';
 import LoadingModal from '../components/LoadingModal';
 import { API } from '../services/api';
-import { connectedStudentsState } from '../state/students';
 import NetworkErrorModal from './components/NetworkErrorModal';
 import LayoutBase from './LayoutBase';
 
 const UserLayout: React.FC = () => {
   const navigate = useNavigate();
 
-  const {
-    data: initData,
-    loading: initLoading,
-    run,
-  } = useRequest(API.init, {
+  const [name, setName] = useRecoilState(nameState);
+  const { loading: initLoading, run } = useRequest(API.init, {
     onError() {
       localStorage.removeItem('token');
       navigate('/login');
+    },
+    onSuccess(response) {
+      setName(response.data.name);
     },
   });
 
@@ -56,7 +57,7 @@ const UserLayout: React.FC = () => {
           navigate('/login');
           toast.info('Logout Success');
         }}
-        teacherName={initData?.data.name}
+        teacherName={name}
         MainContainer={({ children }) => (
           <Box
             component="main"

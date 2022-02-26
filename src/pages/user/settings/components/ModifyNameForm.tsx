@@ -5,15 +5,20 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import FormTextField from '~/components/FormTextField';
 import { API } from '~/services/api';
+import { useSetRecoilState } from 'recoil';
+import { nameState } from '~/state/name';
 
 const ModifyNameForm: React.FC = () => {
   const { control, handleSubmit, reset } = useForm({
     defaultValues: { newName: '' },
   });
 
+  const setName = useSetRecoilState(nameState);
+
   const { run } = useRequest(API.modifyName, {
     manual: true,
-    onSuccess() {
+    onSuccess(_, [body]) {
+      setName(body.newName);
       toast.success('Modify Name Success');
     },
   });
