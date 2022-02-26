@@ -5,7 +5,7 @@ import {
   ManageAccountsOutlined,
 } from '@mui/icons-material';
 import { Box, Container } from '@mui/material';
-import { useRequest } from 'ahooks';
+import { useBoolean, useRequest } from 'ahooks';
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -21,6 +21,8 @@ import LayoutBase from './LayoutBase';
 const UserLayout: React.FC = () => {
   const navigate = useNavigate();
 
+  const [initSuccess, { setTrue: setInitSuccessTrue }] = useBoolean();
+
   const [name, setName] = useRecoilState(nameState);
   const location = useLocation();
   const setUnauthorizedHistoryPath = useSetRecoilState(
@@ -29,18 +31,18 @@ const UserLayout: React.FC = () => {
   const { loading: initLoading, run } = useRequest(API.init, {
     onError() {
       setUnauthorizedHistoryPath(location.pathname);
-      console.log(location.pathname);
-
       localStorage.removeItem('token');
       navigate('/login');
     },
     onSuccess(response) {
       setName(response.data.name);
+      setInitSuccessTrue();
     },
   });
 
   const setStudents = useSetRecoilState(connectedStudentsState);
   const { loading: getStudentsLoading } = useRequest(API.getStudents, {
+    ready: initSuccess,
     onSuccess(response) {
       setStudents(response.data);
     },
