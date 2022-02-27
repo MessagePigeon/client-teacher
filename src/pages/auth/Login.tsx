@@ -13,7 +13,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import FormTextField from '~/components/FormTextField';
 import { API, LoginResponse } from '~/services/api';
 import { unauthorizedHistoryPathState } from '~/state/unauthorized-history-path';
@@ -27,13 +27,16 @@ const Login: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const unauthorizedHistoryPath = useRecoilValue(unauthorizedHistoryPathState);
+  const [unauthorizedHistoryPath, setUnauthorizedHistoryPath] = useRecoilState(
+    unauthorizedHistoryPathState,
+  );
   const onRequestSuccess = (response: AxiosResponse<LoginResponse, any>) => {
     if (rememberMe) {
       localStorage.setItem('token', response.data.token);
     }
     toast.success('Login Success');
     navigate(unauthorizedHistoryPath);
+    setUnauthorizedHistoryPath('/send-message');
   };
 
   const { run, loading } = useRequest(API.login, {
