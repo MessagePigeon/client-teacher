@@ -8,18 +8,18 @@ import { API } from '~/services/api';
 import { useSetRecoilState } from 'recoil';
 import { nameState } from '~/state/name';
 
-const ModifyNameForm: React.FC = () => {
+const ChangeNameForm: React.FC = () => {
+  const setName = useSetRecoilState(nameState);
+
   const { control, handleSubmit, reset } = useForm({
     defaultValues: { newName: '' },
   });
-
-  const setName = useSetRecoilState(nameState);
 
   const { run } = useRequest(API.modifyName, {
     manual: true,
     onSuccess(_, [body]) {
       setName(body.newName);
-      toast.success('Modify Name Success');
+      toast.success('Change Name Success');
     },
   });
 
@@ -47,4 +47,4 @@ const ModifyNameForm: React.FC = () => {
   );
 };
 
-export default ModifyNameForm;
+export default ChangeNameForm;

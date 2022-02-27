@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import FormTextField from '~/components/FormTextField';
 import { API } from '~/services/api';
 
-const ModifyPasswordForm: React.FC = () => {
+const ChangePasswordForm: React.FC = () => {
   const { control, handleSubmit, reset } = useForm({
     defaultValues: { oldPassword: '', newPassword: '' },
   });
@@ -19,7 +19,7 @@ const ModifyPasswordForm: React.FC = () => {
     onSuccess() {
       localStorage.removeItem('token');
       navigate('/login');
-      toast.success('Modify Password Success. Please Login Again');
+      toast.success('Change Password Success. Please Login Again');
     },
   });
 
@@ -57,4 +57,4 @@ const ModifyPasswordForm: React.FC = () => {
   );
 };
 
-export default ModifyPasswordForm;
+export default ChangePasswordForm;
