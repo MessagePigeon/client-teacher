@@ -1,5 +1,5 @@
 import { Button, Grid, Theme, useMediaQuery } from '@mui/material';
-import { useRequest } from 'ahooks';
+import { useMount, useRequest } from 'ahooks';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
@@ -17,7 +17,9 @@ const ConnectForm = () => {
   });
 
   const { connectCode: connectCodeParam } = useParams();
-  setValue('connectCode', connectCodeParam || '');
+  useMount(() => {
+    setValue('connectCode', connectCodeParam || '');
+  });
 
   const [pendingStudents, setPendingStudents] =
     useRecoilState(pendingStudentsState);
