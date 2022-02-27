@@ -25,7 +25,7 @@ const ConnectForm = () => {
   const { run } = useRequest(API.connectStudent, {
     manual: true,
     onSuccess(response) {
-      setPendingStudents([...pendingStudents, response.data]);
+      setPendingStudents([response.data, ...pendingStudents]);
       toast.success('Send Connect Request Success');
     },
   });

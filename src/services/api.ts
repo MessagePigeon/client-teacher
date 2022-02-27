@@ -16,7 +16,11 @@ export type StudentResponse = { id: string; online: boolean; remark: string };
 
 export type ConnectRequestBody = { connectCode: string; remark: string };
 
-export type ConnectRequestResponse = { requestId: string; remark: string };
+export type ConnectRequestResponse = {
+  requestId: string;
+  studentId: string;
+  remark: string;
+};
 
 export type ModifyStudentRemarkBody = { studentId: string; newRemark: string };
 

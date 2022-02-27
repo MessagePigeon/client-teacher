@@ -7,7 +7,11 @@ export const connectedStudentsState = atom<ConnectedStudent[]>({
   default: [],
 });
 
-export type PendingStudent = { requestId: string; remark: string };
+export type PendingStudent = {
+  requestId: string;
+  studentId: string;
+  remark: string;
+};
 
 export const pendingStudentsState = atom<PendingStudent[]>({
   key: 'pendingStudents',
