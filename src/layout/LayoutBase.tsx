@@ -42,8 +42,8 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
   const [navCurrentPath, setNavCurrentPath] = useState<string>('');
 
   useEffect(() => {
-    // slice `/path` to `path`
-    setNavCurrentPath(location.pathname.slice(1));
+    // get `aaa` from `/aaa/bbb`
+    setNavCurrentPath(location.pathname.split('/')[1]);
   }, [location]);
 
   return (
