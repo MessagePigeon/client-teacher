@@ -18,6 +18,7 @@ const Routers: React.FC = () => {
         <Route path="send-message" element={<SendMessage />} />
         <Route path="history" element={<History />} />
         <Route path="add-device" element={<AddDevice />} />
+        <Route path="add-device/:connectCode" element={<AddDevice />} />
         <Route path="settings" element={<Settings />} />
       </Route>
       <Route element={<AuthLayout />}>

@@ -2,7 +2,7 @@ import { Button, Grid, Theme, useMediaQuery } from '@mui/material';
 import { useRequest } from 'ahooks';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useRecoilState } from 'recoil';
 import FormTextField from '~/components/FormTextField';
@@ -16,9 +16,8 @@ const ConnectForm = () => {
     defaultValues: { connectCode: '', remark: '' },
   });
 
-  const [searchParams] = useSearchParams();
-  const defaultConnectCode = searchParams.get('connectCode');
-  setValue('connectCode', defaultConnectCode || '');
+  const { connectCode: connectCodeParam } = useParams();
+  setValue('connectCode', connectCodeParam || '');
 
   const [pendingStudents, setPendingStudents] =
     useRecoilState(pendingStudentsState);
@@ -47,7 +46,7 @@ const ConnectForm = () => {
           control={control}
           name="connectCode"
           label="设备代码"
-          autoFocus={!defaultConnectCode}
+          autoFocus={!connectCodeParam}
         />
       </Grid>
       <Grid item md={6} xs={12}>
@@ -55,7 +54,7 @@ const ConnectForm = () => {
           control={control}
           name="remark"
           label="备注名"
-          autoFocus={!!defaultConnectCode}
+          autoFocus={!!connectCodeParam}
         />
       </Grid>
       <Grid item container md={12} xs={12} justifyContent="end">
