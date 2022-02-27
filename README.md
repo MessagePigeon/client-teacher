@@ -4,8 +4,8 @@
 
 ## Development
 
-1. Create `.env.local`
-2. Add `VITE_API_URL` field as your backend api url
+1. Rename `.env.template` to `.env` and configure it
+2. Run it
 
 ```bash
 npm run dev
