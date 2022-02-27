@@ -2,6 +2,7 @@ import { Button, Divider, Paper, Typography } from '@mui/material';
 import { useRequest } from 'ahooks';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import FormTextField from '~/components/FormTextField';
 import { API } from '~/services/api';
@@ -11,10 +12,14 @@ const ModifyPasswordForm: React.FC = () => {
     defaultValues: { oldPassword: '', newPassword: '' },
   });
 
+  const navigate = useNavigate();
+
   const { run } = useRequest(API.modifyPassword, {
     manual: true,
     onSuccess() {
-      toast.success('Modify Password Success');
+      localStorage.removeItem('token');
+      navigate('/login');
+      toast.success('Modify Password Success. Please Login Again');
     },
   });
 
