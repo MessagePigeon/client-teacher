@@ -3,23 +3,23 @@ import { useRequest } from 'ahooks';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { useRecoilState } from 'recoil';
 import FormTextField from '~/components/FormTextField';
 import { API } from '~/services/api';
-import { useSetRecoilState } from 'recoil';
 import { nameState } from '~/state/name';
 
-const ChangeNameForm: React.FC = () => {
-  const setName = useSetRecoilState(nameState);
+const ModifyNameForm: React.FC = () => {
+  const [name, setName] = useRecoilState(nameState);
 
   const { control, handleSubmit, reset } = useForm({
-    defaultValues: { newName: '' },
+    defaultValues: { newName: name },
   });
 
   const { run } = useRequest(API.modifyName, {
     manual: true,
     onSuccess(_, [body]) {
       setName(body.newName);
-      toast.success('Change Name Success');
+      toast.success('Modify Name Success');
     },
   });
 
@@ -39,6 +39,7 @@ const ChangeNameForm: React.FC = () => {
         label="新姓名"
         name="newName"
         autoComplete="name"
+        rules={{ validate: (value) => value !== name || '与原姓名相同' }}
       />
       <Button fullWidth type="submit" variant="contained" sx={{ mt: 1 }}>
         确定
@@ -47,4 +48,4 @@ const ChangeNameForm: React.FC = () => {
   );
 };
 
-export default ChangeNameForm;
+export default ModifyNameForm;
