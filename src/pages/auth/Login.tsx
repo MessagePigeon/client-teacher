@@ -1,13 +1,6 @@
 import { LockOutlined } from '@mui/icons-material';
-import {
-  Avatar,
-  Box,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Typography,
-} from '@mui/material';
-import { useBoolean, useRequest } from 'ahooks';
+import { Avatar, Box, Button, Typography } from '@mui/material';
+import { useRequest } from 'ahooks';
 import { AxiosResponse } from 'axios';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -19,8 +12,6 @@ import { API, LoginResponse } from '~/services/api';
 import { unauthorizedHistoryPathState } from '~/state/unauthorized-history-path';
 
 const Login: React.FC = () => {
-  const [rememberMe, { toggle: toggleRememberMe }] = useBoolean(true);
-
   const { control, handleSubmit } = useForm({
     defaultValues: { username: '', password: '' },
   });
@@ -31,9 +22,7 @@ const Login: React.FC = () => {
     unauthorizedHistoryPathState,
   );
   const onRequestSuccess = (response: AxiosResponse<LoginResponse, any>) => {
-    if (rememberMe) {
-      localStorage.setItem('token', response.data.token);
-    }
+    localStorage.setItem('token', response.data.token);
     toast.success('Login Success');
     navigate(unauthorizedHistoryPath);
     setUnauthorizedHistoryPath('/send-message');
@@ -79,16 +68,6 @@ const Login: React.FC = () => {
           autoComplete="current-password"
           defaultHelperText="忘记密码? 联系管理员重置"
           password
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              color="primary"
-              checked={rememberMe}
-              onChange={toggleRememberMe}
-            />
-          }
-          label="记住我"
         />
         <Button
           type="submit"
