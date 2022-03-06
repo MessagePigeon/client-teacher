@@ -9,7 +9,7 @@ import FormTextField from '~/components/FormTextField';
 import { API } from '~/services/api';
 import { pendingStudentsState } from '~/state/students';
 
-const ConnectForm = () => {
+const ConnectForm: React.FC = () => {
   const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.only('xs'));
 
   const { control, handleSubmit, reset, setValue } = useForm({
