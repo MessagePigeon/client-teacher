@@ -13,7 +13,6 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { nameState } from '~/state/name';
 import { connectedStudentsState } from '~/state/students';
 import { unauthorizedHistoryPathState } from '~/state/unauthorized-history-path';
-import useAllWsEvents from '~/websocket';
 import LoadingModal from '../components/LoadingModal';
 import { API } from '../services/api';
 import NetworkErrorModal from './components/NetworkErrorModal';
@@ -48,8 +47,6 @@ const UserLayout: React.FC = () => {
       setStudents(response.data);
     },
   });
-
-  useAllWsEvents({ ready: initSuccess });
 
   return (
     <>
