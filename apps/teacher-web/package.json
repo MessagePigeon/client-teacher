@@ -1,0 +1,21 @@
+{
+  "name": "message-pigeon-client-teacher",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "ahooks": "^3.1.9",
+    "axios": "^0.25.0",
+    "react-hook-form": "^7.26.1",
+    "react-router-dom": "6",
+    "react-toastify": "^8.1.1",
+    "recoil": "^0.6.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^1.0.7",
+    "vite": "^2.7.2"
+  }
+}
