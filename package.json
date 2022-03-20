@@ -1,6 +1,6 @@
 {
-  "name": "client-teacher",
-  "version": "0.1.0",
+  "name": "message-pigeon-client-teacher",
+  "version": "0.0.0",
   "description": "Message Pigeon Frontend (teacher & admin)",
   "scripts": {
     "format": "prettier --write \"**/src/**/*.{ts,tsx}\"",
