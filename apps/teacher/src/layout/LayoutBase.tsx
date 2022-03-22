@@ -20,7 +20,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
-type navigationItem = { title: string; icon: JSX.Element; path: string };
+type NavigationItem = { title: string; icon: JSX.Element; path: string };
 
 interface LayoutProps {
   /** app bar title */
@@ -28,7 +28,7 @@ interface LayoutProps {
   /** github repo link, displayed on the app bar as a github button */
   github?: string;
   /** navigation for routers */
-  navigation: navigationItem[];
+  navigation: NavigationItem[];
   /** hide navigation drawer (and bottom navigation bar for responsive) */
   hideNavigation?: boolean;
   /** current navigation path (a.k.a. selected navigation item path) */
@@ -215,7 +215,7 @@ const Layout: React.FC<LayoutProps> = ({
 };
 
 interface LayoutBaseProps {
-  navigation: navigationItem[];
+  navigation: NavigationItem[];
   isLogin?: boolean;
   logout?: () => void;
   teacherName?: string;
