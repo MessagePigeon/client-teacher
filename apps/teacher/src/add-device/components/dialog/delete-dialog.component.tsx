@@ -4,8 +4,8 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import { useRecoilState } from 'recoil';
 import { API } from '~/services/api';
-import { connectedStudentsState } from '~/state/students';
-import getDeleteArrayByIndex from '~/utils/get-delete-array-by-index';
+import { connectedStudentsState } from '~/state/students.state';
+import getDeleteArrayByIndex from '~/common/utils/get-delete-array-by-index.util';
 
 interface DeleteDialogProps {
   open: boolean;

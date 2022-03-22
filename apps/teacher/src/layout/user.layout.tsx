@@ -9,13 +9,13 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { nameState } from '~/state/name';
-import { connectedStudentsState } from '~/state/students';
-import { unauthorizedHistoryPathState } from '~/state/unauthorized-history-path';
-import LoadingModal from '../components/LoadingModal';
+import { nameState } from '~/state/name.state';
+import { connectedStudentsState } from '~/state/students.state';
+import { unauthorizedHistoryPathState } from '~/state/unauthorized-history-path.state';
+import LoadingModal from '../common/components/loading-modal.component';
 import { API } from '../services/api';
-import NetworkErrorModal from './components/NetworkErrorModal';
-import LayoutBase from './LayoutBase';
+import NetworkErrorModal from './components/network-error-modal.component';
+import LayoutBase from './base.layout';
 
 const UserLayout: React.FC = () => {
   const navigate = useNavigate();

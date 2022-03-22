@@ -4,9 +4,9 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { useRecoilState } from 'recoil';
-import FormTextField from '~/components/FormTextField';
+import FormTextField from '~/common/components/form-text-field.component';
 import { API } from '~/services/api';
-import { nameState } from '~/state/name';
+import { nameState } from '~/state/name.state';
 
 const ModifyNameForm: React.FC = () => {
   const [name, setName] = useRecoilState(nameState);

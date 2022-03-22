@@ -4,7 +4,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import FormTextField from '~/components/FormTextField';
+import FormTextField from '~/common/components/form-text-field.component';
 import { API } from '~/services/api';
 
 const ChangePasswordForm: React.FC = () => {

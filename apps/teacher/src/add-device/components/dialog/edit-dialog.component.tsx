@@ -11,8 +11,8 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useRecoilState } from 'recoil';
 import { API } from '~/services/api';
-import { connectedStudentsState } from '~/state/students';
-import getUpdateArrayByIndex from '~/utils/get-update-array-by-index';
+import { connectedStudentsState } from '~/state/students.state';
+import getUpdateArrayByIndex from '~/common/utils/get-update-array-by-index.util';
 
 interface EditDialogProps {
   open: boolean;

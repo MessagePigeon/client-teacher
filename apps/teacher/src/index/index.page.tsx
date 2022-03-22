@@ -1,7 +1,7 @@
 import { useMount } from 'ahooks';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoadingModal from '../components/LoadingModal';
+import LoadingModal from '../common/components/loading-modal.component';
 
 const Index: React.FC = () => {
   const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import service from './lib/service';
+import service from './lib/service.lib';
 
 export type LoginBody = { username: string; password: string };
 export type LoginResponse = { token: string };

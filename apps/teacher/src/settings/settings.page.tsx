@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 import React from 'react';
-import ModifyNameForm from './components/ModifyNameForm';
-import ChangePasswordForm from './components/ChangePasswordForm';
+import ModifyNameForm from './components/modify-name-form.component';
+import ChangePasswordForm from './components/change-password-form.component';
 
 const Settings: React.FC = () => {
   return (

@@ -2,7 +2,7 @@ import { HistoryEdu, Login } from '@mui/icons-material';
 import { useMount } from 'ahooks';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import LayoutBase from './LayoutBase';
+import LayoutBase from './base.layout';
 
 const AuthLayout: React.FC = () => {
   const navigate = useNavigate();

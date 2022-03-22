@@ -12,9 +12,12 @@ import {
 import { useBoolean } from 'ahooks';
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { connectedStudentsState, pendingStudentsState } from '~/state/students';
-import DeleteDialog from './dialog/DeleteDialog';
-import EditDialog from './dialog/EditDialog';
+import {
+  connectedStudentsState,
+  pendingStudentsState,
+} from '~/state/students.state';
+import DeleteDialog from './dialog/delete-dialog.component';
+import EditDialog from './dialog/edit-dialog.component';
 
 const StudentsTable: React.FC = () => {
   const pendingStudents = useRecoilValue(pendingStudentsState);
