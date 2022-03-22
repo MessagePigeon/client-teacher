@@ -1,5 +1,5 @@
 {
-  "name": "teacher",
+  "name": "@mpigeon/client-teacher",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",

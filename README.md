@@ -1,6 +1,6 @@
 # Message Pigeon Teacher Client
 
-> The frontend of Message Pigeon teacher & admin
+> The frontend of Message Pigeon for teacher & admin teacher
 
 ## Development
 

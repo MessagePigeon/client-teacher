@@ -1,7 +1,7 @@
 {
-  "name": "message-pigeon-client-teacher",
+  "name": "@mpigeon/client",
   "version": "0.0.0",
-  "description": "Message Pigeon Frontend (teacher & admin)",
+  "description": "Message Pigeon Frontend (teacher & admin teacher)",
   "scripts": {
     "format": "prettier --write \"**/src/**/*.{ts,tsx}\"",
     "lint": "eslint \"**/src/**/*.ts\" --fix"
