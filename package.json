@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "description": "Message Pigeon Frontend (teacher & admin teacher)",
   "scripts": {
-    "format": "prettier --write \"**/src/**/*.{ts,tsx}\"",
-    "lint": "eslint \"**/src/**/*.ts\" --fix"
+    "format": "prettier --write \"**/*.{ts,tsx}\"",
+    "lint": "eslint \"**/*.{ts,tsx}\" --fix"
   },
   "author": "Justin Sun",
   "license": "AGPL-3.0",
