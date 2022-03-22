@@ -6,15 +6,8 @@
     "format": "prettier --write \"**/src/**/*.{ts,tsx}\"",
     "lint": "eslint \"**/src/**/*.ts\" --fix"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MessagePigeon/client-teacher.git"
-  },
   "author": "Justin Sun",
   "license": "AGPL-3.0",
-  "bugs": {
-    "url": "https://github.com/MessagePigeon/client-teacher/issues"
-  },
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
