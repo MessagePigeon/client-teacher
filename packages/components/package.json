@@ -1,0 +1,7 @@
+{
+  "name": "@mpigeon/client-components",
+  "version": "0.1.0",
+  "main": "src/index.ts",
+  "author": "Justin Sun",
+  "license": "AGPL-3.0"
+}
