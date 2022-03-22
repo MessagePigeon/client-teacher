@@ -1,5 +1,4 @@
 import { HistoryEdu, Login } from '@mui/icons-material';
-import { Container } from '@mui/material';
 import { useMount } from 'ahooks';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -21,16 +20,8 @@ const AuthLayout: React.FC = () => {
         { title: '登录', icon: <Login />, path: 'login' },
         { title: '注册', icon: <HistoryEdu />, path: 'register' },
       ]}
-      MainContainer={({ children }) => (
-        <Container
-          component="main"
-          maxWidth="xs"
-          sx={{ mt: 10, mb: { xs: 10, md: 2 } }}
-        >
-          {children}
-        </Container>
-      )}
       navigate={(path) => navigate(path)}
+      mainContainerMaxWidth="xs"
     />
   );
 };

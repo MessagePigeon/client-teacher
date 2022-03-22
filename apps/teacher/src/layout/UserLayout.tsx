@@ -4,7 +4,6 @@ import {
   History,
   ManageAccountsOutlined,
 } from '@mui/icons-material';
-import { Box, Container } from '@mui/material';
 import { useBoolean, useRequest } from 'ahooks';
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -68,18 +67,6 @@ const UserLayout: React.FC = () => {
           toast.info('Logout Success');
         }}
         teacherName={name}
-        MainContainer={({ children }) => (
-          <Box
-            component="main"
-            sx={{
-              mt: 10,
-              mb: { xs: 10, md: 2 },
-              ml: { md: '200px' },
-            }}
-          >
-            <Container maxWidth="md">{children}</Container>
-          </Box>
-        )}
         navigate={(path) => {
           run();
           navigate(path);
