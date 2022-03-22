@@ -137,7 +137,7 @@ export const Layout: React.FC<LayoutProps> = ({
               }}
             >
               <List>
-                {navigation!.map(({ icon, title, path }, index) => (
+                {navigation.map(({ icon, title, path }, index) => (
                   <ListItemButton
                     key={index}
                     onClick={() => onNavigate(path)}
@@ -198,7 +198,7 @@ export const Layout: React.FC<LayoutProps> = ({
               onNavigate(newPath);
             }}
           >
-            {navigation!.map(({ title, icon, path }, index) => (
+            {navigation.map(({ title, icon, path }, index) => (
               <BottomNavigationAction
                 key={index}
                 label={title}
