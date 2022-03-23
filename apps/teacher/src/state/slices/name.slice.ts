@@ -11,13 +11,13 @@ export const nameSlice = createSlice({
   name: 'name',
   initialState,
   reducers: {
-    modify(state, action: PayloadAction<string>) {
+    set(state, action: PayloadAction<string>) {
       state.name = action.payload;
     },
   },
 });
 
-export const { modify: modifyName } = nameSlice.actions;
+export const nameActions = nameSlice.actions;
 
 export const nameSelector = (state: RootState) => state.name.name;
 

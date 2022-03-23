@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { API } from '~/http/api';
 import { useAppDispatch } from '~/state/hooks';
-import { editConnectedStudentRemark } from '~/state/slices/connected-students.slice';
+import { connectStudentsActions } from '~/state/slices/connected-students.slice';
 
 interface EditDialogProps {
   open: boolean;
@@ -36,7 +36,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
   const { run } = useRequest(API.modifyStudentRemark, {
     manual: true,
     onSuccess() {
-      dispatch(editConnectedStudentRemark({ id: studentId, newRemark }));
+      dispatch(connectStudentsActions.editRemark({ id: studentId, newRemark }));
       toast.success('Modify Remark Success');
     },
   });

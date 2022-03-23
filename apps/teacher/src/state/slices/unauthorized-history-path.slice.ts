@@ -11,13 +11,13 @@ export const unauthorizedHistoryPathSlice = createSlice({
   name: 'unauthorized-history-path',
   initialState,
   reducers: {
-    modify(state, action: PayloadAction<string>) {
+    set(state, action: PayloadAction<string>) {
       state.path = action.payload;
     },
   },
 });
 
-export const { modify: modifyUnauthorizedHistoryPath } =
+export const unauthorizedHistoryPathActions =
   unauthorizedHistoryPathSlice.actions;
 
 export const unauthorizedHistoryPathSelector = (state: RootState) =>

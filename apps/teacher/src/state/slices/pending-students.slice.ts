@@ -23,7 +23,7 @@ export const pendingStudentsSlice = createSlice({
   },
 });
 
-export const { add: addPendingStudent } = pendingStudentsSlice.actions;
+export const pendingStudentsActions = pendingStudentsSlice.actions;
 
 export const pendingStudentsSelector = (state: RootState) =>
   state.pendingStudents.students;

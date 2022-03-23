@@ -9,7 +9,7 @@ import FormTextField from '~/common/components/form-text-field.component';
 import { API } from '~/http/api';
 import { useAppDispatch, useAppSelector } from '~/state/hooks';
 import {
-  modifyUnauthorizedHistoryPath,
+  unauthorizedHistoryPathActions,
   unauthorizedHistoryPathSelector,
 } from '~/state/slices/unauthorized-history-path.slice';
 
@@ -31,7 +31,7 @@ const Login: React.FC = () => {
       localStorage.setItem('token', response.data.token);
       toast.success('Login Success');
       navigate(unauthorizedHistoryPath);
-      dispatch(modifyUnauthorizedHistoryPath('/send-message'));
+      dispatch(unauthorizedHistoryPathActions.set('/send-message'));
     },
   });
 

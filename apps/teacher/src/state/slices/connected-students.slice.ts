@@ -34,11 +34,7 @@ export const connectedStudentsSlice = createSlice({
   },
 });
 
-export const {
-  set: setConnectedStudents,
-  editRemark: editConnectedStudentRemark,
-  delete: deleteConnectedStudent,
-} = connectedStudentsSlice.actions;
+export const connectStudentsActions = connectedStudentsSlice.actions;
 
 export const connectedStudentsSelector = (state: RootState) =>
   state.connectedStudents.students;

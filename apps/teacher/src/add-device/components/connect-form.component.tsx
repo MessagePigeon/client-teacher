@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
 import { API } from '~/http/api';
 import { useAppDispatch } from '~/state/hooks';
-import { addPendingStudent } from '~/state/slices/pending-students.slice';
+import { pendingStudentsActions } from '~/state/slices/pending-students.slice';
 
 const ConnectForm: React.FC = () => {
   const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.only('xs'));
@@ -26,7 +26,7 @@ const ConnectForm: React.FC = () => {
   const { run } = useRequest(API.connectStudent, {
     manual: true,
     onSuccess(response) {
-      dispatch(addPendingStudent(response.data));
+      dispatch(pendingStudentsActions.add(response.data));
       toast.success('Send Connect Request Success');
     },
   });

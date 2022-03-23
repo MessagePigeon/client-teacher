@@ -9,11 +9,11 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '~/state/hooks';
-import { modifyName, nameSelector } from '~/state/slices/name.slice';
-import { modifyUnauthorizedHistoryPath } from '~/state/slices/unauthorized-history-path.slice';
+import { nameActions, nameSelector } from '~/state/slices/name.slice';
+import { unauthorizedHistoryPathActions } from '~/state/slices/unauthorized-history-path.slice';
 import LoadingModal from '../common/components/loading-modal.component';
 import { API } from '../http/api';
-import { setConnectedStudents } from '../state/slices/connected-students.slice';
+import { connectStudentsActions } from '../state/slices/connected-students.slice';
 import LayoutBase from './base.layout';
 import NetworkErrorModal from './components/network-error-modal.component';
 
@@ -29,11 +29,11 @@ const UserLayout: React.FC = () => {
   const { loading: initLoading, run } = useRequest(API.init, {
     onError() {
       localStorage.removeItem('token');
-      dispatch(modifyUnauthorizedHistoryPath(location.pathname));
+      dispatch(unauthorizedHistoryPathActions.set(location.pathname));
       navigate('/login');
     },
     onSuccess(response) {
-      dispatch(modifyName(response.data.name));
+      dispatch(nameActions.set(response.data.name));
       setInitSuccessTrue();
     },
   });
@@ -41,7 +41,7 @@ const UserLayout: React.FC = () => {
   const { loading: getStudentsLoading } = useRequest(API.getStudents, {
     ready: initSuccess,
     onSuccess(response) {
-      dispatch(setConnectedStudents(response.data));
+      dispatch(connectStudentsActions.set(response.data));
     },
   });
 

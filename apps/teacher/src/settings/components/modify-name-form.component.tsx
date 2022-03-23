@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
 import { API } from '~/http/api';
 import { useAppDispatch, useAppSelector } from '~/state/hooks';
-import { modifyName, nameSelector } from '~/state/slices/name.slice';
+import { nameActions, nameSelector } from '~/state/slices/name.slice';
 
 const ModifyNameForm: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -19,7 +19,7 @@ const ModifyNameForm: React.FC = () => {
   const { run } = useRequest(API.modifyName, {
     manual: true,
     onSuccess(_, [body]) {
-      dispatch(modifyName(body.newName));
+      dispatch(nameActions.set(body.newName));
       toast.success('Modify Name Success');
     },
   });
