@@ -1,9 +1,9 @@
-import service from './lib/service.lib';
+import service from './lib/axios.lib';
 
-export type LoginBody = { username: string; password: string };
+export type LoginRequest = { username: string; password: string };
 export type LoginResponse = { token: string };
 
-export type RegisterBody = {
+export type RegisterRequest = {
   username: string;
   name: string;
   password: string;
@@ -12,9 +12,13 @@ export type RegisterBody = {
 
 export type InitResponse = { username: string; name: string };
 
-export type StudentResponse = { id: string; online: boolean; remark: string };
+export type StudentResponse = Array<{
+  id: string;
+  online: boolean;
+  remark: string;
+}>;
 
-export type ConnectRequestBody = { connectCode: string; remark: string };
+export type ConnectRequest = { connectCode: string; remark: string };
 
 export type ConnectRequestResponse = {
   requestId: string;
@@ -22,18 +26,24 @@ export type ConnectRequestResponse = {
   remark: string;
 };
 
-export type ModifyStudentRemarkBody = { studentId: string; newRemark: string };
+export type ModifyStudentRemarkRequest = {
+  studentId: string;
+  newRemark: string;
+};
 
-export type ModifyNameBody = { newName: string };
+export type ModifyNameRequest = { newName: string };
 
-export type ModifyPasswordBody = { oldPassword: string; newPassword: string };
+export type ModifyPasswordRequest = {
+  oldPassword: string;
+  newPassword: string;
+};
 
 export class API {
-  static async login(body: LoginBody) {
+  static async login(body: LoginRequest) {
     return await service.post<LoginResponse>('/login', body);
   }
 
-  static async register(body: RegisterBody) {
+  static async register(body: RegisterRequest) {
     return await service.post('/register', body);
   }
 
@@ -42,14 +52,14 @@ export class API {
   }
 
   static async getStudents() {
-    return await service.get<StudentResponse[]>('/students');
+    return await service.get<StudentResponse>('/students');
   }
 
-  static async connectStudent(body: ConnectRequestBody) {
+  static async connectStudent(body: ConnectRequest) {
     return await service.post<ConnectRequestResponse>('/connect-request', body);
   }
 
-  static async modifyStudentRemark(body: ModifyStudentRemarkBody) {
+  static async modifyStudentRemark(body: ModifyStudentRemarkRequest) {
     return await service.patch('/student/remark', body);
   }
 
@@ -57,11 +67,11 @@ export class API {
     return await service.delete('/student', { params: { studentId } });
   }
 
-  static async modifyName(body: ModifyNameBody) {
+  static async modifyName(body: ModifyNameRequest) {
     return await service.patch('/name', body);
   }
 
-  static async modifyPassword(body: ModifyPasswordBody) {
+  static async modifyPassword(body: ModifyPasswordRequest) {
     return await service.patch('/password', body);
   }
 }
