@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useRecoilState } from 'recoil';
 import FormTextField from '~/common/components/form-text-field.component';
-import { API, LoginResponse } from '~/services/api';
+import { API, LoginResponse } from '~/http/api';
 import { unauthorizedHistoryPathState } from '~/state/unauthorized-history-path.state';
 
 const Login: React.FC = () => {

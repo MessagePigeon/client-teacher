@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useRecoilState } from 'recoil';
 import FormTextField from '~/common/components/form-text-field.component';
-import { API } from '~/services/api';
+import { API } from '~/http/api';
 import { pendingStudentsState } from '~/state/students.state';
 
 const ConnectForm: React.FC = () => {

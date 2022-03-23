@@ -3,7 +3,7 @@ import { useRequest } from 'ahooks';
 import React from 'react';
 import { toast } from 'react-toastify';
 import { useRecoilState } from 'recoil';
-import { API } from '~/services/api';
+import { API } from '~/http/api';
 import { connectedStudentsState } from '~/state/students.state';
 import getDeleteArrayByIndex from '~/common/utils/get-delete-array-by-index.util';
 

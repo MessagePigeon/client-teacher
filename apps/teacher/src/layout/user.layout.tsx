@@ -13,7 +13,7 @@ import { nameState } from '~/state/name.state';
 import { connectedStudentsState } from '~/state/students.state';
 import { unauthorizedHistoryPathState } from '~/state/unauthorized-history-path.state';
 import LoadingModal from '../common/components/loading-modal.component';
-import { API } from '../services/api';
+import { API } from '../http/api';
 import NetworkErrorModal from './components/network-error-modal.component';
 import LayoutBase from './base.layout';
 

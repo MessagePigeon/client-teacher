@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
-import { API } from '~/services/api';
+import { API } from '~/http/api';
 
 const Register: React.FC = () => {
   const { control, handleSubmit, watch } = useForm({

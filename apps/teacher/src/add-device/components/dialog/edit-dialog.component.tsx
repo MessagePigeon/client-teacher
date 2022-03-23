@@ -10,7 +10,7 @@ import { useRequest, useUpdateEffect } from 'ahooks';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useRecoilState } from 'recoil';
-import { API } from '~/services/api';
+import { API } from '~/http/api';
 import { connectedStudentsState } from '~/state/students.state';
 import getUpdateArrayByIndex from '~/common/utils/get-update-array-by-index.util';
 
