@@ -56,16 +56,14 @@ importers:
       react-hook-form: ^7.26.1
       react-redux: ^7.2.6
       react-router-dom: '6'
-      recoil: ^0.6.1
       vite: ^2.7.2
     dependencies:
       '@mpigeon/client-components': link:../../packages/components
-      '@reduxjs/toolkit': 1.8.0_react-redux@7.2.6+react@17.0.2
+      '@reduxjs/toolkit': 1.8.0_react-redux@7.2.6
       axios: 0.25.0
-      react-hook-form: 7.28.0_react@17.0.2
-      react-redux: 7.2.6_react-dom@17.0.2+react@17.0.2
-      react-router-dom: 6.2.2_react-dom@17.0.2+react@17.0.2
-      recoil: 0.6.1_react-dom@17.0.2+react@17.0.2
+      react-hook-form: 7.28.0
+      react-redux: 7.2.6
+      react-router-dom: 6.2.2
     devDependencies:
       '@vitejs/plugin-react': 1.2.0
       vite: 2.8.6
@@ -726,7 +724,7 @@ packages:
     resolution: {integrity: sha512-q/ytXxO5NKvyT37pmisQAItCFqA7FD/vNb8dgaJy3/630Fsc+Mz9/9f2SziBoIZ30TJooXyTwZmhi1zjXmObYg==}
     dev: false
 
-  /@reduxjs/toolkit/1.8.0_react-redux@7.2.6+react@17.0.2:
+  /@reduxjs/toolkit/1.8.0_react-redux@7.2.6:
     resolution: {integrity: sha512-cdfHWfcvLyhBUDicoFwG1u32JqvwKDxLxDd7zSmSoFw/RhYLOygIRtmaMjPRUUHmVmmAGAvquLLsKKU/677kSQ==}
     peerDependencies:
       react: ^16.9.0 || ^17.0.0 || 18.0.0-beta
@@ -738,8 +736,7 @@ packages:
         optional: true
     dependencies:
       immer: 9.0.12
-      react: 17.0.2
-      react-redux: 7.2.6_react-dom@17.0.2+react@17.0.2
+      react-redux: 7.2.6
       redux: 4.1.2
       redux-thunk: 2.4.1_redux@4.1.2
       reselect: 4.1.5
@@ -2337,15 +2334,6 @@ packages:
       react: ^16.8.0 || ^17
     dev: false
 
-  /react-hook-form/7.28.0_react@17.0.2:
-    resolution: {integrity: sha512-mmLpT86BkMGPr0r6ca8zxV0WH4Y1FW5MKs7Rq1+uHLVeeg5pSWbF5Z/qLCnM5vPVblHNM6lRBRRotnfEAf0ALA==}
-    engines: {node: '>=12.22.0'}
-    peerDependencies:
-      react: ^16.8.0 || ^17
-    dependencies:
-      react: 17.0.2
-    dev: false
-
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -2353,7 +2341,7 @@ packages:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
     dev: false
 
-  /react-redux/7.2.6_react-dom@17.0.2+react@17.0.2:
+  /react-redux/7.2.6:
     resolution: {integrity: sha512-10RPdsz0UUrRL1NZE0ejTkucnclYSgXp5q+tB5SWx2qeG2ZJQJyymgAhwKy73yiL/13btfB6fPr+rgbMAaZIAQ==}
     peerDependencies:
       react: ^16.8.3 || ^17
@@ -2370,8 +2358,6 @@ packages:
       hoist-non-react-statics: 3.3.2
       loose-envify: 1.4.0
       prop-types: 15.8.1
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
       react-is: 17.0.2
     dev: false
 
@@ -2390,33 +2376,12 @@ packages:
       react-router: 6.2.2
     dev: false
 
-  /react-router-dom/6.2.2_react-dom@17.0.2+react@17.0.2:
-    resolution: {integrity: sha512-AtYEsAST7bDD4dLSQHDnk/qxWLJdad5t1HFa1qJyUrCeGgEuCSw0VB/27ARbF9Fi/W5598ujvJOm3ujUCVzuYQ==}
-    peerDependencies:
-      react: '>=16.8'
-      react-dom: '>=16.8'
-    dependencies:
-      history: 5.3.0
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
-      react-router: 6.2.2_react@17.0.2
-    dev: false
-
   /react-router/6.2.2:
     resolution: {integrity: sha512-/MbxyLzd7Q7amp4gDOGaYvXwhEojkJD5BtExkuKmj39VEE0m3l/zipf6h2WIB2jyAO0lI6NGETh4RDcktRm4AQ==}
     peerDependencies:
       react: '>=16.8'
     dependencies:
       history: 5.3.0
-    dev: false
-
-  /react-router/6.2.2_react@17.0.2:
-    resolution: {integrity: sha512-/MbxyLzd7Q7amp4gDOGaYvXwhEojkJD5BtExkuKmj39VEE0m3l/zipf6h2WIB2jyAO0lI6NGETh4RDcktRm4AQ==}
-    peerDependencies:
-      react: '>=16.8'
-    dependencies:
-      history: 5.3.0
-      react: 17.0.2
     dev: false
 
   /react-toastify/8.2.0:
@@ -2474,23 +2439,6 @@ packages:
         optional: true
     dependencies:
       hamt_plus: 1.0.2
-    dev: false
-
-  /recoil/0.6.1_react-dom@17.0.2+react@17.0.2:
-    resolution: {integrity: sha512-J7oT3LZl2vpyFClgSUpOQjpykz84VSX/NJE/PavAtR8n7Z+whEdVBPUtwc2TEWjONeL/lJmiac2XQ+qEOQA52Q==}
-    peerDependencies:
-      react: '>=16.13.1'
-      react-dom: '*'
-      react-native: '*'
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-    dependencies:
-      hamt_plus: 1.0.2
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
     dev: false
 
   /redux-thunk/2.4.1_redux@4.1.2:

@@ -4,10 +4,10 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useRecoilState } from 'recoil';
 import FormTextField from '~/common/components/form-text-field.component';
 import { API } from '~/http/api';
-import { pendingStudentsState } from '~/state/students.state';
+import { useAppDispatch } from '~/state/hooks';
+import { addPendingStudent } from '~/state/slices/pending-students.slice';
 
 const ConnectForm: React.FC = () => {
   const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.only('xs'));
@@ -21,13 +21,12 @@ const ConnectForm: React.FC = () => {
     setValue('connectCode', connectCodeParam || '');
   });
 
-  const [pendingStudents, setPendingStudents] =
-    useRecoilState(pendingStudentsState);
+  const dispatch = useAppDispatch();
 
   const { run } = useRequest(API.connectStudent, {
     manual: true,
     onSuccess(response) {
-      setPendingStudents([response.data, ...pendingStudents]);
+      dispatch(addPendingStudent(response.data));
       toast.success('Send Connect Request Success');
     },
   });

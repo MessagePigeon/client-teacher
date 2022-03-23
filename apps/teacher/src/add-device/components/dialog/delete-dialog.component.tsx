@@ -2,38 +2,36 @@ import { Button, Dialog, DialogActions, DialogTitle } from '@mui/material';
 import { useRequest } from 'ahooks';
 import React from 'react';
 import { toast } from 'react-toastify';
-import { useRecoilState } from 'recoil';
 import { API } from '~/http/api';
-import { connectedStudentsState } from '~/state/students.state';
-import getDeleteArrayByIndex from '~/common/utils/get-delete-array-by-index.util';
+import { useAppDispatch } from '~/state/hooks';
+import { deleteConnectedStudent } from '~/state/slices/connected-students.slice';
 
 interface DeleteDialogProps {
   open: boolean;
   onClose: () => void;
   studentId: string;
+  studentRemark: string;
 }
 
 const DeleteDialog: React.FC<DeleteDialogProps> = ({
   open,
   onClose,
   studentId,
+  studentRemark,
 }) => {
-  const [students, setStudents] = useRecoilState(connectedStudentsState);
-
-  const student = students.find(({ id }) => id === studentId);
+  const dispatch = useAppDispatch();
 
   const { run } = useRequest(API.deleteStudent, {
     manual: true,
     onSuccess() {
-      const index = students.findIndex(({ id }) => id === studentId);
-      setStudents(getDeleteArrayByIndex(students, index));
+      dispatch(deleteConnectedStudent({ id: studentId }));
       toast.success('Delete Student Success');
     },
   });
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>确认删除 {student?.remark} 吗?</DialogTitle>
+      <DialogTitle>确认删除 {studentRemark} 吗?</DialogTitle>
       <DialogActions>
         <Button onClick={onClose}>取消</Button>
         <Button

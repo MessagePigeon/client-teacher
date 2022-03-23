@@ -9,10 +9,9 @@ import {
 import { useRequest, useUpdateEffect } from 'ahooks';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { useRecoilState } from 'recoil';
 import { API } from '~/http/api';
-import { connectedStudentsState } from '~/state/students.state';
-import getUpdateArrayByIndex from '~/common/utils/get-update-array-by-index.util';
+import { useAppDispatch } from '~/state/hooks';
+import { editConnectedStudentRemark } from '~/state/slices/connected-students.slice';
 
 interface EditDialogProps {
   open: boolean;
@@ -27,8 +26,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
   studentId,
   oldStudentRemark,
 }) => {
-  const [students, setStudents] = useRecoilState(connectedStudentsState);
-  const oldStudent = students.find(({ id }) => id === studentId);
+  const dispatch = useAppDispatch();
 
   const [newRemark, setNewRemark] = useState<string>('');
   useUpdateEffect(() => {
@@ -38,12 +36,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
   const { run } = useRequest(API.modifyStudentRemark, {
     manual: true,
     onSuccess() {
-      const index = students.findIndex(({ id }) => id === studentId);
-      const newStudent = {
-        ...oldStudent!,
-        remark: newRemark,
-      };
-      setStudents(getUpdateArrayByIndex(students, index, newStudent));
+      dispatch(editConnectedStudentRemark({ id: studentId, newRemark }));
       toast.success('Modify Remark Success');
     },
   });

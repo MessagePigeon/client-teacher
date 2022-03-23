@@ -3,22 +3,23 @@ import { useRequest } from 'ahooks';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { useRecoilState } from 'recoil';
 import FormTextField from '~/common/components/form-text-field.component';
 import { API } from '~/http/api';
-import { nameState } from '~/state/name.state';
+import { useAppDispatch, useAppSelector } from '~/state/hooks';
+import { modifyName, nameSelector } from '~/state/slices/name.slice';
 
 const ModifyNameForm: React.FC = () => {
-  const [name, setName] = useRecoilState(nameState);
+  const dispatch = useAppDispatch();
+  const name = useAppSelector(nameSelector);
 
   const { control, handleSubmit, reset } = useForm({
-    defaultValues: { newName: name },
+    defaultValues: { newName: '' },
   });
 
   const { run } = useRequest(API.modifyName, {
     manual: true,
     onSuccess(_, [body]) {
-      setName(body.newName);
+      dispatch(modifyName(body.newName));
       toast.success('Modify Name Success');
     },
   });

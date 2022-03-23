@@ -11,17 +11,15 @@ import {
 } from '@mui/material';
 import { useBoolean } from 'ahooks';
 import React, { useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import {
-  connectedStudentsState,
-  pendingStudentsState,
-} from '~/state/students.state';
+import { useAppSelector } from '~/state/hooks';
+import { connectedStudentsSelector } from '~/state/slices/connected-students.slice';
+import { pendingStudentsSelector } from '~/state/slices/pending-students.slice';
 import DeleteDialog from './dialog/delete-dialog.component';
 import EditDialog from './dialog/edit-dialog.component';
 
 const StudentsTable: React.FC = () => {
-  const pendingStudents = useRecoilValue(pendingStudentsState);
-  const connectedStudents = useRecoilValue(connectedStudentsState);
+  const pendingStudents = useAppSelector(pendingStudentsSelector);
+  const connectedStudents = useAppSelector(connectedStudentsSelector);
 
   const [openDeleteDialog, { set: setOpenDeleteDialog }] = useBoolean();
   const [openEditDialog, { set: setOpenEditDialog }] = useBoolean();
@@ -93,6 +91,7 @@ const StudentsTable: React.FC = () => {
                     size="small"
                     onClick={() => {
                       setSelectStudentId(student.id);
+                      setSelectStudentRemark(student.remark);
                       setOpenDeleteDialog(true);
                     }}
                   >
@@ -108,6 +107,7 @@ const StudentsTable: React.FC = () => {
         open={openDeleteDialog}
         onClose={() => setOpenDeleteDialog(false)}
         studentId={selectStudentId}
+        studentRemark={selectStudentRemark}
       />
       <EditDialog
         open={openEditDialog}

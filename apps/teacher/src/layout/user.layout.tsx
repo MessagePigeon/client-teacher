@@ -8,42 +8,40 @@ import { useBoolean, useRequest } from 'ahooks';
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { nameState } from '~/state/name.state';
-import { connectedStudentsState } from '~/state/students.state';
-import { unauthorizedHistoryPathState } from '~/state/unauthorized-history-path.state';
+import { useAppDispatch, useAppSelector } from '~/state/hooks';
+import { modifyName, nameSelector } from '~/state/slices/name.slice';
+import { modifyUnauthorizedHistoryPath } from '~/state/slices/unauthorized-history-path.slice';
 import LoadingModal from '../common/components/loading-modal.component';
 import { API } from '../http/api';
-import NetworkErrorModal from './components/network-error-modal.component';
+import { setConnectedStudents } from '../state/slices/connected-students.slice';
 import LayoutBase from './base.layout';
+import NetworkErrorModal from './components/network-error-modal.component';
 
 const UserLayout: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [initSuccess, { setTrue: setInitSuccessTrue }] = useBoolean();
 
-  const [name, setName] = useRecoilState(nameState);
-  const location = useLocation();
-  const setUnauthorizedHistoryPath = useSetRecoilState(
-    unauthorizedHistoryPathState,
-  );
+  const dispatch = useAppDispatch();
+
+  const name = useAppSelector(nameSelector);
   const { loading: initLoading, run } = useRequest(API.init, {
     onError() {
-      setUnauthorizedHistoryPath(location.pathname);
       localStorage.removeItem('token');
+      dispatch(modifyUnauthorizedHistoryPath(location.pathname));
       navigate('/login');
     },
     onSuccess(response) {
-      setName(response.data.name);
+      dispatch(modifyName(response.data.name));
       setInitSuccessTrue();
     },
   });
 
-  const setStudents = useSetRecoilState(connectedStudentsState);
   const { loading: getStudentsLoading } = useRequest(API.getStudents, {
     ready: initSuccess,
     onSuccess(response) {
-      setStudents(response.data);
+      dispatch(setConnectedStudents(response.data));
     },
   });
 

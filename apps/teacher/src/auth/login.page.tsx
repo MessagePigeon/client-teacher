@@ -1,15 +1,17 @@
 import { LockOutlined } from '@mui/icons-material';
 import { Avatar, Box, Button, Typography } from '@mui/material';
 import { useRequest } from 'ahooks';
-import { AxiosResponse } from 'axios';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useRecoilState } from 'recoil';
 import FormTextField from '~/common/components/form-text-field.component';
-import { API, LoginResponse } from '~/http/api';
-import { unauthorizedHistoryPathState } from '~/state/unauthorized-history-path.state';
+import { API } from '~/http/api';
+import { useAppDispatch, useAppSelector } from '~/state/hooks';
+import {
+  modifyUnauthorizedHistoryPath,
+  unauthorizedHistoryPathSelector,
+} from '~/state/slices/unauthorized-history-path.slice';
 
 const Login: React.FC = () => {
   const { control, handleSubmit } = useForm({
@@ -18,19 +20,19 @@ const Login: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const [unauthorizedHistoryPath, setUnauthorizedHistoryPath] = useRecoilState(
-    unauthorizedHistoryPathState,
+  const dispatch = useAppDispatch();
+  const unauthorizedHistoryPath = useAppSelector(
+    unauthorizedHistoryPathSelector,
   );
-  const onRequestSuccess = (response: AxiosResponse<LoginResponse, any>) => {
-    localStorage.setItem('token', response.data.token);
-    toast.success('Login Success');
-    navigate(unauthorizedHistoryPath);
-    setUnauthorizedHistoryPath('/send-message');
-  };
 
   const { run, loading } = useRequest(API.login, {
     manual: true,
-    onSuccess: onRequestSuccess,
+    onSuccess(response) {
+      localStorage.setItem('token', response.data.token);
+      toast.success('Login Success');
+      navigate(unauthorizedHistoryPath);
+      dispatch(modifyUnauthorizedHistoryPath('/send-message'));
+    },
   });
 
   return (

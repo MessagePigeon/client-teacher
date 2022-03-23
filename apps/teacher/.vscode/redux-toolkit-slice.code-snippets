@@ -1,0 +1,28 @@
+{
+  "Create Redux Toolkit Slice": {
+    "scope": "typescript",
+    "prefix": "rtks",
+    "body": [
+      "import { createSlice, PayloadAction } from '@reduxjs/toolkit';",
+      "import { RootState } from '../store';",
+      "",
+      "interface ${1:New}State {}",
+      "",
+      "const initialState: ${1:New}State = {};",
+      "",
+      "export const ${2:new}Slice = createSlice({",
+      "  name: '${3:state-name}',",
+      "  initialState,",
+      "  reducers: {",
+      "    reducer(state, action: PayloadAction<>) {},",
+      "  },",
+      "});",
+      "",
+      "export const {} = ${2:new}Slice.actions;",
+      "",
+      "export const ${2:new}Selector = (state: RootState) => state.${2:new};",
+      "",
+      "export default ${2:new}Slice.reducer;"
+    ]
+  }
+}
