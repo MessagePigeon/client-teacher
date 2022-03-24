@@ -5,7 +5,7 @@ interface UnauthorizedHistoryPathState {
   path: string;
 }
 
-const initialState: UnauthorizedHistoryPathState = { path: '' };
+const initialState: UnauthorizedHistoryPathState = { path: '/send-message' };
 
 export const unauthorizedHistoryPathSlice = createSlice({
   name: 'unauthorized-history-path',
