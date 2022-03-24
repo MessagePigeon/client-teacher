@@ -36,7 +36,9 @@ const EditDialog: React.FC<EditDialogProps> = ({
   const { run } = useRequest(API.modifyStudentRemark, {
     manual: true,
     onSuccess() {
-      dispatch(connectStudentsActions.editRemark({ id: studentId, newRemark }));
+      dispatch(
+        connectStudentsActions.modifyRemark({ id: studentId, newRemark }),
+      );
       toast.success('Modify Remark Success');
     },
   });

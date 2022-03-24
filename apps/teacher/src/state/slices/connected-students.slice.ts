@@ -17,7 +17,7 @@ export const connectedStudentsSlice = createSlice({
     set(state, action: PayloadAction<ConnectedStudent[]>) {
       state.students = action.payload;
     },
-    editRemark(
+    modifyRemark(
       state,
       action: PayloadAction<{ id: string; newRemark: string }>,
     ) {
