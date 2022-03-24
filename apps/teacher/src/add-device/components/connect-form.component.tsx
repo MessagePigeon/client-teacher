@@ -27,7 +27,7 @@ const ConnectForm: React.FC = () => {
     manual: true,
     onSuccess(response) {
       dispatch(pendingStudentsActions.add(response.data));
-      toast.success('Send Connect Request Success');
+      toast.info('Send Connect Request Success');
     },
   });
 

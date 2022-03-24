@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { connectStudentsActions } from '~/state/slices/connected-students.slice';
 import { pendingStudentsActions } from '~/state/slices/pending-students.slice';
 import { store } from '~/state/store';
@@ -15,7 +16,11 @@ export const websocketEvents = {
     store.dispatch(connectStudentsActions.setOffline({ id: studentId }));
   },
   'reject-connect-request': ({ requestId }: { requestId: string }) => {
+    const { remark } = state.pendingStudents.students.find(
+      ({ requestId: originRequestId }) => originRequestId === requestId,
+    )!;
     store.dispatch(pendingStudentsActions.remove({ requestId }));
+    toast.warn(`${remark} Reject Connection`);
   },
   'accept-connect-request': ({ requestId }: { requestId: string }) => {
     const { studentId: id, remark } = state.pendingStudents.students.find(
@@ -23,6 +28,7 @@ export const websocketEvents = {
     )!;
     store.dispatch(pendingStudentsActions.remove({ requestId }));
     store.dispatch(connectStudentsActions.add({ id, remark, online: true }));
+    toast.success(`${remark} Accept Connection`);
   },
   'student-connect-by-admin': ({
     studentId,
