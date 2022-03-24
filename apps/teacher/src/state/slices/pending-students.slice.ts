@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
+import { findIndexById } from '../utils/find-index-by-id.util';
 
 type PendingStudent = {
   requestId: string;
@@ -19,6 +20,14 @@ export const pendingStudentsSlice = createSlice({
   reducers: {
     add(state, action: PayloadAction<PendingStudent>) {
       state.students.push(action.payload);
+    },
+    remove(state, action: PayloadAction<{ requestId: string }>) {
+      const index = findIndexById(
+        state.students,
+        action.payload.requestId,
+        'requestId',
+      );
+      state.students.splice(index, 1);
     },
   },
 });

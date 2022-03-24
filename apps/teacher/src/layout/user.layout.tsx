@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '~/state/hooks';
 import { nameActions, nameSelector } from '~/state/slices/name.slice';
 import { unauthorizedHistoryPathActions } from '~/state/slices/unauthorized-history-path.slice';
+import { useAppWebsocket } from '~/websocket/use-app-websocket.hook';
 import LoadingModal from '../common/components/loading-modal.component';
 import { API } from '../http/api';
 import { connectStudentsActions } from '../state/slices/connected-students.slice';
@@ -44,6 +45,8 @@ const UserLayout: React.FC = () => {
       dispatch(connectStudentsActions.set(response.data));
     },
   });
+
+  useAppWebsocket({ ready: initSuccess });
 
   return (
     <>

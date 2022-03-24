@@ -28,6 +28,17 @@ export const connectedStudentsSlice = createSlice({
       const index = findIndexById(state.students, action.payload.id);
       state.students.splice(index, 1);
     },
+    add(state, action: PayloadAction<ConnectedStudent>) {
+      state.students.unshift(action.payload);
+    },
+    setOnline(state, action: PayloadAction<{ id: string }>) {
+      const index = findIndexById(state.students, action.payload.id);
+      state.students[index].online = true;
+    },
+    setOffline(state, action: PayloadAction<{ id: string }>) {
+      const index = findIndexById(state.students, action.payload.id);
+      state.students[index].online = false;
+    },
   },
 });
 
