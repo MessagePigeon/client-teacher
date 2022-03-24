@@ -51,6 +51,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
       <DialogContent>
         <TextField
           autoFocus
+          variant="standard"
           label="New Remark"
           id="newRemark"
           value={newRemark}
