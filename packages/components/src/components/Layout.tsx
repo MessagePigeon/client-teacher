@@ -55,6 +55,10 @@ export interface LayoutProps {
    * @default 'Logout'
    */
   logoutText?: string;
+  /**
+   * @default 220
+   */
+  drawerWidth?: number;
 }
 
 export const Layout: React.FC<LayoutProps> = ({
@@ -70,6 +74,7 @@ export const Layout: React.FC<LayoutProps> = ({
   onNavigate,
   logoutText = 'Logout',
   welcomeText = 'Welcome',
+  drawerWidth = 220,
   children,
 }) => {
   return (
@@ -119,10 +124,10 @@ export const Layout: React.FC<LayoutProps> = ({
           <Drawer
             variant="permanent"
             sx={{
-              width: 200,
+              width: drawerWidth,
               flexShrink: 0,
               [`& .MuiDrawer-paper`]: {
-                width: 200,
+                width: drawerWidth,
                 boxSizing: 'border-box',
               },
               display: { xs: 'none', md: 'block' },
