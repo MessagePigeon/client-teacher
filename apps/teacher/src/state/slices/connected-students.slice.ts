@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
+import { findIndexById } from '../utils/find-index-by-id.util';
 
 type ConnectedStudent = { id: string; online: boolean; remark: string };
 
@@ -20,15 +21,11 @@ export const connectedStudentsSlice = createSlice({
       state,
       action: PayloadAction<{ id: string; newRemark: string }>,
     ) {
-      const index = state.students.findIndex(
-        ({ id }) => id === action.payload.id,
-      );
+      const index = findIndexById(state.students, action.payload.id, 'id');
       state.students[index].remark = action.payload.newRemark;
     },
     delete(state, action: PayloadAction<{ id: string }>) {
-      const index = state.students.findIndex(
-        ({ id }) => id === action.payload.id,
-      );
+      const index = findIndexById(state.students, action.payload.id, 'id');
       state.students.splice(index, 1);
     },
   },
