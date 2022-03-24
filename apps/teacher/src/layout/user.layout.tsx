@@ -49,11 +49,15 @@ const UserLayout: React.FC = () => {
     <>
       <LayoutBase
         navigation={[
-          { title: '发送消息', icon: <ForwardToInbox />, path: 'send-message' },
-          { title: '历史记录', icon: <History />, path: 'history' },
-          { title: '添加设备', icon: <Devices />, path: 'add-device' },
           {
-            title: '个人设置',
+            title: 'Send Message',
+            icon: <ForwardToInbox />,
+            path: 'send-message',
+          },
+          { title: 'History', icon: <History />, path: 'history' },
+          { title: 'Add Device', icon: <Devices />, path: 'add-device' },
+          {
+            title: 'Settings',
             icon: <ManageAccountsOutlined />,
             path: 'settings',
           },

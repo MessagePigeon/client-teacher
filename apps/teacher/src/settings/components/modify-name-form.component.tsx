@@ -33,17 +33,19 @@ const ModifyNameForm: React.FC = () => {
         reset();
       })}
     >
-      <Typography mb={1}>修改姓名</Typography>
+      <Typography mb={1}>Modify Name</Typography>
       <Divider />
       <FormTextField
         control={control}
-        label="新姓名"
+        label="New Name"
         name="newName"
         autoComplete="name"
-        rules={{ validate: (value) => value !== name || '与原姓名相同' }}
+        rules={{
+          validate: (value) => value !== name || 'Same as original name',
+        }}
       />
       <Button fullWidth type="submit" variant="contained" sx={{ mt: 1 }}>
-        确定
+        Modify
       </Button>
     </Paper>
   );

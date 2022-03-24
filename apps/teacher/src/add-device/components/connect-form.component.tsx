@@ -46,7 +46,7 @@ const ConnectForm: React.FC = () => {
         <FormTextField
           control={control}
           name="connectCode"
-          label="设备代码"
+          label="Connect Code"
           autoFocus={!connectCodeParam}
         />
       </Grid>
@@ -54,13 +54,13 @@ const ConnectForm: React.FC = () => {
         <FormTextField
           control={control}
           name="remark"
-          label="备注名"
+          label="Remark"
           autoFocus={!!connectCodeParam}
         />
       </Grid>
       <Grid item container md={12} xs={12} justifyContent="end">
         <Button variant="contained" fullWidth={isXs} type="submit">
-          添加
+          Add
         </Button>
       </Grid>
     </Grid>

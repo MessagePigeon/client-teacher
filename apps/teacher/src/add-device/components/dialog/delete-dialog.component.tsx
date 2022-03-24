@@ -31,16 +31,18 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>确认删除 {studentRemark} 吗?</DialogTitle>
+      <DialogTitle>
+        Are you sure you want to delete <strong>{studentRemark}</strong> ?
+      </DialogTitle>
       <DialogActions>
-        <Button onClick={onClose}>取消</Button>
+        <Button onClick={onClose}>Cancel</Button>
         <Button
           onClick={() => {
             run(studentId);
             onClose();
           }}
         >
-          确定
+          Delete
         </Button>
       </DialogActions>
     </Dialog>

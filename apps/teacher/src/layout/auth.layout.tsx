@@ -17,8 +17,8 @@ const AuthLayout: React.FC = () => {
   return (
     <LayoutBase
       navigation={[
-        { title: '登录', icon: <Login />, path: 'login' },
-        { title: '注册', icon: <HistoryEdu />, path: 'register' },
+        { title: 'Login', icon: <Login />, path: 'login' },
+        { title: 'Register', icon: <HistoryEdu />, path: 'register' },
       ]}
       navigate={(path) => navigate(path)}
       mainContainerMaxWidth="xs"

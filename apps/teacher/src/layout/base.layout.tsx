@@ -30,15 +30,13 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
   return (
     <Layout
       navigation={navigation}
-      title="飞鸽传书"
+      title="Message Pigeon"
       isLogin={isLogin}
-      username={`${teacherName}老师`}
+      username={`${teacherName}`}
       github="https://github.com/MessagePigeon/client-teacher"
       onNavigate={navigate}
       currentPath={navCurrentPath}
       onLogout={logout}
-      logoutText="退出登录"
-      welcomeText="欢迎您"
       mainContainerMaxWidth={mainContainerMaxWidth}
     >
       <Outlet />

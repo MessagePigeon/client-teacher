@@ -48,7 +48,7 @@ const Login: React.FC = () => {
         <LockOutlined />
       </Avatar>
       <Typography component="h1" variant="h5">
-        登录
+        Login
       </Typography>
       <Box
         component="form"
@@ -59,16 +59,16 @@ const Login: React.FC = () => {
         <FormTextField
           name="username"
           control={control}
-          label="用户名"
+          label="Username"
           autoComplete="username"
           autoFocus
         />
         <FormTextField
           name="password"
           control={control}
-          label="密码"
+          label="Password"
           autoComplete="current-password"
-          defaultHelperText="忘记密码? 联系管理员重置"
+          defaultHelperText="Forgot your password? Contact admin to reset"
           password
         />
         <Button
@@ -78,7 +78,7 @@ const Login: React.FC = () => {
           sx={{ mt: 1, mb: 2 }}
           disabled={loading}
         >
-          登录
+          Login
         </Button>
       </Box>
     </Box>

@@ -43,11 +43,13 @@ const EditDialog: React.FC<EditDialogProps> = ({
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>编辑 {oldStudentRemark}</DialogTitle>
+      <DialogTitle>
+        Edit <strong>{oldStudentRemark}</strong>
+      </DialogTitle>
       <DialogContent>
         <TextField
           autoFocus
-          label="新备注"
+          label="New Remark"
           id="newRemark"
           value={newRemark}
           onChange={(event) => setNewRemark(event.target.value)}
@@ -55,7 +57,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>取消</Button>
+        <Button onClick={onClose}>Cancel</Button>
         <Button
           onClick={() => {
             run({ studentId, newRemark });
@@ -63,7 +65,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
           }}
           disabled={newRemark === '' || newRemark === oldStudentRemark}
         >
-          确定
+          Save
         </Button>
       </DialogActions>
     </Dialog>

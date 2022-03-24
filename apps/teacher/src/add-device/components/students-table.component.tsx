@@ -32,12 +32,12 @@ const StudentsTable: React.FC = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell sx={{ fontWeight: 'bold' }}>备注</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>Remark</TableCell>
               <TableCell sx={{ fontWeight: 'bold' }} align="center">
-                状态
+                Status
               </TableCell>
               <TableCell sx={{ fontWeight: 'bold' }} align="right">
-                操作
+                Actions
               </TableCell>
             </TableRow>
           </TableHead>
@@ -49,7 +49,7 @@ const StudentsTable: React.FC = () => {
                   align="center"
                   sx={{ color: (theme) => theme.palette.text.secondary }}
                 >
-                  等待中
+                  Pending
                 </TableCell>
                 <TableCell align="right">
                   <IconButton size="small" disabled>
@@ -74,7 +74,7 @@ const StudentsTable: React.FC = () => {
                         : theme.palette.error.main,
                   }}
                 >
-                  {student.online ? '在线' : '离线'}
+                  {student.online ? 'Online' : 'Offline'}
                 </TableCell>
                 <TableCell align="right">
                   <IconButton

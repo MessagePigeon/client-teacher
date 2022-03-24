@@ -32,26 +32,26 @@ const ChangePasswordForm: React.FC = () => {
         reset();
       })}
     >
-      <Typography mb={1}>修改密码</Typography>
+      <Typography mb={1}>Change Password</Typography>
       <Divider />
       <FormTextField
         control={control}
-        label="原密码"
+        label="Old Password"
         name="oldPassword"
         password
       />
       <FormTextField
         control={control}
-        label="新密码"
+        label="New Password"
         name="newPassword"
         autoComplete="new-password"
         rules={{
-          minLength: { value: 5, message: '至少五个字符' },
+          minLength: { value: 5, message: 'At least five characters' },
         }}
         password
       />
       <Button fullWidth type="submit" variant="contained" sx={{ mt: 1 }}>
-        确定
+        Change
       </Button>
     </Paper>
   );

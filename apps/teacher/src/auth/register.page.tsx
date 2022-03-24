@@ -14,7 +14,7 @@ const Register: React.FC = () => {
       username: '',
       name: '',
       password: '',
-      rePassword: '',
+      confirmPassword: '',
       registerCode: '',
     },
   });
@@ -42,65 +42,68 @@ const Register: React.FC = () => {
         <LockOutlined />
       </Avatar>
       <Typography component="h1" variant="h5">
-        注册
+        Register
       </Typography>
       <Box
         component="form"
-        onSubmit={handleSubmit(({ rePassword, ...formData }) => run(formData))}
+        onSubmit={handleSubmit(({ confirmPassword, ...formData }) =>
+          run(formData),
+        )}
         noValidate
         sx={{ mt: 1 }}
       >
         <FormTextField
           name="username"
-          label="用户名"
+          label="Username"
           control={control}
           rules={{
             pattern: {
               value: /^([a-zA-Z]+[0-9-_]*)+$/,
-              message: '请使用大小写字母、数字、中划线、下划线',
+              message:
+                'Please use upper and lower case letters, numbers, underscores and underlines',
             },
           }}
           autoFocus
           autoComplete="username"
-          defaultHelperText="注册后无法修改"
+          defaultHelperText="Cannot be modified after registration"
         />
         <FormTextField
           name="name"
-          label="真实姓名"
+          label="Name"
           control={control}
           autoComplete="name"
-          defaultHelperText="将用于显示在消息标题中"
+          defaultHelperText="Will be used to display in the message header"
         />
         <FormTextField
           name="password"
-          label="密码"
+          label="Password"
           control={control}
           rules={{
-            minLength: { value: 5, message: '至少五个字符' },
+            minLength: { value: 5, message: 'At least five characters' },
           }}
           autoComplete="new-password"
           password
         />
         <FormTextField
-          name="rePassword"
-          label="重复密码"
+          name="confirmPassword"
+          label="Confirm Password"
           control={control}
           rules={{
             validate: (value) =>
-              value === watchOriginPassword || '重复密码不正确',
+              value === watchOriginPassword || 'Confirm password incorrect',
           }}
           password
         />
         <FormTextField
           name="registerCode"
-          label="注册码"
+          label="Register Code"
           control={control}
           rules={{
-            minLength: { value: 32, message: '注册码长度需32位' },
-            maxLength: { value: 32, message: '注册码长度仅32位' },
+            minLength: { value: 32, message: '32 characters required' },
+            maxLength: { value: 32, message: '32 characters only' },
           }}
           password
-          defaultHelperText="联系管理员可获取注册码"
+          defaultHelperText="Contact admin to obtain a registration code"
         />
         <Button
           type="submit"
@@ -109,7 +112,7 @@ const Register: React.FC = () => {
           sx={{ mt: 1, mb: 2 }}
           disabled={loading}
         >
-          注册
+          Register
         </Button>
       </Box>
     </Box>
