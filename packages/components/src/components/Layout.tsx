@@ -96,6 +96,7 @@ export const Layout: React.FC<LayoutProps> = ({
                   onClick={() => {
                     window.open(github);
                   }}
+                  sx={{ display: { xs: 'none', md: 'block' } }}
                 >
                   <GitHub />
                 </IconButton>
