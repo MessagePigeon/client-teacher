@@ -4,7 +4,7 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import { API } from '~/http/api';
 import { useAppDispatch } from '~/state/hooks';
-import { connectStudentsActions } from '~/state/slices/connected-students.slice';
+import { connectedStudentsActions } from '~/state/slices/connected-students.slice';
 
 interface DeleteDialogProps {
   open: boolean;
@@ -24,7 +24,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
   const { run } = useRequest(API.deleteStudent, {
     manual: true,
     onSuccess() {
-      dispatch(connectStudentsActions.delete({ id: studentId }));
+      dispatch(connectedStudentsActions.delete({ id: studentId }));
       toast.success('Delete Student Success');
     },
   });

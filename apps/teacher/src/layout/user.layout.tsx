@@ -14,7 +14,7 @@ import { unauthorizedHistoryPathActions } from '~/state/slices/unauthorized-hist
 import { useAppWebsocket } from '~/websocket/use-app-websocket.hook';
 import LoadingModal from '../common/components/loading-modal.component';
 import { API } from '../http/api';
-import { connectStudentsActions } from '../state/slices/connected-students.slice';
+import { connectedStudentsActions } from '../state/slices/connected-students.slice';
 import LayoutBase from './base.layout';
 import NetworkErrorModal from './components/network-error-modal.component';
 
@@ -42,7 +42,7 @@ const UserLayout: React.FC = () => {
   const { loading: getStudentsLoading } = useRequest(API.getStudents, {
     ready: initSuccess,
     onSuccess(response) {
-      dispatch(connectStudentsActions.set(response.data));
+      dispatch(connectedStudentsActions.set(response.data));
     },
   });
 

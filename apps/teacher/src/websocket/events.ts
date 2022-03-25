@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import { connectStudentsActions } from '~/state/slices/connected-students.slice';
+import { connectedStudentsActions } from '~/state/slices/connected-students.slice';
 import { pendingStudentsActions } from '~/state/slices/pending-students.slice';
 import { store } from '~/state/store';
 
@@ -10,10 +10,10 @@ store.subscribe(() => {
 
 export const websocketEvents = {
   'student-online': ({ studentId }: { studentId: string }) => {
-    store.dispatch(connectStudentsActions.setOnline({ id: studentId }));
+    store.dispatch(connectedStudentsActions.setOnline({ id: studentId }));
   },
   'student-offline': ({ studentId }: { studentId: string }) => {
-    store.dispatch(connectStudentsActions.setOffline({ id: studentId }));
+    store.dispatch(connectedStudentsActions.setOffline({ id: studentId }));
   },
   'reject-connect-request': ({ requestId }: { requestId: string }) => {
     const { remark } = state.pendingStudents.students.find(
@@ -27,7 +27,7 @@ export const websocketEvents = {
       ({ requestId: originRequestId }) => originRequestId === requestId,
     )!;
     store.dispatch(pendingStudentsActions.remove({ requestId }));
-    store.dispatch(connectStudentsActions.add({ id, remark, online: true }));
+    store.dispatch(connectedStudentsActions.add({ id, remark, online: true }));
     toast.success(`${remark} Accept Connection`);
   },
   'student-connect-by-admin': ({
@@ -40,10 +40,10 @@ export const websocketEvents = {
     online: boolean;
   }) => {
     store.dispatch(
-      connectStudentsActions.add({ id: studentId, remark, online }),
+      connectedStudentsActions.add({ id: studentId, remark, online }),
     );
   },
   'student-disconnect-by-admin': ({ studentId }: { studentId: string }) => {
-    store.dispatch(connectStudentsActions.delete({ id: studentId }));
+    store.dispatch(connectedStudentsActions.delete({ id: studentId }));
   },
 };

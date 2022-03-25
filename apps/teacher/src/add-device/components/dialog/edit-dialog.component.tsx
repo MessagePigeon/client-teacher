@@ -14,7 +14,7 @@ import { API } from '~/http/api';
 import { useAppDispatch, useAppSelector } from '~/state/hooks';
 import {
   connectedStudentsSelector,
-  connectStudentsActions,
+  connectedStudentsActions,
 } from '~/state/slices/connected-students.slice';
 
 interface EditDialogProps {
@@ -46,7 +46,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
     manual: true,
     onSuccess(_, [body]) {
       dispatch(
-        connectStudentsActions.modifyRemark({
+        connectedStudentsActions.modifyRemark({
           id: studentId,
           newRemark: body.newRemark,
         }),

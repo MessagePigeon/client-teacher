@@ -42,7 +42,7 @@ export const connectedStudentsSlice = createSlice({
   },
 });
 
-export const connectStudentsActions = connectedStudentsSlice.actions;
+export const connectedStudentsActions = connectedStudentsSlice.actions;
 
 export const connectedStudentsSelector = (state: RootState) =>
   state.connectedStudents.students;
