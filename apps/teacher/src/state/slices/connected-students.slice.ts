@@ -47,4 +47,7 @@ export const connectedStudentsActions = connectedStudentsSlice.actions;
 export const connectedStudentsSelector = (state: RootState) =>
   state.connectedStudents.students;
 
+export const onlineStudentsSelector = (state: RootState) =>
+  state.connectedStudents.students.filter(({ online }) => online);
+
 export default connectedStudentsSlice.reducer;

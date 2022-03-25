@@ -38,6 +38,20 @@ export type ModifyPasswordRequest = {
   newPassword: string;
 };
 
+export type SendMessageRequest = {
+  studentIds: string[];
+  message: string;
+  tts: number;
+  closeDelay: number;
+};
+
+export type SendMessageResponse = {
+  messageId: number;
+  createdAt: string;
+  message: string;
+  studentIds: string[];
+};
+
 export class API {
   static async login(body: LoginRequest) {
     return await service.post<LoginResponse>('/login', body);
@@ -73,5 +87,9 @@ export class API {
 
   static async modifyPassword(body: ModifyPasswordRequest) {
     return await service.patch('/password', body);
+  }
+
+  static async sendMessage(body: SendMessageRequest) {
+    return await service.post<SendMessageResponse>('/message', body);
   }
 }
