@@ -1,51 +1,51 @@
 import service from './lib/axios.lib';
 
-export type LoginRequest = { username: string; password: string };
-export type LoginResponse = { token: string };
+type LoginRequest = { username: string; password: string };
+type LoginResponse = { token: string };
 
-export type RegisterRequest = {
+type RegisterRequest = {
   username: string;
   name: string;
   password: string;
   registerCode: string;
 };
 
-export type InitResponse = { username: string; name: string };
+type InitResponse = { username: string; name: string };
 
-export type StudentResponse = Array<{
+type StudentResponse = Array<{
   id: string;
   online: boolean;
   remark: string;
 }>;
 
-export type ConnectRequest = { connectCode: string; remark: string };
+type ConnectRequest = { connectCode: string; remark: string };
 
-export type ConnectRequestResponse = {
+type ConnectRequestResponse = {
   requestId: string;
   studentId: string;
   remark: string;
 };
 
-export type ModifyStudentRemarkRequest = {
+type ModifyStudentRemarkRequest = {
   studentId: string;
   newRemark: string;
 };
 
-export type ModifyNameRequest = { newName: string };
+type ModifyNameRequest = { newName: string };
 
-export type ModifyPasswordRequest = {
+type ModifyPasswordRequest = {
   oldPassword: string;
   newPassword: string;
 };
 
-export type SendMessageRequest = {
+type SendMessageRequest = {
   studentIds: string[];
   message: string;
   tts: number;
   closeDelay: number;
 };
 
-export type SendMessageResponse = {
+type SendMessageResponse = {
   messageId: number;
   createdAt: string;
   message: string;
