@@ -1,5 +1,5 @@
 import { Autocomplete, Button, TextField } from '@mui/material';
-import { useRequest } from 'ahooks';
+import { useRequest, useUpdateEffect } from 'ahooks';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
@@ -15,12 +15,28 @@ const SendMessage: React.FC = () => {
 
   const onlineStudents = useSelector(onlineStudentsSelector);
 
-  const { control, handleSubmit, setValue } = useForm<{
+  const { control, handleSubmit, setValue, watch } = useForm<{
     studentIds: string[];
     message: string;
     tts: number;
     closeDelay: number;
   }>({ defaultValues: { studentIds: [], message: '', tts: 0, closeDelay: 0 } });
+
+  // Delete the selected user if it is offline
+  const watchStudentIds = watch('studentIds');
+  useUpdateEffect(() => {
+    watchStudentIds.forEach((studentId, index) => {
+      const isStudentOnline = onlineStudents
+        .map(({ id }) => id)
+        .includes(studentId);
+      if (!isStudentOnline) {
+        setValue('studentIds', [
+          ...watchStudentIds.slice(0, index),
+          ...watchStudentIds.slice(index + 1),
+        ]);
+      }
+    });
+  }, [onlineStudents]);
 
   const { run } = useRequest(API.sendMessage, {
     manual: true,
@@ -49,7 +65,9 @@ const SendMessage: React.FC = () => {
         }) => (
           <Autocomplete
             multiple
-            options={onlineStudents}
+            // Prevent Mui warnings caused by undefined options when the user is selected offline
+            options={[...onlineStudents, undefined]}
+            getOptionDisabled={(option) => option === undefined}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -58,13 +76,14 @@ const SendMessage: React.FC = () => {
                 helperText={invalid && error?.message}
               />
             )}
-            getOptionLabel={({ remark }) => remark}
+            getOptionLabel={(student) => student?.remark || ''}
             noOptionsText="Devices Not Found"
-            onChange={(_, values) => onChange(values.map(({ id }) => id))}
+            onChange={(_, values) =>
+              onChange(values.map((student) => student?.id))
+            }
             value={
-              value.map(
-                (selectedId) =>
-                  onlineStudents.find(({ id }) => id === selectedId)!,
+              value.map((selectedId) =>
+                onlineStudents.find(({ id }) => id === selectedId),
               )!
             }
           />
