@@ -46,4 +46,8 @@ export const websocketEvents = {
   'student-disconnect-by-admin': ({ studentId }: { studentId: string }) => {
     store.dispatch(connectedStudentsActions.delete({ id: studentId }));
   },
+  logout: () => {
+    localStorage.removeItem('token');
+    location.reload();
+  },
 };
