@@ -34,6 +34,8 @@ interface FormTextFieldProps<
   autoFocus?: boolean;
   password?: boolean;
   variant?: 'standard' | 'filled' | 'outlined';
+  multiline?: boolean;
+  rows?: number;
 }
 
 const FormTextField = <
@@ -49,6 +51,8 @@ const FormTextField = <
   autoFocus,
   password,
   variant,
+  multiline,
+  rows,
 }: FormTextFieldProps<TFieldValues, TName>) => {
   const [showPassword, { toggle: toggleShowPassword }] = useBoolean();
 
@@ -69,6 +73,8 @@ const FormTextField = <
           helperText={invalid ? error?.message : defaultHelperText}
           type={password ? (showPassword ? 'text' : 'password') : undefined}
           variant={variant}
+          multiline={multiline}
+          rows={rows}
           InputProps={
             password
               ? {
