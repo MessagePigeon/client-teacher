@@ -1,17 +1,18 @@
-import { Button, Grid, Theme, useMediaQuery } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { useMount, useRequest } from 'ahooks';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
+import { useCheckPhone } from '~/common/hooks/use-check-phone.hook';
 import { API } from '~/http/api';
 import { useAppDispatch, useAppSelector } from '~/state/hooks';
 import { connectedStudentsSelector } from '~/state/slices/connected-students.slice';
 import { pendingStudentsActions } from '~/state/slices/pending-students.slice';
 
 const ConnectForm: React.FC = () => {
-  const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.only('xs'));
+  const isPhone = useCheckPhone();
 
   const connectedStudents = useAppSelector(connectedStudentsSelector);
 
@@ -67,7 +68,7 @@ const ConnectForm: React.FC = () => {
         />
       </Grid>
       <Grid item container md={12} xs={12} justifyContent="end">
-        <Button variant="contained" fullWidth={isXs} type="submit">
+        <Button variant="contained" fullWidth={isPhone} type="submit">
           Add
         </Button>
       </Grid>
