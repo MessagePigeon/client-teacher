@@ -33,6 +33,7 @@ interface FormTextFieldProps<
   autoComplete?: string;
   autoFocus?: boolean;
   password?: boolean;
+  variant?: 'standard' | 'filled' | 'outlined';
 }
 
 const FormTextField = <
@@ -47,6 +48,7 @@ const FormTextField = <
   autoComplete,
   autoFocus,
   password,
+  variant,
 }: FormTextFieldProps<TFieldValues, TName>) => {
   const [showPassword, { toggle: toggleShowPassword }] = useBoolean();
 
@@ -66,6 +68,7 @@ const FormTextField = <
           error={invalid}
           helperText={invalid ? error?.message : defaultHelperText}
           type={password ? (showPassword ? 'text' : 'password') : undefined}
+          variant={variant}
           InputProps={
             password
               ? {
