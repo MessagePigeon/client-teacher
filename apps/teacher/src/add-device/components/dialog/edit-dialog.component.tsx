@@ -4,14 +4,18 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  TextField,
 } from '@mui/material';
 import { useRequest, useUpdateEffect } from 'ahooks';
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import FormTextField from '~/common/components/form-text-field.component';
 import { API } from '~/http/api';
-import { useAppDispatch } from '~/state/hooks';
-import { connectStudentsActions } from '~/state/slices/connected-students.slice';
+import { useAppDispatch, useAppSelector } from '~/state/hooks';
+import {
+  connectedStudentsSelector,
+  connectStudentsActions,
+} from '~/state/slices/connected-students.slice';
 
 interface EditDialogProps {
   open: boolean;
@@ -28,16 +32,24 @@ const EditDialog: React.FC<EditDialogProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const [newRemark, setNewRemark] = useState<string>('');
+  const connectedStudents = useAppSelector(connectedStudentsSelector);
+
+  const { control, handleSubmit, setValue } = useForm({
+    defaultValues: { newRemark: '' },
+  });
+
   useUpdateEffect(() => {
-    setNewRemark(oldStudentRemark);
+    setValue('newRemark', oldStudentRemark);
   }, [oldStudentRemark]);
 
   const { run } = useRequest(API.modifyStudentRemark, {
     manual: true,
-    onSuccess() {
+    onSuccess(_, [body]) {
       dispatch(
-        connectStudentsActions.modifyRemark({ id: studentId, newRemark }),
+        connectStudentsActions.modifyRemark({
+          id: studentId,
+          newRemark: body.newRemark,
+        }),
       );
       toast.success('Modify Remark Success');
     },
@@ -45,32 +57,35 @@ const EditDialog: React.FC<EditDialogProps> = ({
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>
-        Edit <strong>{oldStudentRemark}</strong>
-      </DialogTitle>
-      <DialogContent>
-        <TextField
-          autoFocus
-          variant="standard"
-          label="New Remark"
-          id="newRemark"
-          value={newRemark}
-          onChange={(event) => setNewRemark(event.target.value)}
-          margin="normal"
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button
-          onClick={() => {
-            run({ studentId, newRemark });
-            onClose();
-          }}
-          disabled={newRemark === '' || newRemark === oldStudentRemark}
-        >
-          Save
-        </Button>
-      </DialogActions>
+      <form
+        onSubmit={handleSubmit(({ newRemark }) => {
+          run({ studentId, newRemark });
+          onClose();
+        })}
+      >
+        <DialogTitle>
+          Edit <strong>{oldStudentRemark}</strong>
+        </DialogTitle>
+        <DialogContent>
+          <FormTextField
+            control={control}
+            name="newRemark"
+            autoFocus
+            variant="standard"
+            label="New Remark"
+            rules={{
+              validate: (value) =>
+                !connectedStudents
+                  .map(({ remark }) => remark)
+                  .includes(value) || 'Remark duplicate',
+            }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onClose}>Cancel</Button>
+          <Button type="submit">Save</Button>
+        </DialogActions>
+      </form>
     </Dialog>
   );
 };

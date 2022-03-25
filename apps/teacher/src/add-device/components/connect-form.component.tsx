@@ -6,11 +6,14 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
 import { API } from '~/http/api';
-import { useAppDispatch } from '~/state/hooks';
+import { useAppDispatch, useAppSelector } from '~/state/hooks';
+import { connectedStudentsSelector } from '~/state/slices/connected-students.slice';
 import { pendingStudentsActions } from '~/state/slices/pending-students.slice';
 
 const ConnectForm: React.FC = () => {
   const isXs = useMediaQuery((theme: Theme) => theme.breakpoints.only('xs'));
+
+  const connectedStudents = useAppSelector(connectedStudentsSelector);
 
   const { control, handleSubmit, reset, setValue } = useForm({
     defaultValues: { connectCode: '', remark: '' },
@@ -56,6 +59,11 @@ const ConnectForm: React.FC = () => {
           name="remark"
           label="Remark"
           autoFocus={!!connectCodeParam}
+          rules={{
+            validate: (value) =>
+              !connectedStudents.map(({ remark }) => remark).includes(value) ||
+              'Remark duplicate',
+          }}
         />
       </Grid>
       <Grid item container md={12} xs={12} justifyContent="end">
