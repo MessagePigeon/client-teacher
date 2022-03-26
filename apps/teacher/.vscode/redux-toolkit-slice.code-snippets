@@ -18,7 +18,7 @@
       "  },",
       "});",
       "",
-      "export const {} = ${2:new}Slice.actions;",
+      "export const ${2:new}Actions = ${2:new}Slice.actions;",
       "",
       "export const ${2:new}Selector = (state: RootState) => state.${2:new};",
       "",
