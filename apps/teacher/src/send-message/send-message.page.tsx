@@ -11,12 +11,15 @@ import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
 import { useCheckPhone } from '~/common/hooks/use-check-phone.hook';
 import { API } from '~/http/api';
+import { useAppDispatch } from '~/state/hooks';
 import { onlineStudentsSelector } from '~/state/slices/connected-students.slice';
+import { messagesActions } from '~/state/slices/messages.slice';
 import CheckBoxAndNumberFieldInSentence from './components/checkbox-and-number-field-in-sentence.component';
 
 const SendMessage: React.FC = () => {
   const isPhone = useCheckPhone();
 
+  const dispatch = useAppDispatch();
   const onlineStudents = useSelector(onlineStudentsSelector);
 
   const { control, handleSubmit, setValue, watch } = useForm<{
@@ -45,7 +48,15 @@ const SendMessage: React.FC = () => {
   const { run } = useRequest(API.sendMessage, {
     manual: true,
     onSuccess(response) {
-      console.log(response.data);
+      const { messageId, createdAt, message, studentIds } = response.data;
+      const newMessage = {
+        id: messageId,
+        createdAt,
+        message,
+        studentIds,
+        showingIds: studentIds,
+      };
+      dispatch(messagesActions.addToTop(newMessage));
       toast.success('Send Message Success');
     },
   });

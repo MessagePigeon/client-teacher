@@ -14,9 +14,9 @@ import { unauthorizedHistoryPathActions } from '~/state/slices/unauthorized-hist
 import { useAppWebsocket } from '~/websocket/use-app-websocket.hook';
 import LoadingModal from '../common/components/loading-modal.component';
 import { API } from '../http/api';
-import { connectedStudentsActions } from '../state/slices/connected-students.slice';
 import LayoutBase from './base.layout';
 import NetworkErrorModal from './components/network-error-modal.component';
+import { useInitUserData } from './helpers/init-user-data.helper';
 
 const UserLayout: React.FC = () => {
   const navigate = useNavigate();
@@ -39,11 +39,8 @@ const UserLayout: React.FC = () => {
     },
   });
 
-  const { loading: getStudentsLoading } = useRequest(API.getStudents, {
+  const { loading: initUserDataLoading } = useInitUserData({
     ready: initSuccess,
-    onSuccess(response) {
-      dispatch(connectedStudentsActions.set(response.data));
-    },
   });
 
   useAppWebsocket({ ready: initSuccess });
@@ -78,7 +75,7 @@ const UserLayout: React.FC = () => {
         }}
       />
       <NetworkErrorModal />
-      <LoadingModal open={initLoading || getStudentsLoading} />
+      <LoadingModal open={initLoading || initUserDataLoading} />
     </>
   );
 };

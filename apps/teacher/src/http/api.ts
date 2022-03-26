@@ -5,9 +5,11 @@ import {
   InitResponse,
   LoginRequest,
   LoginResponse,
+  MessagesResponse,
   ModifyNameRequest,
   ModifyPasswordRequest,
   ModifyStudentRemarkRequest,
+  PaginationRequest,
   RegisterRequest,
   SendMessageRequest,
   SendMessageResponse,
@@ -53,5 +55,9 @@ export class API {
 
   static async sendMessage(body: SendMessageRequest) {
     return await service.post<SendMessageResponse>('/message', body);
+  }
+
+  static async getMessages(params: PaginationRequest) {
+    return await service.get<MessagesResponse>('/messages', { params });
   }
 }

@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify';
 import { connectedStudentsActions } from '~/state/slices/connected-students.slice';
+import { messagesActions } from '~/state/slices/messages.slice';
 import { pendingStudentsActions } from '~/state/slices/pending-students.slice';
 import { store } from '~/state/store';
 
@@ -49,5 +50,8 @@ export const websocketEvents = {
   logout: () => {
     localStorage.removeItem('token');
     location.reload();
+  },
+  'message-close': (data: { messageId: number; studentId: string }) => {
+    store.dispatch(messagesActions.close(data));
   },
 };

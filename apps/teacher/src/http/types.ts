@@ -49,3 +49,20 @@ export type SendMessageResponse = {
   message: string;
   studentIds: string[];
 };
+
+export type PaginationRequest = { skip: number; take: number };
+
+type PaginationResponse<T> = {
+  data: T[];
+  total: number;
+};
+
+type Message = {
+  id: number;
+  createdAt: string;
+  message: string;
+  studentIds: string[];
+  showingIds: string[];
+};
+
+export type MessagesResponse = PaginationResponse<Message>;

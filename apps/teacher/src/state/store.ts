@@ -3,6 +3,7 @@ import name from './slices/name.slice';
 import unauthorizedHistoryPath from './slices/unauthorized-history-path.slice';
 import pendingStudents from './slices/pending-students.slice';
 import connectedStudents from './slices/connected-students.slice';
+import messages from './slices/messages.slice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     unauthorizedHistoryPath,
     pendingStudents,
     connectedStudents,
+    messages,
   },
 });
 
