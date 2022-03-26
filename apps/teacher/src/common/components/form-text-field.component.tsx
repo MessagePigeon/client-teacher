@@ -74,7 +74,7 @@ const FormTextField = <
           type={password ? (showPassword ? 'text' : 'password') : undefined}
           variant={variant}
           multiline={multiline}
-          rows={rows}
+          minRows={rows}
           InputProps={
             password
               ? {
