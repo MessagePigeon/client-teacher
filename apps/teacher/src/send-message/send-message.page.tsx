@@ -1,4 +1,8 @@
-import { Autocomplete, Button, TextField } from '@mui/material';
+import {
+  CheckBox as CheckBoxIcon,
+  CheckBoxOutlineBlank,
+} from '@mui/icons-material';
+import { Autocomplete, Button, Checkbox, TextField } from '@mui/material';
 import { useRequest, useUpdateEffect } from 'ahooks';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -67,7 +71,21 @@ const SendMessage: React.FC = () => {
             multiple
             // Prevent Mui warnings caused by undefined options when the user is selected offline
             options={[...onlineStudents, undefined]}
-            getOptionDisabled={(option) => option === undefined}
+            renderOption={(props, option, { selected }) =>
+              option && (
+                <li {...props}>
+                  <Checkbox
+                    icon={<CheckBoxOutlineBlank fontSize="small" />}
+                    checkedIcon={<CheckBoxIcon fontSize="small" />}
+                    style={{ marginRight: 8 }}
+                    checked={selected}
+                  />
+                  {option?.remark}
+                </li>
+              )
+            }
+            disableCloseOnSelect
+            getOptionLabel={(option) => option?.remark || ''}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -76,7 +94,6 @@ const SendMessage: React.FC = () => {
                 helperText={invalid && error?.message}
               />
             )}
-            getOptionLabel={(student) => student?.remark || ''}
             noOptionsText="Devices Not Found"
             onChange={(_, values) =>
               onChange(values.map((student) => student?.id))
