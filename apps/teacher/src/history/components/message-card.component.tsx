@@ -33,7 +33,9 @@ const MessageCard: React.FC<MessageCardProps> = ({
         <Typography sx={{ fontSize: 14, mt: 1 }} color="text.secondary">
           {date}
         </Typography>
-        <Typography sx={{ my: 1 }}>{message}</Typography>
+        <Typography sx={{ my: 1, whiteSpace: 'pre-wrap' }}>
+          {message}
+        </Typography>
         <Stack direction="row" flexWrap="wrap">
           {studentsStatus.map(({ remark, showing }, index) => (
             <Chip
