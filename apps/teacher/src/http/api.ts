@@ -1,56 +1,18 @@
 import service from './lib/axios.lib';
-
-type LoginRequest = { username: string; password: string };
-type LoginResponse = { token: string };
-
-type RegisterRequest = {
-  username: string;
-  name: string;
-  password: string;
-  registerCode: string;
-};
-
-type InitResponse = { username: string; name: string };
-
-type StudentResponse = Array<{
-  id: string;
-  online: boolean;
-  remark: string;
-}>;
-
-type ConnectRequest = { connectCode: string; remark: string };
-
-type ConnectRequestResponse = {
-  requestId: string;
-  studentId: string;
-  remark: string;
-};
-
-type ModifyStudentRemarkRequest = {
-  studentId: string;
-  newRemark: string;
-};
-
-type ModifyNameRequest = { newName: string };
-
-type ModifyPasswordRequest = {
-  oldPassword: string;
-  newPassword: string;
-};
-
-type SendMessageRequest = {
-  studentIds: string[];
-  message: string;
-  tts: number;
-  closeDelay: number;
-};
-
-type SendMessageResponse = {
-  messageId: number;
-  createdAt: string;
-  message: string;
-  studentIds: string[];
-};
+import {
+  ConnectRequest,
+  ConnectRequestResponse,
+  InitResponse,
+  LoginRequest,
+  LoginResponse,
+  ModifyNameRequest,
+  ModifyPasswordRequest,
+  ModifyStudentRemarkRequest,
+  RegisterRequest,
+  SendMessageRequest,
+  SendMessageResponse,
+  StudentResponse,
+} from './types';
 
 export class API {
   static async login(body: LoginRequest) {
