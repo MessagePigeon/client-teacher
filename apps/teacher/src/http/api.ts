@@ -1,5 +1,6 @@
 import service from './lib/axios.lib';
 import {
+  CloseMessageRequest,
   ConnectRequest,
   ConnectRequestResponse,
   InitResponse,
@@ -59,5 +60,9 @@ export class API {
 
   static async getMessages(params: PaginationRequest) {
     return await service.get<MessagesResponse>('/messages', { params });
+  }
+
+  static async closeMessage(body: CloseMessageRequest) {
+    return await service.post('/message-close', body);
   }
 }

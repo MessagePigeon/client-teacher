@@ -66,3 +66,8 @@ type Message = {
 };
 
 export type MessagesResponse = PaginationResponse<Message>;
+
+export type CloseMessageRequest = {
+  messageId: number;
+  studentId: string;
+};

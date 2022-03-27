@@ -31,6 +31,7 @@ const History: React.FC = () => {
       {messages.map((message) => (
         <MessageCard
           key={message.id}
+          messageId={message.id}
           date={dayjs(message.createdAt).format('dddd YYYY.MM.DD HH:mm:ss')}
           message={message.message}
           studentIds={message.studentIds}
