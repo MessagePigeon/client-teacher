@@ -15,6 +15,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^5.10.2
       '@typescript-eslint/parser': ^5.10.2
       ahooks: ^3.1.9
+      axios: ^0.25.0
       dayjs: ^1.11.0
       eslint: ^8.8.0
       eslint-config-prettier: ^8.3.0
@@ -33,6 +34,7 @@ importers:
       '@mui/lab': 5.0.0-alpha.74_9802765228a7e49f88b32c580b386a0e
       '@mui/material': 5.5.1_7e1331b1b228efabfef6463d5fbc30b1
       ahooks: 3.1.13_react@17.0.2
+      axios: 0.25.0
       dayjs: 1.11.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -56,7 +58,6 @@ importers:
       '@mpigeon/client-components': workspace:^0.1.0
       '@reduxjs/toolkit': ^1.8.0
       '@vitejs/plugin-react': ^1.0.7
-      axios: ^0.25.0
       react-hook-form: ^7.26.1
       react-redux: ^7.2.6
       react-router-dom: '6'
@@ -64,7 +65,6 @@ importers:
     dependencies:
       '@mpigeon/client-components': link:../../packages/components
       '@reduxjs/toolkit': 1.8.0_react-redux@7.2.6
-      axios: 0.25.0
       react-hook-form: 7.28.0
       react-redux: 7.2.6
       react-router-dom: 6.2.2
