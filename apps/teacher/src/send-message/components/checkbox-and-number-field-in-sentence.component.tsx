@@ -30,9 +30,7 @@ const CheckBoxAndNumberFieldInSentence: React.FC<
           }}
         />
         <Typography
-          color={(theme) =>
-            checked ? theme.palette.text.primary : theme.palette.text.secondary
-          }
+          color={checked ? 'text.primary' : 'text.secondary'}
           component="div"
         >
           <div style={{ display: 'inline-block', paddingTop: 10 }}>

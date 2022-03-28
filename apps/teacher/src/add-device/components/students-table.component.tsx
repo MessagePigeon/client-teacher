@@ -45,10 +45,7 @@ const StudentsTable: React.FC = () => {
             {pendingStudents.map((student) => (
               <TableRow key={student.requestId}>
                 <TableCell>{student.remark}</TableCell>
-                <TableCell
-                  align="center"
-                  sx={{ color: (theme) => theme.palette.text.secondary }}
-                >
+                <TableCell align="center" sx={{ color: 'text.secondary' }}>
                   Pending
                 </TableCell>
                 <TableCell align="right">
@@ -67,12 +64,7 @@ const StudentsTable: React.FC = () => {
                 <TableCell>{student.remark}</TableCell>
                 <TableCell
                   align="center"
-                  sx={{
-                    color: (theme) =>
-                      student.online
-                        ? theme.palette.success.main
-                        : theme.palette.error.main,
-                  }}
+                  sx={{ color: student.online ? 'success.main' : 'error.main' }}
                 >
                   {student.online ? 'Online' : 'Offline'}
                 </TableCell>
