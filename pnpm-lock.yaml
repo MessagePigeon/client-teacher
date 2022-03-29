@@ -23,6 +23,7 @@ importers:
       eslint-plugin-react: ^7.28.0
       eslint-plugin-react-hooks: ^4.3.0
       i18next: ^21.6.14
+      i18next-browser-languagedetector: ^6.1.4
       prettier: ^2.5.1
       react: ^17.0.2
       react-dom: ^17.0.2
@@ -39,6 +40,7 @@ importers:
       axios: 0.25.0
       dayjs: 1.11.0
       i18next: 21.6.14
+      i18next-browser-languagedetector: 6.1.4
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-i18next: 11.16.2_f94be6b4dd1edc1d8608af374b838bd6
@@ -2076,6 +2078,12 @@ packages:
     resolution: {integrity: sha512-KknJ50kTInJ7qIScF3jeaFRpMpE8/lfiTdzf/twXyPBLAGrLRTmkz3AdTnKeh40X8k9L2fdYwEp/42WGXIRGcg==}
     dependencies:
       void-elements: 3.1.0
+    dev: false
+
+  /i18next-browser-languagedetector/6.1.4:
+    resolution: {integrity: sha512-wukWnFeU7rKIWT66VU5i8I+3Zc4wReGcuDK2+kuFhtoxBRGWGdvYI9UQmqNL/yQH1KogWwh+xGEaIPH8V/i2Zg==}
+    dependencies:
+      '@babel/runtime': 7.17.8
     dev: false
 
   /i18next/21.6.14:
