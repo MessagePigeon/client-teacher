@@ -155,7 +155,9 @@
     "toast": {
       "edit-success": "Modify Remark Success",
       "delete-success": "Delete Device Success",
-      "send-request-success": "Send Connect Request Success"
+      "send-request-success": "Send Connect Request Success",
+      "accept-connection": "Accept Connection",
+      "reject-connection": "Reject Connection"
     }
   },
   "settings": {

@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify';
+import i18n from '~/i18n';
 import { connectedStudentsActions } from '~/state/slices/connected-students.slice';
 import { messagesActions } from '~/state/slices/messages.slice';
 import { pendingStudentsActions } from '~/state/slices/pending-students.slice';
@@ -21,7 +22,8 @@ export const websocketEvents = {
       ({ requestId: originRequestId }) => originRequestId === requestId,
     )!;
     store.dispatch(pendingStudentsActions.remove({ requestId }));
-    toast.warn(`${remark} Reject Connection`);
+    toast.warn(`${remark} ${i18n.t('add-device.toast.reject-connection')}`);
+    console.log(i18n.language);
   },
   'accept-connect-request': ({ requestId }: { requestId: string }) => {
     const { studentId: id, remark } = state.pendingStudents.students.find(
@@ -29,7 +31,7 @@ export const websocketEvents = {
     )!;
     store.dispatch(pendingStudentsActions.remove({ requestId }));
     store.dispatch(connectedStudentsActions.add({ id, remark, online: true }));
-    toast.success(`${remark} Accept Connection`);
+    toast.success(`${remark} ${i18n.t('add-device.toast.accept-connection')}`);
   },
   'student-connect-by-admin': ({
     studentId,

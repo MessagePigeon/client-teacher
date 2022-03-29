@@ -155,7 +155,9 @@
     "toast": {
       "edit-success": "修改备注成功",
       "delete-success": "删除设备成功",
-      "send-request-success": "连接请求发送成功"
+      "send-request-success": "连接请求发送成功",
+      "accept-connection": "同意连接",
+      "reject-connection": "拒绝连接"
     }
   },
   "settings": {
