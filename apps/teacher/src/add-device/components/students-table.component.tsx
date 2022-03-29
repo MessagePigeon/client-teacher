@@ -8,6 +8,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Tooltip,
 } from '@mui/material';
 import { useBoolean } from 'ahooks';
 import React, { useState } from 'react';
@@ -76,26 +77,38 @@ const StudentsTable: React.FC = () => {
                     : t('add-device.table.status.offline')}
                 </TableCell>
                 <TableCell align="right">
-                  <IconButton
-                    size="small"
-                    onClick={() => {
-                      setSelectStudentId(student.id);
-                      setSelectStudentRemark(student.remark);
-                      setOpenEditDialog(true);
-                    }}
+                  <Tooltip
+                    title={t('add-device.table.tooltip.edit')!}
+                    arrow
+                    placement="left"
                   >
-                    <Edit fontSize="inherit" />
-                  </IconButton>
-                  <IconButton
-                    size="small"
-                    onClick={() => {
-                      setSelectStudentId(student.id);
-                      setSelectStudentRemark(student.remark);
-                      setOpenDeleteDialog(true);
-                    }}
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        setSelectStudentId(student.id);
+                        setSelectStudentRemark(student.remark);
+                        setOpenEditDialog(true);
+                      }}
+                    >
+                      <Edit fontSize="inherit" />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip
+                    title={t('add-device.table.tooltip.delete')!}
+                    arrow
+                    placement="right"
                   >
-                    <Delete fontSize="inherit" />
-                  </IconButton>
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        setSelectStudentId(student.id);
+                        setSelectStudentRemark(student.remark);
+                        setOpenDeleteDialog(true);
+                      }}
+                    >
+                      <Delete fontSize="inherit" />
+                    </IconButton>
+                  </Tooltip>
                 </TableCell>
               </TableRow>
             ))}

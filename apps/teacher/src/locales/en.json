@@ -134,6 +134,10 @@
         "online": "Online",
         "offline": "Offline",
         "pending": "Pending"
+      },
+      "tooltip": {
+        "edit": "Edit Remark",
+        "delete": "Delete Student"
       }
     },
     "dialog": {

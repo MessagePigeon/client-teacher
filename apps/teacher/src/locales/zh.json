@@ -134,6 +134,10 @@
         "online": "在线",
         "offline": "离线",
         "pending": "等待中"
+      },
+      "tooltip": {
+        "edit": "编辑备注",
+        "delete": "删除设备"
       }
     },
     "dialog": {
