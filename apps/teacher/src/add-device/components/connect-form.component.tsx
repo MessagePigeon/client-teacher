@@ -2,6 +2,7 @@ import { Button, Grid } from '@mui/material';
 import { useMount, useRequest } from 'ahooks';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
@@ -12,6 +13,8 @@ import { connectedStudentsSelector } from '~/state/slices/connected-students.sli
 import { pendingStudentsActions } from '~/state/slices/pending-students.slice';
 
 const ConnectForm: React.FC = () => {
+  const { t } = useTranslation();
+
   const isPhone = useCheckPhone();
 
   const connectedStudents = useAppSelector(connectedStudentsSelector);
@@ -31,7 +34,7 @@ const ConnectForm: React.FC = () => {
     manual: true,
     onSuccess(response) {
       dispatch(pendingStudentsActions.add(response.data));
-      toast.info('Send Connect Request Success');
+      toast.info(t('add-device.toast.send-request-success'));
     },
   });
 
@@ -50,7 +53,7 @@ const ConnectForm: React.FC = () => {
         <FormTextField
           control={control}
           name="connectCode"
-          label="Connect Code"
+          label={t('add-device.form.connect-code.label')}
           autoFocus={!connectCodeParam}
         />
       </Grid>
@@ -58,18 +61,18 @@ const ConnectForm: React.FC = () => {
         <FormTextField
           control={control}
           name="remark"
-          label="Remark"
+          label={t('add-device.form.remark.label')}
           autoFocus={!!connectCodeParam}
           rules={{
             validate: (value) =>
               !connectedStudents.map(({ remark }) => remark).includes(value) ||
-              'Remark duplicate',
+              (t('add-device.form.remark.error.validate') as string),
           }}
         />
       </Grid>
       <Grid item container md={12} xs={12} justifyContent="end">
         <Button variant="contained" fullWidth={isPhone} type="submit">
-          Add
+          {t('add-device.form.submit')}
         </Button>
       </Grid>
     </Grid>

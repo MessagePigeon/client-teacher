@@ -2,6 +2,7 @@ import { Button, Divider, Paper, Typography } from '@mui/material';
 import { useRequest } from 'ahooks';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
 import { API } from '~/http/api';
@@ -9,6 +10,8 @@ import { useAppDispatch, useAppSelector } from '~/state/hooks';
 import { nameActions, nameSelector } from '~/state/slices/name.slice';
 
 const ModifyNameForm: React.FC = () => {
+  const { t } = useTranslation();
+
   const dispatch = useAppDispatch();
   const name = useAppSelector(nameSelector);
 
@@ -20,7 +23,7 @@ const ModifyNameForm: React.FC = () => {
     manual: true,
     onSuccess(_, [body]) {
       dispatch(nameActions.set(body.newName));
-      toast.success('Modify Name Success');
+      toast.success(t('settings.modify-name.toast.success'));
     },
   });
 
@@ -33,19 +36,21 @@ const ModifyNameForm: React.FC = () => {
         reset();
       })}
     >
-      <Typography mb={1}>Modify Name</Typography>
+      <Typography mb={1}>{t('settings.modify-name.title')}</Typography>
       <Divider />
       <FormTextField
         control={control}
-        label="New Name"
+        label={t('settings.modify-name.form.new-name.label')}
         name="newName"
         autoComplete="name"
         rules={{
-          validate: (value) => value !== name || 'Same as original name',
+          validate: (value) =>
+            value !== name ||
+            (t('settings.modify-name.form.new-name.error.validate') as string),
         }}
       />
       <Button fullWidth type="submit" variant="contained" sx={{ mt: 1 }}>
-        Modify
+        {t('settings.change-password.form.submit')}
       </Button>
     </Paper>
   );

@@ -8,6 +8,7 @@ import {
 import { useRequest, useUpdateEffect } from 'ahooks';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
 import { API } from '~/http/api';
@@ -30,6 +31,8 @@ const EditDialog: React.FC<EditDialogProps> = ({
   studentId,
   oldStudentRemark,
 }) => {
+  const { t } = useTranslation();
+
   const dispatch = useAppDispatch();
 
   const connectedStudents = useAppSelector(connectedStudentsSelector);
@@ -51,7 +54,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
           newRemark: body.newRemark,
         }),
       );
-      toast.success('Modify Remark Success');
+      toast.success(t('add-device.toast.edit-success'));
     },
   });
 
@@ -64,7 +67,8 @@ const EditDialog: React.FC<EditDialogProps> = ({
         })}
       >
         <DialogTitle>
-          Edit <strong>{oldStudentRemark}</strong>
+          {t('add-device.dialog.edit.title-prefix')}{' '}
+          <strong>{oldStudentRemark}</strong>
         </DialogTitle>
         <DialogContent>
           <FormTextField
@@ -72,18 +76,19 @@ const EditDialog: React.FC<EditDialogProps> = ({
             name="newRemark"
             autoFocus
             variant="standard"
-            label="New Remark"
+            label={t('add-device.dialog.edit.label')}
             rules={{
               validate: (value) =>
                 !connectedStudents
                   .map(({ remark }) => remark)
-                  .includes(value) || 'Remark duplicate',
+                  .includes(value) ||
+                (t('add-device.form.remark.error.validate') as string),
             }}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose}>Cancel</Button>
-          <Button type="submit">Save</Button>
+          <Button onClick={onClose}>{t('add-device.dialog.cancel')}</Button>
+          <Button type="submit">{t('add-device.dialog.edit.save')}</Button>
         </DialogActions>
       </form>
     </Dialog>

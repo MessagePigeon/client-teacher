@@ -1,6 +1,9 @@
+import { MoreTime } from '@mui/icons-material';
+import { LoadingButton } from '@mui/lab';
 import { useRequest } from 'ahooks';
 import dayjs from 'dayjs';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { API } from '~/http/api';
 import { useAppDispatch, useAppSelector } from '~/state/hooks';
 import {
@@ -10,10 +13,10 @@ import {
   messagesTotalSelector,
 } from '~/state/slices/messages.slice';
 import MessageCard from './components/message-card.component';
-import { LoadingButton } from '@mui/lab';
-import { MoreTime } from '@mui/icons-material';
 
 const History: React.FC = () => {
+  const { t } = useTranslation();
+
   const dispatch = useAppDispatch();
   const messages = useAppSelector(messagesSelector);
   const messagesCount = useAppSelector(messagesCountSelector);
@@ -28,16 +31,30 @@ const History: React.FC = () => {
 
   return (
     <>
-      {messages.map((message) => (
-        <MessageCard
-          key={message.id}
-          messageId={message.id}
-          date={dayjs(message.createdAt).format('dddd YYYY.MM.DD HH:mm:ss')}
-          message={message.message}
-          studentIds={message.studentIds}
-          showingIds={message.showingIds}
-        />
-      ))}
+      {messages.map((message) => {
+        const createdDate = dayjs(message.createdAt);
+        const day = [
+          t('history.week.sun'),
+          t('history.week.mon'),
+          t('history.week.tue'),
+          t('history.week.wed'),
+          t('history.week.thu'),
+          t('history.week.fri'),
+          t('history.week.sat'),
+        ][createdDate.day()];
+        const time = dayjs(message.createdAt).format('YYYY.MM.DD HH:mm:ss');
+        const date = `${day} ${time}`;
+        return (
+          <MessageCard
+            key={message.id}
+            messageId={message.id}
+            date={date}
+            message={message.message}
+            studentIds={message.studentIds}
+            showingIds={message.showingIds}
+          />
+        );
+      })}
       {messagesCount < messagesTotal && (
         <LoadingButton
           variant="contained"
@@ -47,7 +64,7 @@ const History: React.FC = () => {
           onClick={() => run({ skip: messagesCount, take: 20 })}
           sx={{ margin: '0 auto', display: 'flex' }}
         >
-          Load more
+          {t('history.load-more')}
         </LoadingButton>
       )}
     </>

@@ -2,6 +2,7 @@ import { Layout, NavigationItem } from '@mpigeon/client-components';
 import { Breakpoint } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface LayoutBaseProps {
   navigation: NavigationItem[];
@@ -20,6 +21,8 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
   teacherName,
   mainContainerMaxWidth,
 }) => {
+  const { t } = useTranslation();
+
   const location = useLocation();
   const [navCurrentPath, setNavCurrentPath] = useState<string>('');
   useEffect(() => {
@@ -30,14 +33,16 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
   return (
     <Layout
       navigation={navigation}
-      title="Message Pigeon"
+      title={t('layout.title')}
       isLogin={isLogin}
-      username={`${teacherName}`}
+      username={teacherName}
       github="https://github.com/MessagePigeon/client-teacher"
       onNavigate={navigate}
       currentPath={navCurrentPath}
       onLogout={logout}
       mainContainerMaxWidth={mainContainerMaxWidth}
+      welcomeText={t('layout.welcome')}
+      logoutText={t('layout.logout')}
     >
       <Outlet />
     </Layout>

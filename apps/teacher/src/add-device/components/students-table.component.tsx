@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { useBoolean } from 'ahooks';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '~/state/hooks';
 import { connectedStudentsSelector } from '~/state/slices/connected-students.slice';
 import { pendingStudentsSelector } from '~/state/slices/pending-students.slice';
@@ -18,6 +19,8 @@ import DeleteDialog from './dialog/delete-dialog.component';
 import EditDialog from './dialog/edit-dialog.component';
 
 const StudentsTable: React.FC = () => {
+  const { t } = useTranslation();
+
   const pendingStudents = useAppSelector(pendingStudentsSelector);
   const connectedStudents = useAppSelector(connectedStudentsSelector);
 
@@ -32,12 +35,14 @@ const StudentsTable: React.FC = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell sx={{ fontWeight: 'bold' }}>Remark</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>
+                {t('add-device.table.head.remark')}
+              </TableCell>
               <TableCell sx={{ fontWeight: 'bold' }} align="center">
-                Status
+                {t('add-device.table.head.status')}
               </TableCell>
               <TableCell sx={{ fontWeight: 'bold' }} align="right">
-                Actions
+                {t('add-device.table.head.actions')}
               </TableCell>
             </TableRow>
           </TableHead>
@@ -46,7 +51,7 @@ const StudentsTable: React.FC = () => {
               <TableRow key={student.requestId}>
                 <TableCell>{student.remark}</TableCell>
                 <TableCell align="center" sx={{ color: 'text.secondary' }}>
-                  Pending
+                  {t('add-device.table.status.pending')}
                 </TableCell>
                 <TableCell align="right">
                   <IconButton size="small" disabled>
@@ -66,7 +71,9 @@ const StudentsTable: React.FC = () => {
                   align="center"
                   sx={{ color: student.online ? 'success.main' : 'error.main' }}
                 >
-                  {student.online ? 'Online' : 'Offline'}
+                  {student.online
+                    ? t('add-device.table.status.online')
+                    : t('add-device.table.status.offline')}
                 </TableCell>
                 <TableCell align="right">
                   <IconButton

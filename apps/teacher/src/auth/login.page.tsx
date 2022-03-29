@@ -3,6 +3,7 @@ import { Avatar, Box, Button, Typography } from '@mui/material';
 import { useRequest } from 'ahooks';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
@@ -14,6 +15,8 @@ import {
 } from '~/state/slices/unauthorized-history-path.slice';
 
 const Login: React.FC = () => {
+  const { t } = useTranslation();
+
   const { control, handleSubmit } = useForm({
     defaultValues: { username: '', password: '' },
   });
@@ -29,7 +32,7 @@ const Login: React.FC = () => {
     manual: true,
     onSuccess(response) {
       localStorage.setItem('token', response.data.token);
-      toast.success('Login Success');
+      toast.success(t('login.toast.login-success'));
       navigate(unauthorizedHistoryPath);
       dispatch(unauthorizedHistoryPathActions.set('/send-message'));
     },
@@ -48,7 +51,7 @@ const Login: React.FC = () => {
         <LockOutlined />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Login
+        {t('login.title')}
       </Typography>
       <Box
         component="form"
@@ -59,16 +62,16 @@ const Login: React.FC = () => {
         <FormTextField
           name="username"
           control={control}
-          label="Username"
+          label={t('login.form.username.label')}
           autoComplete="username"
           autoFocus
         />
         <FormTextField
           name="password"
           control={control}
-          label="Password"
+          label={t('login.form.password.label')}
           autoComplete="current-password"
-          defaultHelperText="Forgot your password? Contact admin to reset"
+          defaultHelperText={t('login.form.password.helper-text')}
           password
         />
         <Button
@@ -78,7 +81,7 @@ const Login: React.FC = () => {
           sx={{ mt: 1, mb: 2 }}
           disabled={loading}
         >
-          Login
+          {t('login.form.submit')}
         </Button>
       </Box>
     </Box>

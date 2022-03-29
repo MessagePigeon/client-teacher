@@ -1,6 +1,7 @@
 import { Button, Dialog, DialogActions, DialogTitle } from '@mui/material';
 import { useRequest } from 'ahooks';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { API } from '~/http/api';
 import { useAppDispatch } from '~/state/hooks';
@@ -19,30 +20,33 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
   studentId,
   studentRemark,
 }) => {
+  const { t } = useTranslation();
+
   const dispatch = useAppDispatch();
 
   const { run } = useRequest(API.deleteStudent, {
     manual: true,
     onSuccess() {
       dispatch(connectedStudentsActions.delete({ id: studentId }));
-      toast.success('Delete Student Success');
+      toast.success(t('add-device.toast.delete-success'));
     },
   });
 
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>
-        Are you sure you want to delete <strong>{studentRemark}</strong> ?
+        {t('add-device.dialog.delete.title-prefix')}{' '}
+        <strong>{studentRemark}</strong> ?
       </DialogTitle>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
+        <Button onClick={onClose}>{t('add-device.dialog.cancel')}</Button>
         <Button
           onClick={() => {
             run(studentId);
             onClose();
           }}
         >
-          Delete
+          {t('add-device.dialog.delete.delete')}
         </Button>
       </DialogActions>
     </Dialog>

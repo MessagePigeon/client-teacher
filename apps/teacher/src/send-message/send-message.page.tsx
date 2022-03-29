@@ -6,6 +6,7 @@ import { Autocomplete, Button, Checkbox, TextField } from '@mui/material';
 import { useRequest, useUpdateEffect } from 'ahooks';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
@@ -17,6 +18,8 @@ import { messagesActions } from '~/state/slices/messages.slice';
 import CheckBoxAndNumberFieldInSentence from './components/checkbox-and-number-field-in-sentence.component';
 
 const SendMessage: React.FC = () => {
+  const { t } = useTranslation();
+
   const isPhone = useCheckPhone();
 
   const dispatch = useAppDispatch();
@@ -57,7 +60,7 @@ const SendMessage: React.FC = () => {
         showingIds: studentIds,
       };
       dispatch(messagesActions.addToTop(newMessage));
-      toast.success('Send Message Success');
+      toast.success(t('send-message.toast.send-message-success'));
     },
   });
 
@@ -73,7 +76,7 @@ const SendMessage: React.FC = () => {
       <Controller
         name="studentIds"
         control={control}
-        rules={{ required: 'Required' }}
+        rules={{ required: t('send-message.devices.require') as string }}
         render={({
           field: { onChange, value },
           fieldState: { invalid, error },
@@ -100,12 +103,12 @@ const SendMessage: React.FC = () => {
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="Devices"
+                label={t('send-message.devices.label')}
                 error={invalid}
                 helperText={invalid && error?.message}
               />
             )}
-            noOptionsText="Devices Not Found"
+            noOptionsText={t('send-message.devices.not-found')}
             onChange={(_, values) =>
               onChange(values.map((student) => student?.id))
             }
@@ -120,7 +123,7 @@ const SendMessage: React.FC = () => {
       <FormTextField
         control={control}
         name="message"
-        label="Message"
+        label={t('send-message.message.label')}
         multiline
         rows={5}
       />
@@ -129,8 +132,8 @@ const SendMessage: React.FC = () => {
         name="tts"
         render={({ field: { onChange } }) => (
           <CheckBoxAndNumberFieldInSentence
-            beforeText="Voice broadcast"
-            afterText="times"
+            beforeText={t('send-message.tts.before-text')}
+            afterText={t('send-message.tts.after-text')}
             onChange={onChange}
             defaultValue={3}
             maxValue={30}
@@ -142,8 +145,8 @@ const SendMessage: React.FC = () => {
         name="closeDelay"
         render={({ field: { onChange } }) => (
           <CheckBoxAndNumberFieldInSentence
-            beforeText="Message can be closed after"
-            afterText="seconds"
+            beforeText={t('send-message.close-delay.before-text')}
+            afterText={t('send-message.close-delay.after-text')}
             onChange={onChange}
             defaultValue={10}
             maxValue={3600}
@@ -156,7 +159,7 @@ const SendMessage: React.FC = () => {
         fullWidth={isPhone}
         sx={{ mt: 1, display: 'block' }}
       >
-        Send
+        {t('send-message.submit')}
       </Button>
     </form>
   );

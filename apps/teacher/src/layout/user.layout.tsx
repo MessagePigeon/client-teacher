@@ -6,6 +6,7 @@ import {
 } from '@mui/icons-material';
 import { useBoolean, useRequest } from 'ahooks';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '~/state/hooks';
@@ -19,6 +20,8 @@ import NetworkErrorModal from './components/network-error-modal.component';
 import { useInitUserData } from './helpers/init-user-data.helper';
 
 const UserLayout: React.FC = () => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -50,14 +53,22 @@ const UserLayout: React.FC = () => {
       <LayoutBase
         navigation={[
           {
-            title: 'Send Message',
+            title: t('layout.navigation.user.send-message'),
             icon: <ForwardToInbox />,
             path: 'send-message',
           },
-          { title: 'History', icon: <History />, path: 'history' },
-          { title: 'Add Device', icon: <Devices />, path: 'add-device' },
           {
-            title: 'Settings',
+            title: t('layout.navigation.user.history'),
+            icon: <History />,
+            path: 'history',
+          },
+          {
+            title: t('layout.navigation.user.add-device'),
+            icon: <Devices />,
+            path: 'add-device',
+          },
+          {
+            title: t('layout.navigation.user.settings'),
             icon: <ManageAccountsOutlined />,
             path: 'settings',
           },

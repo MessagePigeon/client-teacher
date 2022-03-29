@@ -12,6 +12,7 @@ import {
   FieldValues,
   RegisterOptions,
 } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 type Rules<
   TFieldValues extends FieldValues = FieldValues,
@@ -54,13 +55,18 @@ const FormTextField = <
   multiline,
   rows,
 }: FormTextFieldProps<TFieldValues, TName>) => {
+  const { t } = useTranslation();
+
   const [showPassword, { toggle: toggleShowPassword }] = useBoolean();
 
   return (
     <Controller
       name={name}
       control={control}
-      rules={{ required: 'Required', ...rules }}
+      rules={{
+        required: t('components.form-text-field.required') as string,
+        ...rules,
+      }}
       render={({ field, fieldState: { invalid, error } }) => (
         <MuiTextField
           margin="normal"

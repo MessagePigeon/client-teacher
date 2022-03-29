@@ -3,12 +3,15 @@ import { Avatar, Box, Button, Typography } from '@mui/material';
 import { useRequest } from 'ahooks';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
 import { API } from '~/http/api';
 
 const Register: React.FC = () => {
+  const { t } = useTranslation();
+
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
       username: '',
@@ -24,7 +27,7 @@ const Register: React.FC = () => {
   const { run, loading } = useRequest(API.register, {
     manual: true,
     onSuccess() {
-      toast.success('Register Success. Please Login');
+      toast.success(t('register.toast.register-success'));
       navigate('/login');
     },
   });
@@ -42,7 +45,7 @@ const Register: React.FC = () => {
         <LockOutlined />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Register
+        {t('register.title')}
       </Typography>
       <Box
         component="form"
@@ -54,56 +57,65 @@ const Register: React.FC = () => {
       >
         <FormTextField
           name="username"
-          label="Username"
+          label={t('register.form.username.label')}
           control={control}
           rules={{
             pattern: {
               value: /^([a-zA-Z]+[0-9-_]*)+$/,
-              message:
-                'Please use upper and lower case letters, numbers, underscores and underlines',
+              message: t('register.form.username.error.pattern'),
             },
           }}
           autoFocus
           autoComplete="username"
-          defaultHelperText="Cannot be modified after registration"
+          defaultHelperText={t('register.form.username.helper-text')}
         />
         <FormTextField
           name="name"
-          label="Name"
+          label={t('register.form.name.label')}
           control={control}
           autoComplete="name"
-          defaultHelperText="Will be used to display in the message header"
+          defaultHelperText={t('register.form.name.helper-text')}
         />
         <FormTextField
           name="password"
-          label="Password"
+          label={t('register.form.password.label')}
           control={control}
           rules={{
-            minLength: { value: 5, message: 'At least five characters' },
+            minLength: {
+              value: 5,
+              message: t('register.form.password.error.min-length'),
+            },
           }}
           autoComplete="new-password"
           password
         />
         <FormTextField
           name="confirmPassword"
-          label="Confirm Password"
+          label={t('register.form.confirm-password.label')}
           control={control}
           rules={{
             validate: (value) =>
-              value === watchOriginPassword || 'Confirm password incorrect',
+              value === watchOriginPassword ||
+              (t('register.form.confirm-password.error.validate') as string),
           }}
           password
         />
         <FormTextField
           name="registerCode"
-          label="Register Code"
+          label={t('register.form.register-code.label')}
           control={control}
           rules={{
-            minLength: { value: 32, message: '32 characters required' },
-            maxLength: { value: 32, message: '32 characters only' },
+            minLength: {
+              value: 32,
+              message: t('register.form.register-code.error.min-length'),
+            },
+            maxLength: {
+              value: 32,
+              message: t('register.form.register-code.error.max-length'),
+            },
           }}
           password
-          defaultHelperText="Contact admin to obtain a registration code"
+          defaultHelperText={t('register.form.register-code.helper-text')}
         />
         <Button
           type="submit"
@@ -112,7 +124,7 @@ const Register: React.FC = () => {
           sx={{ mt: 1, mb: 2 }}
           disabled={loading}
         >
-          Register
+          {t('register.form.submit')}
         </Button>
       </Box>
     </Box>

@@ -1,0 +1,192 @@
+{
+  "components": {
+    "form-text-field": {
+      "required": "Required"
+    }
+  },
+  "layout": {
+    "title": "Message Pigeon",
+    "logout": "Logout",
+    "welcome": "Welcome",
+    "navigation": {
+      "auth": {
+        "login": "Login",
+        "register": "Register"
+      },
+      "user": {
+        "send-message": "Send Message",
+        "history": "History",
+        "add-device": "Add Device",
+        "settings": "Settings"
+      }
+    }
+  },
+  "login": {
+    "title": "Login",
+    "form": {
+      "username": {
+        "label": "Username"
+      },
+      "password": {
+        "label": "Password",
+        "helper-text": "Forgot your password? Contact admin to reset"
+      },
+      "submit": "Login"
+    },
+    "toast": {
+      "login-success": "Login Success"
+    }
+  },
+  "register": {
+    "title": "Register",
+    "form": {
+      "username": {
+        "label": "Username",
+        "helper-text": "Cannot be modified after registration",
+        "error": {
+          "pattern": "Please use upper and lower case letters, numbers, underscores and underlines"
+        }
+      },
+      "name": {
+        "label": "Name",
+        "helper-text": "Will be used to display in the message header"
+      },
+      "password": {
+        "label": "Password",
+        "error": {
+          "min-length": "At least 5 characters"
+        }
+      },
+      "confirm-password": {
+        "label": "Confirm Password",
+        "error": {
+          "validate": "Confirm password incorrect"
+        }
+      },
+      "register-code": {
+        "label": "Register Code",
+        "helper-text": "Contact admin to obtain a registration code",
+        "error": {
+          "min-length": "32 characters required",
+          "max-length": "32 characters only"
+        }
+      },
+      "submit": "Register"
+    },
+    "toast": {
+      "register-success": "Register Success. Please Login"
+    }
+  },
+  "send-message": {
+    "devices": {
+      "label": "Select Devices",
+      "not-found": "Devices Not Found",
+      "require": "Please select at least 1 device"
+    },
+    "message": {
+      "label": "Message"
+    },
+    "tts": {
+      "before-text": "Voice broadcast",
+      "after-text": "times"
+    },
+    "close-delay": {
+      "before-text": "Message cannot be closed within",
+      "after-text": "seconds"
+    },
+    "submit": "Send",
+    "toast": {
+      "send-message-success": "Send Message Success"
+    }
+  },
+  "history": {
+    "week": {
+      "sun": "Sunday",
+      "mon": "Monday",
+      "tue": "Tuesday",
+      "wed": "Wednesday",
+      "thu": "Thursday",
+      "fri": "Friday",
+      "sat": "Saturday"
+    },
+    "load-more": "Load More"
+  },
+  "add-device": {
+    "form": {
+      "connect-code": {
+        "label": "Connect Code"
+      },
+      "remark": {
+        "label": "Remark",
+        "error": {
+          "validate": "Remark duplicate"
+        }
+      },
+      "submit": "Add"
+    },
+    "table": {
+      "head": {
+        "remark": "Remark",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "status": {
+        "online": "Online",
+        "offline": "Offline",
+        "pending": "Pending"
+      }
+    },
+    "dialog": {
+      "edit": {
+        "title-prefix": "Edit",
+        "label": "New Remark",
+        "save": "Save"
+      },
+      "delete": {
+        "title-prefix": "Are you sure you want to delete",
+        "delete": "Delete"
+      },
+      "cancel": "Cancel"
+    },
+    "toast": {
+      "edit-success": "Modify Remark Success",
+      "delete-success": "Delete Device Success",
+      "send-request-success": "Send Connect Request Success"
+    }
+  },
+  "settings": {
+    "modify-name": {
+      "title": "Modify Name",
+      "form": {
+        "new-name": {
+          "label": "New Name",
+          "error": {
+            "validate": "Same as original name"
+          }
+        },
+        "submit": "Modify"
+      },
+      "toast": {
+        "success": "Modify Name Success"
+      }
+    },
+    "change-password": {
+      "title": "Change Password",
+      "form": {
+        "old-password": {
+          "label": "Old Password"
+        },
+        "new-password": {
+          "label": "New Password",
+          "error": {
+            "min-length": "At least 5 characters"
+          }
+        },
+        "submit": "Change"
+      },
+      "toast": {
+        "success": "Change Password Success. Please Login Again"
+      }
+    }
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "components": {
+    "form-text-field": {
+      "required": "必需"
+    }
+  },
+  "layout": {
+    "title": "飞鸽传书",
+    "logout": "退出登录",
+    "welcome": "欢迎您",
+    "navigation": {
+      "auth": {
+        "login": "登录",
+        "register": "注册"
+      },
+      "user": {
+        "add-device": "添加设备",
+        "history": "历史记录",
+        "send-message": "发送消息",
+        "settings": "个人设置"
+      }
+    }
+  },
+  "login": {
+    "title": "登录",
+    "form": {
+      "username": {
+        "label": "用户名"
+      },
+      "password": {
+        "label": "密码",
+        "helper-text": "忘记密码? 联系管理员以重置"
+      },
+      "submit": "登录"
+    },
+    "toast": {
+      "login-success": "登录成功"
+    }
+  },
+  "register": {
+    "title": "注册",
+    "form": {
+      "username": {
+        "label": "用户名",
+        "helper-text": "注册后无法修改",
+        "error": {
+          "pattern": "请使用大小写字母、数字、中划线、下划线"
+        }
+      },
+      "name": {
+        "label": "真实姓名",
+        "helper-text": "将用于显示在消息标题中"
+      },
+      "password": {
+        "label": "密码",
+        "error": {
+          "min-length": "至少5个字符"
+        }
+      },
+      "confirm-password": {
+        "label": "重复密码",
+        "error": {
+          "validate": "重复密码不正确"
+        }
+      },
+      "register-code": {
+        "label": "注册码",
+        "helper-text": "联系管理员可获取注册码",
+        "error": {
+          "min-length": "注册码长度需32位",
+          "max-length": "注册码长度仅32位"
+        }
+      },
+      "submit": "注册"
+    },
+    "toast": {
+      "register-success": "注册成功 请登录"
+    }
+  },
+  "send-message": {
+    "devices": {
+      "label": "选择设备",
+      "not-found": "设备不存在",
+      "require": "请至少选择1台设备"
+    },
+    "message": {
+      "label": "消息"
+    },
+    "tts": {
+      "before-text": "语音播报",
+      "after-text": "次"
+    },
+    "close-delay": {
+      "before-text": "消息在",
+      "after-text": "秒内无法关闭"
+    },
+    "submit": "发送",
+    "toast": {
+      "send-message-success": "发送消息成功"
+    }
+  },
+  "history": {
+    "week": {
+      "sun": "星期天",
+      "mon": "星期一",
+      "tue": "星期二",
+      "wed": "星期三",
+      "thu": "星期四",
+      "fri": "星期五",
+      "sat": "星期六"
+    },
+    "load-more": "加载更多"
+  },
+  "add-device": {
+    "form": {
+      "connect-code": {
+        "label": "连接码"
+      },
+      "remark": {
+        "label": "备注",
+        "error": {
+          "validate": "备注重复"
+        }
+      },
+      "submit": "添加"
+    },
+    "table": {
+      "head": {
+        "remark": "备注",
+        "status": "状态",
+        "actions": "操作"
+      },
+      "status": {
+        "online": "在线",
+        "offline": "离线",
+        "pending": "等待中"
+      }
+    },
+    "dialog": {
+      "edit": {
+        "title-prefix": "编辑",
+        "label": "新备注",
+        "save": "保存"
+      },
+      "delete": {
+        "title-prefix": "你确定删除",
+        "delete": "删除"
+      },
+      "cancel": "取消"
+    },
+    "toast": {
+      "edit-success": "修改备注成功",
+      "delete-success": "删除设备成功",
+      "send-request-success": "连接请求发送成功"
+    }
+  },
+  "settings": {
+    "modify-name": {
+      "title": "修改姓名",
+      "form": {
+        "new-name": {
+          "label": "新姓名",
+          "error": {
+            "validate": "与原姓名相同"
+          }
+        },
+        "submit": "修改"
+      },
+      "toast": {
+        "success": "修改姓名成功"
+      }
+    },
+    "change-password": {
+      "title": "修改密码",
+      "form": {
+        "old-password": {
+          "label": "旧密码"
+        },
+        "new-password": {
+          "label": "新密码",
+          "error": {
+            "min-length": "至少5个字符"
+          }
+        },
+        "submit": "修改"
+      },
+      "toast": {
+        "success": "修改密码成功 请重新登录"
+      }
+    }
+  }
+}
