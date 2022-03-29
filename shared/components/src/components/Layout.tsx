@@ -1,4 +1,4 @@
-import { GitHub, Logout } from '@mui/icons-material';
+import { GitHub, Language, Logout } from '@mui/icons-material';
 import {
   AppBar,
   BottomNavigation,
@@ -13,13 +13,17 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Menu,
+  MenuItem,
   Paper,
   Toolbar,
   Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 
 export type NavigationItem = { title: string; icon: JSX.Element; path: string };
+
+export type LanguageMenuItem = { text: string; language: string };
 
 export interface LayoutProps {
   /** app bar title */
@@ -59,6 +63,12 @@ export interface LayoutProps {
    * @default 220
    */
   drawerWidth?: number;
+  /** i18n language change button and menu in app bar */
+  languageMenu?: LanguageMenuItem[];
+  /** when click language menu item */
+  onChangeLanguage?: (language: string) => void;
+  /** `language` field in language menu item */
+  currentLanguage?: string;
 }
 
 export const Layout: React.FC<LayoutProps> = ({
@@ -75,8 +85,13 @@ export const Layout: React.FC<LayoutProps> = ({
   logoutText = 'Logout',
   welcomeText = 'Welcome',
   drawerWidth = 220,
+  languageMenu,
+  onChangeLanguage,
+  currentLanguage,
   children,
 }) => {
+  const [menuAnchorEl, setMenuAnchorEl] = useState<any>(null);
+
   return (
     <>
       <Box component="header" sx={{ display: 'flex' }}>
@@ -102,17 +117,53 @@ export const Layout: React.FC<LayoutProps> = ({
                 </IconButton>
               )}
             </Box>
+            {languageMenu && (
+              <>
+                <IconButton
+                  color="inherit"
+                  edge="end"
+                  sx={{ mr: 1 }}
+                  onClick={(event) => setMenuAnchorEl(event.currentTarget)}
+                >
+                  <Language />
+                </IconButton>
+                <Menu
+                  id="language-menu"
+                  open={!!menuAnchorEl}
+                  onClose={() => setMenuAnchorEl(null)}
+                  anchorEl={menuAnchorEl}
+                >
+                  {languageMenu.map(({ text, language }) => (
+                    <MenuItem
+                      key={language}
+                      selected={language === currentLanguage}
+                      onClick={() => {
+                        if (onChangeLanguage && language !== currentLanguage) {
+                          onChangeLanguage(language);
+                        }
+                        setMenuAnchorEl(null);
+                      }}
+                    >
+                      {text}
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </>
+            )}
             {isLogin && (
               <>
                 {username && (
-                  <Typography variant="subtitle1">
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ display: { xs: 'none', md: 'block' } }}
+                  >
                     {welcomeText}, {username}
                   </Typography>
                 )}
                 <IconButton
                   color="inherit"
                   edge="end"
-                  sx={{ ml: 2, display: { xs: 'block', md: 'none' } }}
+                  sx={{ display: { xs: 'block', md: 'none' } }}
                   onClick={onLogout}
                 >
                   <Logout />

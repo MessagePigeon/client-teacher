@@ -21,7 +21,7 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
   teacherName,
   mainContainerMaxWidth,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const location = useLocation();
   const [navCurrentPath, setNavCurrentPath] = useState<string>('');
@@ -43,6 +43,12 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
       mainContainerMaxWidth={mainContainerMaxWidth}
       welcomeText={t('layout.welcome')}
       logoutText={t('layout.logout')}
+      languageMenu={[
+        { text: '中文', language: 'zh' },
+        { text: 'English', language: 'en' },
+      ]}
+      onChangeLanguage={(language) => i18n.changeLanguage(language)}
+      currentLanguage={i18n.language}
     >
       <Outlet />
     </Layout>
