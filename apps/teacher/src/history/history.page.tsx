@@ -33,15 +33,9 @@ const History: React.FC = () => {
     <>
       {messages.map((message) => {
         const createdDate = dayjs(message.createdAt);
-        const day = [
-          t('history.week.sun'),
-          t('history.week.mon'),
-          t('history.week.tue'),
-          t('history.week.wed'),
-          t('history.week.thu'),
-          t('history.week.fri'),
-          t('history.week.sat'),
-        ][createdDate.day()];
+        const day = (t('history.week', { returnObjects: true }) as string[])[
+          createdDate.day()
+        ];
         const time = dayjs(message.createdAt).format('YYYY.MM.DD HH:mm:ss');
         const date = `${day} ${time}`;
         return (

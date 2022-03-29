@@ -100,15 +100,15 @@
     }
   },
   "history": {
-    "week": {
-      "sun": "Sunday",
-      "mon": "Monday",
-      "tue": "Tuesday",
-      "wed": "Wednesday",
-      "thu": "Thursday",
-      "fri": "Friday",
-      "sat": "Saturday"
-    },
+    "week": [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
     "load-more": "Load More"
   },
   "add-device": {
