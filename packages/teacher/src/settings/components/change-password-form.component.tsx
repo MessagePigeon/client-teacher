@@ -17,7 +17,7 @@ const ChangePasswordForm: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const { run } = useRequest(API.modifyPassword, {
+  const { run, loading } = useRequest(API.modifyPassword, {
     manual: true,
     onSuccess() {
       localStorage.removeItem('token');
@@ -58,7 +58,13 @@ const ChangePasswordForm: React.FC = () => {
         }}
         password
       />
-      <Button fullWidth type="submit" variant="contained" sx={{ mt: 1 }}>
+      <Button
+        fullWidth
+        type="submit"
+        variant="contained"
+        sx={{ mt: 1 }}
+        disabled={loading}
+      >
         {t('settings.change-password.form.submit')}
       </Button>
     </Paper>

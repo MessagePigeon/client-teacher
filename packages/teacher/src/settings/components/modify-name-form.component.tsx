@@ -19,7 +19,7 @@ const ModifyNameForm: React.FC = () => {
     defaultValues: { newName: '' },
   });
 
-  const { run } = useRequest(API.modifyName, {
+  const { run, loading } = useRequest(API.modifyName, {
     manual: true,
     onSuccess(_, [body]) {
       dispatch(nameActions.set(body.newName));
@@ -49,7 +49,13 @@ const ModifyNameForm: React.FC = () => {
             (t('settings.modify-name.form.new-name.error.validate') as string),
         }}
       />
-      <Button fullWidth type="submit" variant="contained" sx={{ mt: 1 }}>
+      <Button
+        fullWidth
+        type="submit"
+        variant="contained"
+        sx={{ mt: 1 }}
+        disabled={loading}
+      >
         {t('settings.change-password.form.submit')}
       </Button>
     </Paper>

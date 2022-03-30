@@ -30,7 +30,7 @@ const ConnectForm: React.FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const { run } = useRequest(API.connectStudent, {
+  const { run, loading } = useRequest(API.connectStudent, {
     manual: true,
     onSuccess(response) {
       dispatch(pendingStudentsActions.add(response.data));
@@ -71,7 +71,12 @@ const ConnectForm: React.FC = () => {
         />
       </Grid>
       <Grid item container md={12} xs={12} justifyContent="end">
-        <Button variant="contained" fullWidth={isPhone} type="submit">
+        <Button
+          variant="contained"
+          fullWidth={isPhone}
+          type="submit"
+          disabled={loading}
+        >
           {t('add-device.form.submit')}
         </Button>
       </Grid>

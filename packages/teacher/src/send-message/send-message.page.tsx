@@ -48,7 +48,7 @@ const SendMessage: React.FC = () => {
     });
   }, [onlineStudents]);
 
-  const { run } = useRequest(API.sendMessage, {
+  const { run, loading } = useRequest(API.sendMessage, {
     manual: true,
     onSuccess(response) {
       const { messageId, createdAt, message, studentIds } = response.data;
@@ -158,6 +158,7 @@ const SendMessage: React.FC = () => {
         variant="contained"
         fullWidth={isPhone}
         sx={{ mt: 1, display: 'block' }}
+        disabled={loading}
       >
         {t('send-message.submit')}
       </Button>
