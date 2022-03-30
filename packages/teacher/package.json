@@ -10,7 +10,7 @@
     "lint": "eslint \"**/*.{ts,tsx}\" --fix"
   },
   "dependencies": {
-    "@mpigeon/client-components": "workspace:^0.1.0",
+    "@mpigeon/client-shared": "workspace:^0.1.0",
     "@reduxjs/toolkit": "^1.8.0",
     "react-hook-form": "^7.26.1",
     "react-redux": "^7.2.6",

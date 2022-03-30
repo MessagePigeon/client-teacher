@@ -1,4 +1,4 @@
-import { Layout, NavigationItem } from '@mpigeon/client-components';
+import { Layout, NavigationItem } from '@mpigeon/client-shared';
 import { Breakpoint } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
