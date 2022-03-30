@@ -1,4 +1,4 @@
-import service from './lib/axios.lib';
+import { createAxiosService } from '@mpigeon/client-shared';
 import {
   CloseMessageRequest,
   ConnectRequest,
@@ -16,6 +16,8 @@ import {
   SendMessageResponse,
   StudentResponse,
 } from './types';
+
+const service = createAxiosService(`${import.meta.env.VITE_HTTP_URL}/teacher`);
 
 export class API {
   static async login(body: LoginRequest) {
