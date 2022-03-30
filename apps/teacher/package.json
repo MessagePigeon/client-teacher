@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
+    "build:tsc": "tsc && vite build",
     "preview": "vite preview",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "lint": "eslint \"**/*.{ts,tsx}\" --fix"
