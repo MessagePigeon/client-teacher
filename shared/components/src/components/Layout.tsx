@@ -232,7 +232,11 @@ export const Layout: React.FC<LayoutProps> = ({
       <Container
         component="main"
         maxWidth={mainContainerMaxWidth}
-        sx={{ mt: 10, mb: { xs: 10, md: 2 } }}
+        sx={{
+          mt: 10,
+          mb: { xs: 10, md: 2 },
+          minHeight: { xs: 'calc(100vh - 160px)', md: 0 },
+        }}
       >
         {children}
       </Container>
