@@ -6,8 +6,8 @@ import { Outlet, useLocation } from 'react-router-dom';
 interface LayoutBaseProps {
   navigation: NavigationItem[];
   isLogin?: boolean;
-  logout?: () => void;
-  navigate?: (path: string) => void;
+  onLogout?: () => void;
+  onNavigate?: (path: string) => void;
   mainContainerMaxWidth?: Breakpoint;
   hideNavigation?: boolean;
 }
@@ -15,8 +15,8 @@ interface LayoutBaseProps {
 const LayoutBase: React.FC<LayoutBaseProps> = ({
   navigation,
   isLogin,
-  logout,
-  navigate,
+  onLogout,
+  onNavigate,
   mainContainerMaxWidth,
   hideNavigation,
 }) => {
@@ -34,9 +34,9 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
       github="https://github.com/MessagePigeon/client-teacher"
       navigation={navigation}
       isLogin={isLogin}
-      onNavigate={navigate}
+      onNavigate={onNavigate}
       currentPath={navCurrentPath}
-      onLogout={logout}
+      onLogout={onLogout}
       mainContainerMaxWidth={mainContainerMaxWidth}
       hideNavigation={hideNavigation}
     >
