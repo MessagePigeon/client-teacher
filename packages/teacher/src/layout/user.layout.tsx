@@ -77,7 +77,7 @@ const UserLayout: React.FC = () => {
         logout={() => {
           localStorage.removeItem('token');
           navigate('/login');
-          toast.info('Logout Success');
+          toast.info(t('layout.toast.logout'));
         }}
         teacherName={name}
         navigate={(path) => {

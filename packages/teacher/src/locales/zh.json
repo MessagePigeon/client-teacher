@@ -19,6 +19,9 @@
         "send-message": "发送消息",
         "settings": "个人设置"
       }
+    },
+    "toast": {
+      "logout": "登出成功"
     }
   },
   "login": {

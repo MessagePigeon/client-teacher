@@ -19,6 +19,9 @@
         "add-device": "Add Device",
         "settings": "Settings"
       }
+    },
+    "toast": {
+      "logout": "Logout Success"
     }
   },
   "login": {
