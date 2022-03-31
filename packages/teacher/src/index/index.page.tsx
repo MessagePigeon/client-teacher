@@ -1,7 +1,7 @@
+import { LoadingModal } from '@mpigeon/client-shared';
 import { useMount } from 'ahooks';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoadingModal from '../common/components/loading-modal.component';
 
 const IndexPage: React.FC = () => {
   const navigate = useNavigate();

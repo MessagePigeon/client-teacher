@@ -1,11 +1,7 @@
 import { Backdrop, CircularProgress } from '@mui/material';
 import React from 'react';
 
-interface LoadingModalProps {
-  open: boolean;
-}
-
-const LoadingModal: React.FC<LoadingModalProps> = ({ open }) => {
+export const LoadingModal: React.FC<{ open: boolean }> = ({ open }) => {
   return (
     <Backdrop
       open={open}
@@ -15,5 +11,3 @@ const LoadingModal: React.FC<LoadingModalProps> = ({ open }) => {
     </Backdrop>
   );
 };
-
-export default LoadingModal;
