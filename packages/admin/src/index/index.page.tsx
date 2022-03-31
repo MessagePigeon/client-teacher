@@ -1,3 +1,4 @@
+import { LoadingModal } from '@mpigeon/client-shared';
 import { useMount } from 'ahooks';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +14,7 @@ const IndexPage: React.FC = () => {
     }
   });
 
-  return <div>IndexPage</div>;
+  return <LoadingModal open />;
 };
 
 export default IndexPage;
