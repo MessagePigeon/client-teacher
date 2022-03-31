@@ -1,4 +1,4 @@
-import { Button, TextField } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 import { useRequest } from 'ahooks';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -23,10 +23,12 @@ const LoginPage: React.FC = () => {
   });
 
   return (
-    <form
+    <Box
+      component="form"
       onSubmit={handleSubmit((data) => {
         run(data);
       })}
+      mt={30}
     >
       <Controller
         control={control}
@@ -46,7 +48,7 @@ const LoginPage: React.FC = () => {
       <Button type="submit" variant="contained" sx={{ mt: 2 }} fullWidth>
         Login
       </Button>
-    </form>
+    </Box>
   );
 };
 
