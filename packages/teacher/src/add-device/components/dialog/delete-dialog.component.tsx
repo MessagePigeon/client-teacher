@@ -28,7 +28,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
     manual: true,
     onSuccess() {
       dispatch(connectedStudentsActions.delete({ id: studentId }));
-      toast.success(t('add-device.toast.delete-success'));
+      toast.info(t('add-device.toast.delete-success'));
     },
   });
 
