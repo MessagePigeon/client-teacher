@@ -48,7 +48,7 @@ export interface LayoutProps {
   /** when click logout button */
   onLogout?: () => void;
   /** when click navigation list item */
-  onNavigate: (path: string) => void;
+  onNavigate?: (path: string) => void;
   /**
    * displayed before username
    * @default 'Welcome'
@@ -197,7 +197,7 @@ export const Layout: React.FC<LayoutProps> = ({
                 {navigation.map(({ icon, title, path }, index) => (
                   <ListItemButton
                     key={index}
-                    onClick={() => onNavigate(path)}
+                    onClick={() => onNavigate && onNavigate(path)}
                     selected={path === currentPath}
                     sx={{
                       '&.Mui-selected': {
@@ -256,7 +256,7 @@ export const Layout: React.FC<LayoutProps> = ({
             showLabels
             value={currentPath}
             onChange={(_, newPath) => {
-              onNavigate(newPath);
+              onNavigate && onNavigate(newPath);
             }}
           >
             {navigation.map(({ title, icon, path }, index) => (
