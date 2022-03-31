@@ -3,7 +3,7 @@ import React from 'react';
 import ModifyNameForm from './components/modify-name-form.component';
 import ChangePasswordForm from './components/change-password-form.component';
 
-const Settings: React.FC = () => {
+const SettingsPage: React.FC = () => {
   return (
     <Grid container spacing={2}>
       <Grid item md={6} xs={12}>
@@ -16,4 +16,4 @@ const Settings: React.FC = () => {
   );
 };
 
-export default Settings;
+export default SettingsPage;

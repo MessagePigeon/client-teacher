@@ -17,7 +17,7 @@ import { onlineStudentsSelector } from '~/state/slices/connected-students.slice'
 import { messagesActions } from '~/state/slices/messages.slice';
 import CheckBoxAndNumberFieldInSentence from './components/checkbox-and-number-field-in-sentence.component';
 
-const SendMessage: React.FC = () => {
+const SendMessagePage: React.FC = () => {
   const { t } = useTranslation();
 
   const isPhone = useCheckPhone();
@@ -166,4 +166,4 @@ const SendMessage: React.FC = () => {
   );
 };
 
-export default SendMessage;
+export default SendMessagePage;

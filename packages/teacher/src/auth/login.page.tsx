@@ -14,7 +14,7 @@ import {
   unauthorizedHistoryPathSelector,
 } from '~/state/slices/unauthorized-history-path.slice';
 
-const Login: React.FC = () => {
+const LoginPage: React.FC = () => {
   const { t } = useTranslation();
 
   const { control, handleSubmit } = useForm({
@@ -88,4 +88,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

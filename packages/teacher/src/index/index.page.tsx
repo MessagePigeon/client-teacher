@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoadingModal from '../common/components/loading-modal.component';
 
-const Index: React.FC = () => {
+const IndexPage: React.FC = () => {
   const navigate = useNavigate();
   useMount(() => {
     const token = localStorage.getItem('token');
@@ -16,4 +16,4 @@ const Index: React.FC = () => {
   return <LoadingModal open />;
 };
 
-export default Index;
+export default IndexPage;

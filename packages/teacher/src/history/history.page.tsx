@@ -14,7 +14,7 @@ import {
 } from '~/state/slices/messages.slice';
 import MessageCard from './components/message-card.component';
 
-const History: React.FC = () => {
+const HistoryPage: React.FC = () => {
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
@@ -65,4 +65,4 @@ const History: React.FC = () => {
   );
 };
 
-export default History;
+export default HistoryPage;

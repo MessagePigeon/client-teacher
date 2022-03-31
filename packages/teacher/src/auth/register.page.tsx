@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
 import { API } from '~/http/api';
 
-const Register: React.FC = () => {
+const RegisterPage: React.FC = () => {
   const { t } = useTranslation();
 
   const { control, handleSubmit, watch } = useForm({
@@ -131,4 +131,4 @@ const Register: React.FC = () => {
   );
 };
 
-export default Register;
+export default RegisterPage;
