@@ -1,5 +1,11 @@
 import { LoadingModal } from '@mpigeon/client-shared';
-import { Mood } from '@mui/icons-material';
+import {
+  Badge,
+  ConnectWithoutContact,
+  Message,
+  Mood,
+  SupervisorAccount,
+} from '@mui/icons-material';
 import { useRequest } from 'ahooks';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +26,21 @@ const AdminLayout: React.FC = () => {
   return (
     <>
       <LayoutBase
-        navigation={[{ title: 'Welcome', icon: <Mood />, path: 'welcome' }]}
+        navigation={[
+          { title: 'Welcome', icon: <Mood />, path: 'welcome' },
+          {
+            title: 'Message',
+            icon: <Message />,
+            path: 'message',
+          },
+          { title: 'Teacher', icon: <SupervisorAccount />, path: 'teacher' },
+          { title: 'Student', icon: <Badge />, path: 'student' },
+          {
+            title: 'Connection',
+            icon: <ConnectWithoutContact />,
+            path: 'connection',
+          },
+        ]}
         onLogout={() => {
           localStorage.removeItem('token');
           navigate('/login');
