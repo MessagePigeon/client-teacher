@@ -3,7 +3,7 @@ import {
   Badge,
   ConnectWithoutContact,
   Message,
-  Mood,
+  ReceiptLong,
   SupervisorAccount,
 } from '@mui/icons-material';
 import { useRequest } from 'ahooks';
@@ -27,7 +27,11 @@ const AdminLayout: React.FC = () => {
     <>
       <LayoutBase
         navigation={[
-          { title: 'Welcome', icon: <Mood />, path: 'welcome' },
+          {
+            title: 'Register Code',
+            icon: <ReceiptLong />,
+            path: 'register-code',
+          },
           {
             title: 'Message',
             icon: <Message />,

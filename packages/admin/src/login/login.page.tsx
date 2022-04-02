@@ -17,7 +17,7 @@ const LoginPage: React.FC = () => {
     manual: true,
     onSuccess(response) {
       localStorage.setItem('token', response.data.token);
-      navigate('/welcome');
+      navigate('/register-code');
       toast.success('Login Success');
     },
   });

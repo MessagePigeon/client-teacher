@@ -6,9 +6,9 @@ import AdminLayout from './layout/admin.layout';
 import LoginLayout from './layout/login.layout';
 import LoginPage from './login/login.page';
 import MessagePage from './message/message.page';
+import RegisterCodePage from './register-code/register-code.page';
 import StudentPage from './student/student.page';
 import TeacherPage from './teacher/teacher.page';
-import WelcomePage from './welcome/welcome.page';
 
 const Routers: React.FC = () => {
   return (
@@ -18,7 +18,7 @@ const Routers: React.FC = () => {
         <Route path="login" element={<LoginPage />} />
       </Route>
       <Route element={<AdminLayout />}>
-        <Route path="welcome" element={<WelcomePage />} />
+        <Route path="register-code" element={<RegisterCodePage />} />
         <Route path="message" element={<MessagePage />} />
         <Route path="teacher" element={<TeacherPage />} />
         <Route path="student" element={<StudentPage />} />

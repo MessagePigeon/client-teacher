@@ -1,12 +1,12 @@
 import { Typography } from '@mui/material';
 import React from 'react';
 
-const WelcomePage: React.FC = () => {
+const RegisterCodePage: React.FC = () => {
   return (
     <Typography variant="h2" align="center">
-      Welcome
+      RegisterCode
     </Typography>
   );
 };
 
-export default WelcomePage;
+export default RegisterCodePage;
