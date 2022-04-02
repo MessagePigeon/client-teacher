@@ -8,7 +8,7 @@ export type RegisterRequest = {
   registerCode: string;
 };
 
-export type InitResponse = { username: string; name: string };
+export type InitResponse = { name: string };
 
 export type StudentResponse = Array<{
   id: string;
@@ -17,7 +17,6 @@ export type StudentResponse = Array<{
 }>;
 
 export type ConnectRequest = { connectCode: string; remark: string };
-
 export type ConnectRequestResponse = {
   requestId: string;
   studentId: string;
@@ -42,7 +41,6 @@ export type SendMessageRequest = {
   tts: number;
   closeDelay: number;
 };
-
 export type SendMessageResponse = {
   messageId: number;
   createdAt: string;
@@ -51,7 +49,6 @@ export type SendMessageResponse = {
 };
 
 export type PaginationRequest = { skip: number; take: number };
-
 type PaginationResponse<T> = {
   data: T[];
   total: number;
@@ -64,7 +61,6 @@ type Message = {
   studentIds: string[];
   showingIds: string[];
 };
-
 export type MessagesResponse = PaginationResponse<Message>;
 
 export type CloseMessageRequest = {
