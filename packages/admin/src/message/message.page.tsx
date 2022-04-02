@@ -21,38 +21,31 @@ import { Controller, useForm } from 'react-hook-form';
 import { API } from '~/http/apis';
 import DateTimePicker from './components/date-time-picker.component';
 
-type Teacher = { id: string; name: string };
-type Student = { id: string; defaultRemark: string };
-type SearchParams = {
-  teacherId: string;
-  studentId: string;
-  startTime: string | null;
-  endTime: string | null;
-};
+type Teacher = Record<'id' | 'name', string>;
+type Student = Record<'id' | 'defaultRemark', string>;
+type SearchParams = Record<'teacherId' | 'studentId' | 'startTime' | 'endTime', string>;
 
 const MessagePage: React.FC = () => {
   const isPhone = useCheckPhone();
-
   const [pageSize, setPageSize] = useState<number>(25);
   const [page, setPage] = useState<number>(0);
   const [searchParams, setSearchParams] = useState<SearchParams>({
     teacherId: '',
     studentId: '',
-    startTime: null,
-    endTime: null,
+    startTime: '',
+    endTime: '',
   });
 
   const [selectedId, setSelectedId] = useState<number | undefined>(undefined);
 
-  const { control, handleSubmit, reset, setValue, resetField, watch } =
-    useForm<SearchParams>({
-      defaultValues: {
-        teacherId: '',
-        studentId: '',
-        startTime: null,
-        endTime: null,
-      },
-    });
+  const { control, handleSubmit, reset, setValue, resetField, watch } = useForm<SearchParams>({
+    defaultValues: {
+      teacherId: '',
+      studentId: '',
+      startTime: null,
+      endTime: null,
+    },
+  });
   const formStartTime = watch('startTime');
   const formEndTime = watch('endTime');
 
@@ -61,14 +54,8 @@ const MessagePage: React.FC = () => {
   });
 
   useUpdateEffect(() => {
-    run({
-      skip: page * pageSize,
-      take: pageSize,
-      teacherId: searchParams.teacherId ? searchParams.teacherId : undefined,
-      studentId: searchParams.studentId ? searchParams.studentId : undefined,
-      startTime: searchParams.startTime ? searchParams.startTime : undefined,
-      endTime: searchParams.endTime ? searchParams.endTime : undefined,
-    });
+    const { teacherId, studentId, startTime, endTime } = searchParams;
+    run({ skip: page * pageSize, take: pageSize, teacherId, studentId, startTime, endTime });
   }, [pageSize, page, searchParams]);
 
   const columns: GridColDef[] = [
@@ -77,18 +64,14 @@ const MessagePage: React.FC = () => {
       field: 'createdAt',
       headerName: 'Date',
       width: 180,
-      valueFormatter: (params) =>
-        dayjs(params.value as string).format('YYYY.MM.DD HH:mm:ss'),
+      valueFormatter: params => dayjs(params.value as string).format('YYYY.MM.DD HH:mm:ss'),
     },
     { field: 'message', headerName: 'Message', width: 300 },
     {
       field: 'teacher',
       headerName: 'Teacher',
       renderCell: (params: GridRenderCellParams<Teacher>) => (
-        <Link
-          component="button"
-          onClick={() => setValue('teacherId', params.value.id)}
-        >
+        <Link component="button" onClick={() => setValue('teacherId', params.value.id)}>
           {params.value.name}
         </Link>
       ),
@@ -98,13 +81,15 @@ const MessagePage: React.FC = () => {
       headerName: 'Students',
       minWidth: 200,
       renderCell: (params: GridRenderCellParams<Student[]>) =>
-        params.value.map((student) => (
+        params.value.map(student => (
           <Chip
             key={student.id}
             label={student.defaultRemark}
             size="small"
             sx={{ mr: 0.3 }}
-            onClick={() => setValue('studentId', student.id)}
+            onClick={() => {
+              setValue('studentId', student.id);
+            }}
           />
         )),
     },
@@ -115,20 +100,12 @@ const MessagePage: React.FC = () => {
       <Alert severity="info" sx={{ mb: 3 }}>
         <ul style={{ margin: 0, paddingLeft: 20 }}>
           <li>
-            When you select a row in the table, the full message will be
-            displayed at the bottom
+            When you select a row in the table, the full message will be displayed at the bottom
           </li>
           <li>Click teacher or student to set search id</li>
         </ul>
       </Alert>
-
-      <Grid
-        container
-        spacing={2}
-        component="form"
-        mb={3}
-        onSubmit={handleSubmit((data) => setSearchParams(data))}
-      >
+      <Grid container spacing={2} component="form" mb={3} onSubmit={handleSubmit(setSearchParams)}>
         <Grid item xs={12} md={6}>
           <Controller
             control={control}
@@ -140,7 +117,11 @@ const MessagePage: React.FC = () => {
                 InputProps={{
                   endAdornment: field.value ? (
                     <InputAdornment position="end">
-                      <IconButton onClick={() => resetField('teacherId')}>
+                      <IconButton
+                        onClick={() => {
+                          resetField('teacherId');
+                        }}
+                      >
                         <Clear />
                       </IconButton>
                     </InputAdornment>
@@ -162,7 +143,11 @@ const MessagePage: React.FC = () => {
                 InputProps={{
                   endAdornment: field.value ? (
                     <InputAdornment position="end">
-                      <IconButton onClick={() => resetField('studentId')}>
+                      <IconButton
+                        onClick={() => {
+                          resetField('studentId');
+                        }}
+                      >
                         <Clear />
                       </IconButton>
                     </InputAdornment>
@@ -181,7 +166,7 @@ const MessagePage: React.FC = () => {
               <DateTimePicker
                 label="Start Time"
                 value={value}
-                onChange={(newDate) => onChange(newDate)}
+                onChange={onChange}
                 maxDate={formEndTime ? formEndTime! : undefined}
               />
             )}
@@ -195,19 +180,14 @@ const MessagePage: React.FC = () => {
               <DateTimePicker
                 label="End Time"
                 value={value}
-                onChange={(newDate) => onChange(newDate)}
+                onChange={onChange}
                 minDate={formStartTime ? formStartTime! : undefined}
               />
             )}
           />
         </Grid>
         <Grid item xs={6}>
-          <Button
-            fullWidth={isPhone}
-            variant="contained"
-            color="secondary"
-            onClick={() => reset()}
-          >
+          <Button fullWidth={isPhone} variant="contained" color="secondary" onClick={reset}>
             Reset
           </Button>
         </Grid>
@@ -221,16 +201,16 @@ const MessagePage: React.FC = () => {
       <DataGrid
         loading={loading}
         rows={data?.data.data || []}
-        columns={columns.map((data) => ({ ...data, sortable: false }))}
+        columns={columns.map(data => ({ ...data, sortable: false }))}
         autoHeight
         disableColumnMenu
         pageSize={pageSize}
-        onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+        onPageSizeChange={setPageSize}
         rowCount={data?.data.total || 0}
         page={page}
-        onPageChange={(newPage) => setPage(newPage)}
+        onPageChange={setPage}
         scrollbarSize={20}
-        onSelectionModelChange={(newSelectionModel) => {
+        onSelectionModelChange={newSelectionModel => {
           setSelectedId(newSelectionModel[0] as number | undefined);
         }}
       />
