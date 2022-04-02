@@ -1,3 +1,4 @@
+import { useCheckPhone } from '@mpigeon/client-shared';
 import { Button, Grid } from '@mui/material';
 import { useMount, useRequest } from 'ahooks';
 import React from 'react';
@@ -6,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
-import { useCheckPhone } from '~/common/hooks/use-check-phone.hook';
 import { API } from '~/http/api';
 import { useAppDispatch, useAppSelector } from '~/state/hooks';
 import { connectedStudentsSelector } from '~/state/slices/connected-students.slice';

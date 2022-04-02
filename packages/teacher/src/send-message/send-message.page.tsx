@@ -1,3 +1,4 @@
+import { useCheckPhone } from '@mpigeon/client-shared';
 import {
   CheckBox as CheckBoxIcon,
   CheckBoxOutlineBlank,
@@ -10,7 +11,6 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
-import { useCheckPhone } from '~/common/hooks/use-check-phone.hook';
 import { API } from '~/http/api';
 import { useAppDispatch } from '~/state/hooks';
 import { onlineStudentsSelector } from '~/state/slices/connected-students.slice';
