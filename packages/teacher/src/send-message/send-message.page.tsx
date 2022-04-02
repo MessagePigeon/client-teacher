@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
-import { API } from '~/http/api';
+import { API } from '~/http/apis';
 import { useAppDispatch } from '~/state/hooks';
 import { onlineStudentsSelector } from '~/state/slices/connected-students.slice';
 import { messagesActions } from '~/state/slices/messages.slice';

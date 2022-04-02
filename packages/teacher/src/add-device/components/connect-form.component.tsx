@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
-import { API } from '~/http/api';
+import { API } from '~/http/apis';
 import { useAppDispatch, useAppSelector } from '~/state/hooks';
 import { connectedStudentsSelector } from '~/state/slices/connected-students.slice';
 import { pendingStudentsActions } from '~/state/slices/pending-students.slice';

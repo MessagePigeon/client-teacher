@@ -10,7 +10,7 @@ import { useRequest } from 'ahooks';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { API } from '~/http/api';
+import { API } from '~/http/apis';
 import LayoutBase from './base.layout';
 
 const AdminLayout: React.FC = () => {

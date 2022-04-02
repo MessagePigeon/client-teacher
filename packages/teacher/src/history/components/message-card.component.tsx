@@ -1,7 +1,7 @@
 import { Card, CardContent, Chip, Stack, Typography } from '@mui/material';
 import { useRequest } from 'ahooks';
 import React from 'react';
-import { API } from '~/http/api';
+import { API } from '~/http/apis';
 import { useAppDispatch, useAppSelector } from '~/state/hooks';
 import { connectedStudentsSelector } from '~/state/slices/connected-students.slice';
 import { messagesActions } from '~/state/slices/messages.slice';

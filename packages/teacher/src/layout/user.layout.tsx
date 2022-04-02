@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from '~/state/hooks';
 import { nameActions, nameSelector } from '~/state/slices/name.slice';
 import { unauthorizedHistoryPathActions } from '~/state/slices/unauthorized-history-path.slice';
 import { useAppWebsocket } from '~/websocket/use-app-websocket.hook';
-import { API } from '../http/api';
+import { API } from '../http/apis';
 import LayoutBase from './base.layout';
 import NetworkErrorModal from './components/network-error-modal.component';
 import { useInitUserData } from './helpers/init-user-data.helper';

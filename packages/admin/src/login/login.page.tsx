@@ -4,7 +4,7 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { API } from '~/http/api';
+import { API } from '~/http/apis';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();

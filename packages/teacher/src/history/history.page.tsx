@@ -4,7 +4,7 @@ import { useRequest } from 'ahooks';
 import dayjs from 'dayjs';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { API } from '~/http/api';
+import { API } from '~/http/apis';
 import { useAppDispatch, useAppSelector } from '~/state/hooks';
 import {
   messagesActions,

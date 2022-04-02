@@ -18,7 +18,7 @@ import { useRequest, useUpdateEffect } from 'ahooks';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { API } from '~/http/api';
+import { API } from '~/http/apis';
 import DateTimePicker from './components/date-time-picker.component';
 
 type Teacher = { id: string; name: string };

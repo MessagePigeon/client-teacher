@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
-import { API } from '~/http/api';
+import { API } from '~/http/apis';
 
 const ChangePasswordForm: React.FC = () => {
   const { t } = useTranslation();

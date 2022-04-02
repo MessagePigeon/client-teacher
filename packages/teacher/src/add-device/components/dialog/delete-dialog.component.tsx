@@ -3,7 +3,7 @@ import { useRequest } from 'ahooks';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { API } from '~/http/api';
+import { API } from '~/http/apis';
 import { useAppDispatch } from '~/state/hooks';
 import { connectedStudentsActions } from '~/state/slices/connected-students.slice';
 

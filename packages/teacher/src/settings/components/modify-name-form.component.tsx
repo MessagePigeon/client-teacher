@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import FormTextField from '~/common/components/form-text-field.component';
-import { API } from '~/http/api';
+import { API } from '~/http/apis';
 import { useAppDispatch, useAppSelector } from '~/state/hooks';
 import { nameActions, nameSelector } from '~/state/slices/name.slice';
 
