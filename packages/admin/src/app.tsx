@@ -1,3 +1,5 @@
+import { LocalizationProvider } from '@mui/lab';
+import DateAdapter from '@mui/lab/AdapterDayjs';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { indigo, pink } from '@mui/material/colors';
 import React from 'react';
@@ -10,9 +12,11 @@ const theme = createTheme({ palette: { primary: indigo, secondary: pink } });
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Routers />
-      <ToastContainer position="top-center" theme="colored" newestOnTop />
+      <LocalizationProvider dateAdapter={DateAdapter}>
+        <CssBaseline />
+        <Routers />
+        <ToastContainer position="top-center" theme="colored" newestOnTop />
+      </LocalizationProvider>
     </ThemeProvider>
   );
 };
