@@ -50,24 +50,24 @@ const MessagePage: React.FC = () => {
   const formStartTime = watch('startTime');
   const formEndTime = watch('endTime');
 
-  const { run, data, loading } = useRequest(API.getMessages, {
-    defaultParams: [{ skip: 0, take: PAGE_SIZE }],
-  });
+  const { data, loading } = useRequest(
+    () =>
+      API.getMessages({
+        skip: (page - 1) * PAGE_SIZE,
+        take: PAGE_SIZE,
+        teacherId: searchParams.teacherId ? searchParams.teacherId : undefined,
+        studentId: searchParams.studentId ? searchParams.studentId : undefined,
+        startTime: searchParams.startTime ? searchParams.startTime : undefined,
+        endTime: searchParams.endTime ? searchParams.endTime : undefined,
+      }),
+    {
+      refreshDeps: [searchParams, page],
+    },
+  );
 
   useUpdateEffect(() => {
     setPage(1);
   }, [searchParams]);
-
-  useUpdateEffect(() => {
-    run({
-      skip: (page - 1) * PAGE_SIZE,
-      take: PAGE_SIZE,
-      teacherId: searchParams.teacherId ? searchParams.teacherId : undefined,
-      studentId: searchParams.studentId ? searchParams.studentId : undefined,
-      startTime: searchParams.startTime ? searchParams.startTime : undefined,
-      endTime: searchParams.endTime ? searchParams.endTime : undefined,
-    });
-  }, [searchParams, page]);
 
   return (
     <>
