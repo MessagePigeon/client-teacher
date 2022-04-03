@@ -1,5 +1,5 @@
 {
   "*.{ts,tsx}": [
-    "prettier --write --ignore-unknown"
+    "prettier --write"
   ]
 }
