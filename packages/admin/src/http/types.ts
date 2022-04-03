@@ -13,7 +13,7 @@ export type MessagesRequest = PaginationRequest & {
   startTime?: string;
   endTime?: string;
 };
-type Message = {
+export type Message = {
   id: number;
   createdAt: string;
   message: string;
@@ -22,6 +22,7 @@ type Message = {
 };
 export type MessagesResponse = PaginationResponse<Message>;
 
-export type RegisterCodeResponse = { id: number; code: string };
+export type RegisterCode = { id: number; code: string };
+export type RegisterCodeResponse = PaginationResponse<RegisterCode>;
 export type GenerateRegisterCodesRequest = { count: number };
 export type DeleteRegisterCodeRequest = { id: number };
