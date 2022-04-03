@@ -1,6 +1,10 @@
+import { faker } from '@faker-js/faker';
 import dayjs from 'dayjs';
-import { rest } from 'msw';
+import { rest, RestRequest } from 'msw';
+import { GenerateRegisterCodesRequest } from '~/http/types';
 import { db } from './database';
+
+export const DEFAULT_SUCCESS_RESPONSE = { success: true };
 
 export const handlers = [
   rest.post('/mock/login', (req, res, ctx) => {
@@ -12,7 +16,7 @@ export const handlers = [
     if (isUnauthorized) {
       return res(ctx.status(401), ctx.json({ message: 'Unauthorized' }));
     }
-    return res(ctx.json({ success: true }));
+    return res(ctx.json(DEFAULT_SUCCESS_RESPONSE));
   }),
   rest.get('/mock/messages', (req, res, ctx) => {
     const skip = +req.url.searchParams.get('skip')!;
@@ -51,5 +55,31 @@ export const handlers = [
     const total = filteredMessages.length;
 
     return res(ctx.json({ data, total }));
+  }),
+  rest.get('/mock/teacher/register-codes', (req, res, ctx) => {
+    const skip = +req.url.searchParams.get('skip')!;
+    const take = +req.url.searchParams.get('take')!;
+
+    const data = db.registerCodes.slice(skip, skip + take);
+    const total = db.registerCodes.length;
+
+    return res(ctx.json({ data, total }));
+  }),
+  rest.post(
+    '/mock/teacher/register-codes',
+    (req: RestRequest<GenerateRegisterCodesRequest>, res, ctx) => {
+      const newCodes = new Array(req.body.count).fill(null).map((_, index) => ({
+        id: db.registerCodes.length + index + 1,
+        code: faker.datatype.string(32),
+      }));
+      db.registerCodes = [...newCodes, ...db.registerCodes];
+      return res(ctx.json(DEFAULT_SUCCESS_RESPONSE));
+    },
+  ),
+  rest.delete('/mock/teacher/register-code', (req, res, ctx) => {
+    const id = +req.url.searchParams.get('id')!;
+    const index = db.registerCodes.findIndex((code) => code.id === id);
+    db.registerCodes.splice(index, 1);
+    return res(ctx.json(DEFAULT_SUCCESS_RESPONSE));
   }),
 ];

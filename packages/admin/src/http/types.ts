@@ -25,4 +25,4 @@ export type MessagesResponse = PaginationResponse<Message>;
 export type RegisterCode = { id: number; code: string };
 export type RegisterCodeResponse = PaginationResponse<RegisterCode>;
 export type GenerateRegisterCodesRequest = { count: number };
-export type DeleteRegisterCodeRequest = { id: number };
+export type DeleteRegisterCodeRequest = { id: string };
