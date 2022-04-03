@@ -7,7 +7,9 @@ import {
 } from './types';
 
 const service = createAxiosService(
-  import.meta.env.DEV ? '' : `${import.meta.env.VITE_HTTP_URL}/admin`,
+  import.meta.env.VITE_MOCK
+    ? '/mock'
+    : `${import.meta.env.VITE_HTTP_URL}/admin`,
 );
 
 export class API {

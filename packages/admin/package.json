@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
+    "dev:mock": "cross-env VITE_MOCK=true vite",
     "build": "vite build",
     "build:tsc": "tsc && vite build",
     "preview": "vite preview",

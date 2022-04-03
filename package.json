@@ -30,12 +30,14 @@
     "react-toastify": "^8.1.1"
   },
   "devDependencies": {
+    "@faker-js/faker": "^6.1.1",
     "@types/node": "^17.0.21",
     "@types/react": "^17.0.41",
     "@types/react-dom": "^17.0.14",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
     "@vitejs/plugin-react": "^1.0.7",
+    "cross-env": "^7.0.3",
     "eslint": "^8.8.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
