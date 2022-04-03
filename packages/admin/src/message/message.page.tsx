@@ -31,7 +31,6 @@ const MessagePage: React.FC = () => {
   const isPhone = useCheckPhone();
 
   const [page, setPage] = useState<number>(1);
-
   const [searchParams, setSearchParams] = useState<SearchParams>({
     teacherId: '',
     studentId: '',
@@ -56,6 +55,10 @@ const MessagePage: React.FC = () => {
   });
 
   useUpdateEffect(() => {
+    setPage(1);
+  }, [searchParams]);
+
+  useUpdateEffect(() => {
     run({
       skip: (page - 1) * PAGE_SIZE,
       take: PAGE_SIZE,
@@ -64,7 +67,7 @@ const MessagePage: React.FC = () => {
       startTime: searchParams.startTime ? searchParams.startTime : undefined,
       endTime: searchParams.endTime ? searchParams.endTime : undefined,
     });
-  }, [page, searchParams]);
+  }, [searchParams, page]);
 
   return (
     <>
@@ -162,7 +165,12 @@ const MessagePage: React.FC = () => {
           </Button>
         </Grid>
         <Grid item container xs={6} justifyContent="flex-end">
-          <Button fullWidth={isPhone} type="submit" variant="contained">
+          <Button
+            fullWidth={isPhone}
+            type="submit"
+            variant="contained"
+            disabled={loading}
+          >
             Search
           </Button>
         </Grid>
