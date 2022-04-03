@@ -1,28 +1,25 @@
 import { useCheckPhone } from '@mpigeon/client-shared';
-import { Clear } from '@mui/icons-material';
+import { Clear, Person } from '@mui/icons-material';
 import {
   Alert,
-  Box,
   Button,
   Chip,
   Grid,
   IconButton,
   InputAdornment,
-  Link,
+  Pagination,
   Paper,
   TextField,
   Typography,
 } from '@mui/material';
-import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { useRequest, useUpdateEffect } from 'ahooks';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { PAGE_SIZE } from '~/common/constants';
 import { API } from '~/http/apis';
 import DateTimePicker from './components/date-time-picker.component';
 
-type Teacher = { id: string; name: string };
-type Student = { id: string; defaultRemark: string };
 type SearchParams = {
   teacherId: string;
   studentId: string;
@@ -33,8 +30,8 @@ type SearchParams = {
 const MessagePage: React.FC = () => {
   const isPhone = useCheckPhone();
 
-  const [pageSize, setPageSize] = useState<number>(25);
-  const [page, setPage] = useState<number>(0);
+  const [page, setPage] = useState<number>(1);
+
   const [searchParams, setSearchParams] = useState<SearchParams>({
     teacherId: '',
     studentId: '',
@@ -42,9 +39,7 @@ const MessagePage: React.FC = () => {
     endTime: null,
   });
 
-  const [selectedId, setSelectedId] = useState<number | undefined>(undefined);
-
-  const { control, handleSubmit, reset, setValue, resetField, watch } =
+  const { control, handleSubmit, reset, resetField, watch, setValue } =
     useForm<SearchParams>({
       defaultValues: {
         teacherId: '',
@@ -56,70 +51,25 @@ const MessagePage: React.FC = () => {
   const formStartTime = watch('startTime');
   const formEndTime = watch('endTime');
 
-  const { data, run, loading } = useRequest(API.getMessages, {
-    defaultParams: [{ skip: page * pageSize, take: pageSize }],
+  const { run, data, loading } = useRequest(API.getMessages, {
+    defaultParams: [{ skip: 0, take: PAGE_SIZE }],
   });
 
   useUpdateEffect(() => {
     run({
-      skip: page * pageSize,
-      take: pageSize,
+      skip: (page - 1) * PAGE_SIZE,
+      take: PAGE_SIZE,
       teacherId: searchParams.teacherId ? searchParams.teacherId : undefined,
       studentId: searchParams.studentId ? searchParams.studentId : undefined,
       startTime: searchParams.startTime ? searchParams.startTime : undefined,
       endTime: searchParams.endTime ? searchParams.endTime : undefined,
     });
-  }, [pageSize, page, searchParams]);
-
-  const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 50 },
-    {
-      field: 'createdAt',
-      headerName: 'Date',
-      width: 180,
-      valueFormatter: (params) =>
-        dayjs(params.value as string).format('YYYY.MM.DD HH:mm:ss'),
-    },
-    { field: 'message', headerName: 'Message', width: 300 },
-    {
-      field: 'teacher',
-      headerName: 'Teacher',
-      renderCell: (params: GridRenderCellParams<Teacher>) => (
-        <Link
-          component="button"
-          onClick={() => setValue('teacherId', params.value.id)}
-        >
-          {params.value.name}
-        </Link>
-      ),
-    },
-    {
-      field: 'students',
-      headerName: 'Students',
-      minWidth: 200,
-      renderCell: (params: GridRenderCellParams<Student[]>) =>
-        params.value.map((student) => (
-          <Chip
-            key={student.id}
-            label={student.defaultRemark}
-            size="small"
-            sx={{ mr: 0.3 }}
-            onClick={() => setValue('studentId', student.id)}
-          />
-        )),
-    },
-  ];
+  }, [page, searchParams]);
 
   return (
     <>
       <Alert severity="info" sx={{ mb: 3 }}>
-        <ul style={{ margin: 0, paddingLeft: 20 }}>
-          <li>
-            When you select a row in the table, the full message will be
-            displayed at the bottom
-          </li>
-          <li>Click teacher or student to set search id</li>
-        </ul>
+        Click teacher or student to set search id
       </Alert>
 
       <Grid
@@ -218,33 +168,54 @@ const MessagePage: React.FC = () => {
         </Grid>
       </Grid>
 
-      <DataGrid
-        loading={loading}
-        rows={data?.data.data || []}
-        columns={columns.map((data) => ({ ...data, sortable: false }))}
-        autoHeight
-        disableColumnMenu
-        pageSize={pageSize}
-        onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-        rowCount={data?.data.total || 0}
-        page={page}
-        onPageChange={(newPage) => setPage(newPage)}
-        scrollbarSize={20}
-        onSelectionModelChange={(newSelectionModel) => {
-          setSelectedId(newSelectionModel[0] as number | undefined);
-        }}
-      />
+      <Grid container justifyContent="center" mb={2}>
+        <Pagination
+          count={Math.floor((data?.data.total || 0) / PAGE_SIZE)}
+          page={page}
+          onChange={(_, newPage) => setPage(newPage)}
+          disabled={loading}
+        />
+      </Grid>
 
-      {selectedId && (
-        <Paper sx={{ mt: 3, p: 2 }} variant="outlined">
-          <Typography variant="caption" color="text.secondary" mb={2}>
-            Full Message
+      {data?.data.data.map((message) => (
+        <Paper key={message.id} variant="outlined" sx={{ p: 1.5, mb: 1 }}>
+          <Typography color="text.secondary" variant="body2">
+            <strong>ID:{message.id}</strong>{' '}
+            {dayjs(message.createdAt).format('YYYY.MM.DD HH:mm:ss')}
           </Typography>
-          <Box sx={{ whiteSpace: 'pre-wrap' }}>
-            {data?.data.data.find(({ id }) => id === selectedId)?.message}
-          </Box>
+          <Chip
+            label={message.teacher.name}
+            icon={<Person />}
+            size="small"
+            sx={{ my: 1 }}
+            onClick={() => setValue('teacherId', message.teacher.id)}
+          />
+          <Typography sx={{ whiteSpace: 'pre-wrap' }}>
+            {message.message}
+          </Typography>
+          {message.students.map((student) => (
+            <Chip
+              key={student.id}
+              label={student.defaultRemark}
+              size="small"
+              sx={{ mr: 0.5, mt: 0.5 }}
+              onClick={() => setValue('studentId', student.id)}
+            />
+          ))}
         </Paper>
-      )}
+      ))}
+
+      <Grid container justifyContent="center">
+        <Pagination
+          count={Math.floor((data?.data.total || 0) / PAGE_SIZE)}
+          page={page}
+          onChange={(_, newPage) => {
+            setPage(newPage);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          disabled={loading}
+        />
+      </Grid>
     </>
   );
 };
