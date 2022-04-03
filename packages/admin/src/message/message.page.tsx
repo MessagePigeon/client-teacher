@@ -7,7 +7,6 @@ import {
   Grid,
   IconButton,
   InputAdornment,
-  Pagination,
   Paper,
   TextField,
   Typography,
@@ -16,6 +15,7 @@ import { useRequest, useUpdateEffect } from 'ahooks';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import TopBottomPagination from '~/common/components/top-bottom-pagination.component';
 import { PAGE_SIZE } from '~/common/constants';
 import { API } from '~/http/apis';
 import DateTimePicker from './components/date-time-picker.component';
@@ -168,54 +168,42 @@ const MessagePage: React.FC = () => {
         </Grid>
       </Grid>
 
-      <Grid container justifyContent="center" mb={2}>
-        <Pagination
-          count={Math.floor((data?.data.total || 0) / PAGE_SIZE)}
-          page={page}
-          onChange={(_, newPage) => setPage(newPage)}
-          disabled={loading}
-        />
-      </Grid>
-
-      {data?.data.data.map((message) => (
-        <Paper key={message.id} variant="outlined" sx={{ p: 1.5, mb: 1 }}>
-          <Typography color="text.secondary" variant="body2">
-            <strong>ID:{message.id}</strong>{' '}
-            {dayjs(message.createdAt).format('YYYY.MM.DD HH:mm:ss')}
-          </Typography>
-          <Chip
-            label={message.teacher.name}
-            icon={<Person />}
-            size="small"
-            sx={{ my: 1 }}
-            onClick={() => setValue('teacherId', message.teacher.id)}
-          />
-          <Typography sx={{ whiteSpace: 'pre-wrap' }}>
-            {message.message}
-          </Typography>
-          {message.students.map((student) => (
+      <TopBottomPagination
+        count={Math.ceil((data?.data.total || 0) / PAGE_SIZE)}
+        page={page}
+        onChange={(newPage) => {
+          setPage(newPage);
+        }}
+        disabled={loading}
+      >
+        {data?.data.data.map((message) => (
+          <Paper key={message.id} variant="outlined" sx={{ p: 1.5, my: 1 }}>
+            <Typography color="text.secondary" variant="body2">
+              <strong>ID:{message.id}</strong>{' '}
+              {dayjs(message.createdAt).format('YYYY.MM.DD HH:mm:ss')}
+            </Typography>
             <Chip
-              key={student.id}
-              label={student.defaultRemark}
+              label={message.teacher.name}
+              icon={<Person />}
               size="small"
-              sx={{ mr: 0.5, mt: 0.5 }}
-              onClick={() => setValue('studentId', student.id)}
+              sx={{ my: 1 }}
+              onClick={() => setValue('teacherId', message.teacher.id)}
             />
-          ))}
-        </Paper>
-      ))}
-
-      <Grid container justifyContent="center">
-        <Pagination
-          count={Math.floor((data?.data.total || 0) / PAGE_SIZE)}
-          page={page}
-          onChange={(_, newPage) => {
-            setPage(newPage);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-          disabled={loading}
-        />
-      </Grid>
+            <Typography sx={{ whiteSpace: 'pre-wrap' }}>
+              {message.message}
+            </Typography>
+            {message.students.map((student) => (
+              <Chip
+                key={student.id}
+                label={student.defaultRemark}
+                size="small"
+                sx={{ mr: 0.5, mt: 0.5 }}
+                onClick={() => setValue('studentId', student.id)}
+              />
+            ))}
+          </Paper>
+        ))}
+      </TopBottomPagination>
     </>
   );
 };
