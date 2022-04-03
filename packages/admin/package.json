@@ -12,9 +12,7 @@
   },
   "dependencies": {
     "@date-io/dayjs": "^2.13.1",
-    "@mpigeon/client-shared": "workspace:^0.1.0",
-    "@mui/system": "^5.5.3",
-    "@mui/x-data-grid": "^5.7.0"
+    "@mpigeon/client-shared": "workspace:^0.1.0"
   },
   "msw": {
     "workerDirectory": "public"
