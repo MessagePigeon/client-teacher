@@ -2,7 +2,9 @@
   "name": "@mpigeon/client",
   "version": "0.0.0",
   "description": "Message Pigeon Frontend (teacher & admin teacher)",
+  "private": true,
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "lint": "eslint \"**/*.{ts,tsx}\" --fix"
   },
