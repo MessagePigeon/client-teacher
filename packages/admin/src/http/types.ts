@@ -21,3 +21,7 @@ type Message = {
   students: Array<{ id: string; defaultRemark: string }>;
 };
 export type MessagesResponse = PaginationResponse<Message>;
+
+export type RegisterCodeResponse = { id: number; code: string };
+export type GenerateRegisterCodesRequest = { count: number };
+export type DeleteRegisterCodeRequest = { id: number };
