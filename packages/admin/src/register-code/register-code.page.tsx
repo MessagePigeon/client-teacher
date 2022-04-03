@@ -9,6 +9,7 @@ import {
   TableCell,
   TableRow,
   TextField,
+  Tooltip,
   Typography,
 } from '@mui/material';
 import { useRequest } from 'ahooks';
@@ -110,23 +111,27 @@ const RegisterCodePage: React.FC = () => {
                   </Typography>
                 </TableCell>
                 <TableCell align="right">
-                  <IconButton
-                    size="small"
-                    onClick={async () => {
-                      await navigator.clipboard.writeText(code);
-                      toast.success('Copy Register Code Success');
-                    }}
-                    disabled={deleteLoading}
-                  >
-                    <ContentCopy fontSize="inherit" />
-                  </IconButton>
-                  <IconButton
-                    size="small"
-                    onClick={() => runDelete({ id: `${id}` })}
-                    disabled={deleteLoading}
-                  >
-                    <Delete fontSize="inherit" />
-                  </IconButton>
+                  <Tooltip title="Copy" arrow placement="left">
+                    <IconButton
+                      size="small"
+                      onClick={async () => {
+                        await navigator.clipboard.writeText(code);
+                        toast.success('Copy Register Code Success');
+                      }}
+                      disabled={deleteLoading}
+                    >
+                      <ContentCopy fontSize="inherit" />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Delete" arrow placement="right">
+                    <IconButton
+                      size="small"
+                      onClick={() => runDelete({ id: `${id}` })}
+                      disabled={deleteLoading}
+                    >
+                      <Delete fontSize="inherit" />
+                    </IconButton>
+                  </Tooltip>
                 </TableCell>
               </TableRow>
             ))}
