@@ -1,4 +1,4 @@
-import { Card, CardContent, Chip, Stack, Typography } from '@mui/material';
+import { Chip, Paper, Stack, Typography } from '@mui/material';
 import { useRequest } from 'ahooks';
 import React from 'react';
 import { API } from '~/http/apis';
@@ -42,31 +42,27 @@ const MessageCard: React.FC<MessageCardProps> = ({
   });
 
   return (
-    <Card sx={{ mb: 3 }}>
-      <CardContent>
-        <Typography sx={{ fontSize: 14, mt: 1 }} color="text.secondary">
-          {date}
-        </Typography>
-        <Typography sx={{ my: 1, whiteSpace: 'pre-wrap' }}>
-          {message}
-        </Typography>
-        <Stack direction="row" flexWrap="wrap">
-          {studentsStatus.map(({ remark, showing, id }) => (
-            <Chip
-              key={id}
-              label={remark}
-              color={showing ? 'success' : 'default'}
-              sx={{ mb: 0.5, mr: 1 }}
-              size="small"
-              onDelete={
-                showing ? () => run({ messageId, studentId: id }) : undefined
-              }
-              disabled={showing && closeMessageLoading}
-            />
-          ))}
-        </Stack>
-      </CardContent>
-    </Card>
+    <Paper sx={{ p: 2, mb: 1 }}>
+      <Typography sx={{ fontSize: 14 }} color="text.secondary">
+        {date}
+      </Typography>
+      <Typography sx={{ my: 1, whiteSpace: 'pre-wrap' }}>{message}</Typography>
+      <Stack direction="row" flexWrap="wrap">
+        {studentsStatus.map(({ remark, showing, id }) => (
+          <Chip
+            key={id}
+            label={remark}
+            color={showing ? 'success' : 'default'}
+            sx={{ mt: 0.5, mr: 1 }}
+            size="small"
+            onDelete={
+              showing ? () => run({ messageId, studentId: id }) : undefined
+            }
+            disabled={showing && closeMessageLoading}
+          />
+        ))}
+      </Stack>
+    </Paper>
   );
 };
 
