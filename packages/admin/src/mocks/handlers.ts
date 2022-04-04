@@ -82,4 +82,10 @@ export const handlers = [
     db.registerCodes.splice(index, 1);
     return res(ctx.json(DEFAULT_SUCCESS_RESPONSE));
   }),
+  rest.post('/mock/connection', (req, res, ctx) => {
+    return res(ctx.json(DEFAULT_SUCCESS_RESPONSE));
+  }),
+  rest.post('/mock/disconnection', (req, res, ctx) => {
+    return res(ctx.json(DEFAULT_SUCCESS_RESPONSE));
+  }),
 ];

@@ -6,6 +6,7 @@ import {
   LoginResponse,
   MessagesRequest,
   MessagesResponse,
+  ModifyConnectionRequest,
   PaginationRequest,
   RegisterCodeResponse,
 } from './types';
@@ -36,5 +37,11 @@ export class API {
   }
   static async deleteRegisterCodes(params: DeleteRegisterCodeRequest) {
     return await service.delete('/teacher/register-code', { params });
+  }
+  static async modifyConnection(
+    body: ModifyConnectionRequest,
+    action: 'connect' | 'disconnect',
+  ) {
+    return await service.post(`/${action}ion`, body);
   }
 }

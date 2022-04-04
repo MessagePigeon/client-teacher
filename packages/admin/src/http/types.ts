@@ -26,3 +26,5 @@ export type RegisterCode = { id: number; code: string };
 export type RegisterCodeResponse = PaginationResponse<RegisterCode>;
 export type GenerateRegisterCodesRequest = { count: number };
 export type DeleteRegisterCodeRequest = { id: string };
+
+export type ModifyConnectionRequest = { studentId: string; teacherId: string };
