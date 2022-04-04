@@ -103,8 +103,9 @@ const RegisterCodePage: React.FC = () => {
                   <Typography
                     noWrap
                     sx={{
-                      maxWidth: { xs: 200, md: 400 },
+                      width: { xs: 180, md: 400 },
                       textOverflow: 'ellipsis',
+                      fontFamily: 'monospace',
                     }}
                   >
                     {code}
