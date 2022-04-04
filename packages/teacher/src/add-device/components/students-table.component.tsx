@@ -9,6 +9,7 @@ import {
   TableHead,
   TableRow,
   Tooltip,
+  Typography,
 } from '@mui/material';
 import { useBoolean } from 'ahooks';
 import React, { useState } from 'react';
@@ -48,6 +49,17 @@ const StudentsTable: React.FC = () => {
             </TableRow>
           </TableHead>
           <TableBody>
+            {pendingStudents.length === 0 && connectedStudents.length === 0 && (
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell align="center">
+                  <Typography color="text.secondary">
+                    {t('add-device.table.empty')}
+                  </Typography>
+                </TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            )}
             {pendingStudents.map((student) => (
               <TableRow key={student.requestId}>
                 <TableCell>{student.remark}</TableCell>

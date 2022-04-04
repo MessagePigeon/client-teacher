@@ -1,5 +1,6 @@
 import { MoreTime } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
+import { Typography } from '@mui/material';
 import { useRequest } from 'ahooks';
 import dayjs from 'dayjs';
 import React from 'react';
@@ -28,6 +29,14 @@ const HistoryPage: React.FC = () => {
       dispatch(messagesActions.addMany(response.data.data));
     },
   });
+
+  if (messages.length === 0) {
+    return (
+      <Typography align="center" color="text.secondary" variant="h4">
+        {t('history.empty')}
+      </Typography>
+    );
+  }
 
   return (
     <>
