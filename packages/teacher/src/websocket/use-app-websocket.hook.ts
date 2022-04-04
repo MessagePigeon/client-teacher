@@ -21,5 +21,6 @@ export function useAppWebsocket({ ready }: { ready: boolean }) {
       };
       websocketEvents[event](data);
     };
+    return () => ws.close();
   }, [ready]);
 }
