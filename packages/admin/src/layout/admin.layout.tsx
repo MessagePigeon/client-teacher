@@ -28,9 +28,9 @@ const AdminLayout: React.FC = () => {
       <LayoutBase
         navigation={[
           {
-            title: 'Register Code',
-            icon: <ReceiptLong />,
-            path: 'register-code',
+            title: 'Connection',
+            icon: <ConnectWithoutContact />,
+            path: 'connection',
           },
           {
             title: 'Message',
@@ -40,9 +40,9 @@ const AdminLayout: React.FC = () => {
           { title: 'Teacher', icon: <SupervisorAccount />, path: 'teacher' },
           { title: 'Student', icon: <Badge />, path: 'student' },
           {
-            title: 'Connection',
-            icon: <ConnectWithoutContact />,
-            path: 'connection',
+            title: 'Register Code',
+            icon: <ReceiptLong />,
+            path: 'register-code',
           },
         ]}
         onLogout={() => {

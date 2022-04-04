@@ -10,7 +10,7 @@ const LoginLayout: React.FC = () => {
   useMount(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      navigate('/register-code');
+      navigate('/connection');
     }
   });
 
