@@ -1,20 +1,23 @@
 import { Grid, Pagination } from '@mui/material';
 import React from 'react';
+import { PAGE_SIZE } from '../constants';
 
 interface TopBottomPaginationProps {
-  count: number;
+  total?: number;
   page: number;
   onChange: (newPage: number) => void;
   disabled: boolean;
 }
 
 const TopBottomPagination: React.FC<TopBottomPaginationProps> = ({
-  count,
+  total,
   page,
   onChange,
   disabled,
   children,
 }) => {
+  const count = Math.ceil((total || 0) / PAGE_SIZE);
+
   return (
     <>
       <Grid container justifyContent="center">

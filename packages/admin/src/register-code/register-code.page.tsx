@@ -90,7 +90,7 @@ const RegisterCodePage: React.FC = () => {
         </Button>
       </Box>
       <TopBottomPagination
-        count={Math.ceil((data?.data.total || 0) / PAGE_SIZE)}
+        total={data?.data.total}
         page={page}
         onChange={(newPage) => setPage(newPage)}
         disabled={getLoading}

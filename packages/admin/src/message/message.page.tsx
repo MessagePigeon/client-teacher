@@ -177,7 +177,7 @@ const MessagePage: React.FC = () => {
       </Grid>
 
       <TopBottomPagination
-        count={Math.ceil((data?.data.total || 0) / PAGE_SIZE)}
+        total={data?.data.total}
         page={page}
         onChange={(newPage) => {
           setPage(newPage);
