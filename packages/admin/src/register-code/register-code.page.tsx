@@ -104,7 +104,6 @@ const RegisterCodePage: React.FC = () => {
                     noWrap
                     sx={{
                       width: { xs: 180, md: 400 },
-                      textOverflow: 'ellipsis',
                       fontFamily: 'monospace',
                     }}
                   >
