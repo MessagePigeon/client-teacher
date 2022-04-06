@@ -47,16 +47,7 @@ const HistoryPage: React.FC = () => {
         ];
         const time = dayjs(message.createdAt).format('YYYY.MM.DD HH:mm:ss');
         const date = `${day} ${time}`;
-        return (
-          <MessageCard
-            key={message.id}
-            messageId={message.id}
-            date={date}
-            message={message.message}
-            studentIds={message.studentIds}
-            showingIds={message.showingIds}
-          />
-        );
+        return <MessageCard key={message.id} {...message} date={date} />;
       })}
       {messagesCount < messagesTotal && (
         <LoadingButton

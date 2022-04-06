@@ -7,7 +7,7 @@ import { connectedStudentsSelector } from '~/state/slices/connected-students.sli
 import { messagesActions } from '~/state/slices/messages.slice';
 
 interface MessageCardProps {
-  messageId: number;
+  id: number;
   date: string;
   message: string;
   studentIds: string[];
@@ -15,7 +15,7 @@ interface MessageCardProps {
 }
 
 const MessageCard: React.FC<MessageCardProps> = ({
-  messageId,
+  id,
   date,
   message,
   studentIds,
@@ -48,15 +48,15 @@ const MessageCard: React.FC<MessageCardProps> = ({
       </Typography>
       <Typography sx={{ my: 1, whiteSpace: 'pre-wrap' }}>{message}</Typography>
       <Stack direction="row" flexWrap="wrap">
-        {studentsStatus.map(({ remark, showing, id }) => (
+        {studentsStatus.map(({ remark, showing, id: studentId }) => (
           <Chip
-            key={id}
+            key={studentId}
             label={remark}
             color={showing ? 'success' : 'default'}
             sx={{ mt: 0.5, mr: 1 }}
             size="small"
             onDelete={
-              showing ? () => run({ messageId, studentId: id }) : undefined
+              showing ? () => run({ messageId: id, studentId }) : undefined
             }
             disabled={showing && closeMessageLoading}
           />
