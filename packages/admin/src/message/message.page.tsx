@@ -30,7 +30,7 @@ type SearchParams = {
 const MessagePage: React.FC = () => {
   const isPhone = useCheckPhone();
 
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState(1);
   const [searchParams, setSearchParams] = useState<SearchParams>({
     teacherId: '',
     studentId: '',

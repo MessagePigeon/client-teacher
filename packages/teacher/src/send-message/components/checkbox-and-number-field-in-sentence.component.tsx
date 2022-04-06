@@ -12,8 +12,8 @@ interface CheckBoxAndNumberFieldInSentenceProps {
 const CheckBoxAndNumberFieldInSentence: React.FC<
   CheckBoxAndNumberFieldInSentenceProps
 > = ({ beforeText, afterText, onChange, defaultValue, maxValue }) => {
-  const [fieldNumber, setFieldNumber] = useState<number>(defaultValue);
-  const [checked, setChecked] = useState<boolean>(false);
+  const [fieldNumber, setFieldNumber] = useState(defaultValue);
+  const [checked, setChecked] = useState(false);
 
   return (
     <Box sx={{ my: 2 }}>

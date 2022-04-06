@@ -23,7 +23,7 @@ import { API } from '~/http/apis';
 const RegisterCodePage: React.FC = () => {
   const isPhone = useCheckPhone();
 
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState(1);
 
   const { control, handleSubmit } = useForm({ defaultValues: { count: 1 } });
 

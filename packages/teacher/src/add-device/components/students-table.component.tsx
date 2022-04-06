@@ -28,8 +28,8 @@ const StudentsTable: React.FC = () => {
 
   const [openDeleteDialog, { set: setOpenDeleteDialog }] = useBoolean();
   const [openEditDialog, { set: setOpenEditDialog }] = useBoolean();
-  const [selectStudentId, setSelectStudentId] = useState<string>('');
-  const [selectStudentRemark, setSelectStudentRemark] = useState<string>('');
+  const [selectStudentId, setSelectStudentId] = useState('');
+  const [selectStudentRemark, setSelectStudentRemark] = useState('');
 
   return (
     <>

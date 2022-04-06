@@ -21,7 +21,7 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
   hideNavigation,
 }) => {
   const location = useLocation();
-  const [navCurrentPath, setNavCurrentPath] = useState<string>('');
+  const [navCurrentPath, setNavCurrentPath] = useState('');
   useEffect(() => {
     // get `aaa` from `/aaa/bbb`
     setNavCurrentPath(location.pathname.split('/')[1]);
