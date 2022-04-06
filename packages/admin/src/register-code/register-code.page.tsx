@@ -92,7 +92,7 @@ const RegisterCodePage: React.FC = () => {
       <TopBottomPagination
         total={data?.data.total}
         page={page}
-        onChange={(newPage) => setPage(newPage)}
+        onChange={setPage}
         disabled={getLoading}
       >
         <Table>

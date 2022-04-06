@@ -179,9 +179,7 @@ const MessagePage: React.FC = () => {
       <TopBottomPagination
         total={data?.data.total}
         page={page}
-        onChange={(newPage) => {
-          setPage(newPage);
-        }}
+        onChange={setPage}
         disabled={loading}
       >
         {data?.data.data.map((message) => (
