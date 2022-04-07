@@ -1,5 +1,5 @@
 import { useCheckPhone } from '@mpigeon/client-shared';
-import { ContentCopy, Delete } from '@mui/icons-material';
+import { Check, ContentCopy, Delete } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -15,7 +15,6 @@ import {
 import { useRequest } from 'ahooks';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 import TopBottomPagination from '~/common/components/top-bottom-pagination.component';
 import { PAGE_SIZE } from '~/common/constants';
 import { API } from '~/http/apis';
@@ -24,6 +23,7 @@ const RegisterCodePage: React.FC = () => {
   const isPhone = useCheckPhone();
 
   const [page, setPage] = useState(1);
+  const [copiedId, setCopiedId] = useState(-1);
 
   const { control, handleSubmit } = useForm({ defaultValues: { count: 1 } });
 
@@ -97,44 +97,55 @@ const RegisterCodePage: React.FC = () => {
       >
         <Table>
           <TableBody>
-            {data?.data.data.map(({ id, code }) => (
-              <TableRow key={id}>
-                <TableCell align="left">
-                  <Typography
-                    noWrap
-                    sx={{
-                      width: { xs: 180, md: 400 },
-                      fontFamily: 'monospace',
-                    }}
-                  >
-                    {code}
-                  </Typography>
-                </TableCell>
-                <TableCell align="right">
-                  <Tooltip title="Copy" arrow placement="left">
-                    <IconButton
-                      size="small"
-                      onClick={async () => {
-                        await navigator.clipboard.writeText(code);
-                        toast.success('Copy Register Code Success');
+            {data?.data.data.map(({ id, code }) => {
+              return (
+                <TableRow key={id}>
+                  <TableCell align="left">
+                    <Typography
+                      noWrap
+                      sx={{
+                        width: { xs: 180, md: 400 },
+                        fontFamily: 'monospace',
                       }}
-                      disabled={deleteLoading}
                     >
-                      <ContentCopy fontSize="inherit" />
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip title="Delete" arrow placement="right">
-                    <IconButton
-                      size="small"
-                      onClick={() => runDelete({ id: `${id}` })}
-                      disabled={deleteLoading}
+                      {code}
+                    </Typography>
+                  </TableCell>
+                  <TableCell align="right">
+                    <Tooltip
+                      title={copiedId === id ? 'Copied!' : 'Copy'}
+                      arrow
+                      placement="left"
                     >
-                      <Delete fontSize="inherit" />
-                    </IconButton>
-                  </Tooltip>
-                </TableCell>
-              </TableRow>
-            ))}
+                      <IconButton
+                        size="small"
+                        onClick={async () => {
+                          await navigator.clipboard.writeText(code);
+                          setCopiedId(id);
+                          setTimeout(() => setCopiedId(-1), 1000);
+                        }}
+                        disabled={deleteLoading}
+                      >
+                        {copiedId === id ? (
+                          <Check fontSize="inherit" />
+                        ) : (
+                          <ContentCopy fontSize="inherit" />
+                        )}
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Delete" arrow placement="right">
+                      <IconButton
+                        size="small"
+                        onClick={() => runDelete({ id: `${id}` })}
+                        disabled={deleteLoading}
+                      >
+                        <Delete fontSize="inherit" />
+                      </IconButton>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TopBottomPagination>
