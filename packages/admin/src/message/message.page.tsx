@@ -135,7 +135,7 @@ const MessagePage: React.FC = () => {
                 label="Start Time"
                 value={value}
                 onChange={(newDate) => onChange(newDate)}
-                maxDate={formEndTime ? formEndTime! : undefined}
+                maxDate={formEndTime || undefined}
               />
             )}
           />
@@ -149,7 +149,7 @@ const MessagePage: React.FC = () => {
                 label="End Time"
                 value={value}
                 onChange={(newDate) => onChange(newDate)}
-                minDate={formStartTime ? formStartTime! : undefined}
+                minDate={formStartTime || undefined}
               />
             )}
           />
