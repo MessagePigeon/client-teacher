@@ -55,10 +55,10 @@ const MessagePage: React.FC = () => {
       API.getMessages({
         skip: (page - 1) * PAGE_SIZE,
         take: PAGE_SIZE,
-        teacherId: searchParams.teacherId ? searchParams.teacherId : undefined,
-        studentId: searchParams.studentId ? searchParams.studentId : undefined,
-        startTime: searchParams.startTime ? searchParams.startTime : undefined,
-        endTime: searchParams.endTime ? searchParams.endTime : undefined,
+        teacherId: searchParams.teacherId || undefined,
+        studentId: searchParams.studentId || undefined,
+        startTime: searchParams.startTime || undefined,
+        endTime: searchParams.endTime || undefined,
       }),
     {
       refreshDeps: [searchParams, page],
