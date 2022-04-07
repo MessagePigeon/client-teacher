@@ -1,5 +1,5 @@
 import { useCheckPhone } from '@mpigeon/client-shared';
-import { Check, ContentCopy, Delete } from '@mui/icons-material';
+import { ContentCopy, Delete, Done } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -127,7 +127,7 @@ const RegisterCodePage: React.FC = () => {
                         disabled={deleteLoading}
                       >
                         {copiedId === id ? (
-                          <Check fontSize="inherit" />
+                          <Done fontSize="inherit" />
                         ) : (
                           <ContentCopy fontSize="inherit" />
                         )}
