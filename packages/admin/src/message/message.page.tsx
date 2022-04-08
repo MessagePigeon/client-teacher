@@ -60,9 +60,7 @@ const MessagePage: React.FC = () => {
         startTime: searchParams.startTime || undefined,
         endTime: searchParams.endTime || undefined,
       }),
-    {
-      refreshDeps: [searchParams, page],
-    },
+    { refreshDeps: [searchParams, page] },
   );
 
   useUpdateEffect(() => {
