@@ -93,7 +93,7 @@ const RegisterCodePage: React.FC = () => {
         total={data?.data.total}
         page={page}
         onChange={setPage}
-        disabled={getLoading}
+        loading={getLoading}
       >
         <Table>
           <TableBody>

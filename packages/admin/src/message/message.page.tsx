@@ -180,7 +180,7 @@ const MessagePage: React.FC = () => {
         total={data?.data.total}
         page={page}
         onChange={setPage}
-        disabled={loading}
+        loading={loading}
       >
         {data?.data.data.map((message) => (
           <Paper key={message.id} variant="outlined" sx={{ p: 1.5, my: 1 }}>

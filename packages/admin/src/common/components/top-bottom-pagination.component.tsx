@@ -1,4 +1,4 @@
-import { Grid, Pagination } from '@mui/material';
+import { CircularProgress, Grid, Pagination } from '@mui/material';
 import React from 'react';
 import { PAGE_SIZE } from '../constants';
 
@@ -6,14 +6,14 @@ interface TopBottomPaginationProps {
   total?: number;
   page: number;
   onChange: (newPage: number) => void;
-  disabled: boolean;
+  loading: boolean;
 }
 
 const TopBottomPagination: React.FC<TopBottomPaginationProps> = ({
   total,
   page,
   onChange,
-  disabled,
+  loading,
   children,
 }) => {
   const count = Math.ceil((total || 0) / PAGE_SIZE);
@@ -25,10 +25,16 @@ const TopBottomPagination: React.FC<TopBottomPaginationProps> = ({
           count={count}
           page={page}
           onChange={(_, newPage) => onChange(newPage)}
-          disabled={disabled}
+          disabled={loading}
         />
       </Grid>
-      {children}
+      {loading ? (
+        <Grid container justifyContent="center" sx={{ my: 8 }}>
+          <CircularProgress />
+        </Grid>
+      ) : (
+        children
+      )}
       <Grid container justifyContent="center">
         <Pagination
           count={count}
@@ -37,7 +43,7 @@ const TopBottomPagination: React.FC<TopBottomPaginationProps> = ({
             onChange(newPage);
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
-          disabled={disabled}
+          disabled={loading}
         />
       </Grid>
     </>
