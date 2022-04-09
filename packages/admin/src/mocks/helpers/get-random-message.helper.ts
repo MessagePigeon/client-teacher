@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker';
+import faker from '@faker-js/faker';
 
 export function getRandomMessage() {
   const sentences = new Array(faker.datatype.number({ min: 1, max: 10 }))
