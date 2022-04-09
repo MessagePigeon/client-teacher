@@ -12,7 +12,11 @@ import { useBoolean } from 'ahooks';
 import React from 'react';
 import CopyableChip from './copyable-chip.component';
 
-type Action = { icon: React.ReactNode; tooltip: string; onClick: () => void };
+type Action = {
+  icon: React.ReactElement;
+  tooltip: string;
+  onClick: () => void;
+};
 
 interface UserCardProps {
   id: string;
@@ -62,7 +66,7 @@ const UserCard: React.FC<UserCardProps> = ({
         </Box>
         <Box>{children}</Box>
         {connectedUsers.map((user) => (
-          <CopyableChip key={user.id} copyValue={user.id}>
+          <CopyableChip key={user.id} copyText={user.id}>
             {user.name}
           </CopyableChip>
         ))}

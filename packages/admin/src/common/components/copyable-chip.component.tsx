@@ -4,11 +4,16 @@ import { useBoolean } from 'ahooks';
 import React from 'react';
 
 interface CopyableChipProps {
-  copyValue: string;
+  copyText: string;
   children: string;
+  defaultIcon?: React.ReactElement;
 }
 
-const CopyableChip: React.FC<CopyableChipProps> = ({ copyValue, children }) => {
+const CopyableChip: React.FC<CopyableChipProps> = ({
+  copyText,
+  children,
+  defaultIcon,
+}) => {
   const [isCopied, { set: setIsCopied }] = useBoolean();
 
   return (
@@ -16,9 +21,9 @@ const CopyableChip: React.FC<CopyableChipProps> = ({ copyValue, children }) => {
       label={children}
       size="small"
       sx={{ mr: 0.5, mt: 0.5 }}
-      icon={isCopied ? <Done /> : undefined}
+      icon={isCopied ? <Done /> : defaultIcon}
       onClick={async () => {
-        await navigator.clipboard.writeText(copyValue);
+        await navigator.clipboard.writeText(copyText);
         setIsCopied(true);
         setTimeout(() => setIsCopied(false), 1000);
       }}
