@@ -9,6 +9,7 @@ import {
 import { useRequest } from 'ahooks';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { API } from '~/http/apis';
 
 interface RenameDialogProps {
@@ -16,7 +17,7 @@ interface RenameDialogProps {
   id: string;
   oldName: string;
   onClose: () => void;
-  onSuccess: () => void;
+  refresh: () => void;
 }
 
 const RenameDialog: React.FC<RenameDialogProps> = ({
@@ -24,15 +25,19 @@ const RenameDialog: React.FC<RenameDialogProps> = ({
   id,
   oldName,
   onClose,
-  onSuccess,
+  refresh,
 }) => {
   const { control, handleSubmit } = useForm({
     defaultValues: { newName: oldName },
   });
 
-  const { run } = useRequest(API.renameTeacher, {
+  const { run, loading } = useRequest(API.renameTeacher, {
     manual: true,
-    onSuccess,
+    onSuccess() {
+      onClose();
+      refresh();
+      toast.success('Rename Success');
+    },
   });
 
   return (
@@ -56,8 +61,12 @@ const RenameDialog: React.FC<RenameDialogProps> = ({
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose}>Cancel</Button>
-          <Button type="submit">Rename</Button>
+          <Button onClick={onClose} disabled={loading}>
+            Cancel
+          </Button>
+          <Button type="submit" disabled={loading}>
+            Rename
+          </Button>
         </DialogActions>
       </form>
     </Dialog>
