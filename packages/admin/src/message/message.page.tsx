@@ -1,52 +1,21 @@
-import { useCheckPhone } from '@mpigeon/client-shared';
 import { Person } from '@mui/icons-material';
-import {
-  Alert,
-  Button,
-  Chip,
-  Grid,
-  Paper,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Alert, Paper, Typography } from '@mui/material';
 import { useRequest, useUpdateEffect } from 'ahooks';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import CopyableChip from '~/common/components/copyable-chip.component';
 import TopBottomPagination from '~/common/components/top-bottom-pagination.component';
 import { PAGE_SIZE } from '~/common/constants';
 import { API } from '~/http/apis';
-import DateTimePicker from './components/date-time-picker.component';
-
-type SearchParams = {
-  teacherId: string;
-  studentId: string;
-  startTime: string | null;
-  endTime: string | null;
-  message: string;
-};
-
-const defaultSearchParam: SearchParams = {
-  teacherId: '',
-  studentId: '',
-  startTime: null,
-  endTime: null,
-  message: '',
-};
+import SearchForm, {
+  defaultSearchParams,
+  SearchParams,
+} from './components/search-form.component';
 
 const MessagePage: React.FC = () => {
-  const isPhone = useCheckPhone();
-
   const [page, setPage] = useState(1);
   const [searchParams, setSearchParams] =
-    useState<SearchParams>(defaultSearchParam);
-
-  const { control, handleSubmit, reset, watch, setValue } =
-    useForm<SearchParams>({
-      defaultValues: defaultSearchParam,
-    });
-  const formStartTime = watch('startTime');
-  const formEndTime = watch('endTime');
+    useState<SearchParams>(defaultSearchParams);
 
   const { data, loading } = useRequest(
     () =>
@@ -67,92 +36,13 @@ const MessagePage: React.FC = () => {
   return (
     <>
       <Alert severity="info" sx={{ mb: 3 }}>
-        Click teacher or student to set search id
+        Click teacher or student to copy id
       </Alert>
 
-      <Grid
-        container
-        spacing={2}
-        component="form"
-        mb={3}
-        onSubmit={handleSubmit((data) => setSearchParams(data))}
-      >
-        <Grid item xs={12} md={6}>
-          <Controller
-            control={control}
-            name="teacherId"
-            render={({ field }) => (
-              <TextField label="Teacher ID" fullWidth {...field} />
-            )}
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Controller
-            control={control}
-            name="studentId"
-            render={({ field }) => (
-              <TextField label="Student ID" fullWidth {...field} />
-            )}
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Controller
-            control={control}
-            name="startTime"
-            render={({ field: { onChange, value } }) => (
-              <DateTimePicker
-                label="Start Time"
-                value={value}
-                onChange={(newDate) => onChange(newDate)}
-                maxDate={formEndTime || undefined}
-              />
-            )}
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Controller
-            control={control}
-            name="endTime"
-            render={({ field: { onChange, value } }) => (
-              <DateTimePicker
-                label="End Time"
-                value={value}
-                onChange={(newDate) => onChange(newDate)}
-                minDate={formStartTime || undefined}
-              />
-            )}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Controller
-            control={control}
-            name="message"
-            render={({ field }) => (
-              <TextField label="Message" fullWidth multiline {...field} />
-            )}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <Button
-            fullWidth={isPhone}
-            variant="contained"
-            color="secondary"
-            onClick={() => reset()}
-          >
-            Reset
-          </Button>
-        </Grid>
-        <Grid item container xs={6} justifyContent="flex-end">
-          <Button
-            fullWidth={isPhone}
-            type="submit"
-            variant="contained"
-            disabled={loading}
-          >
-            Search
-          </Button>
-        </Grid>
-      </Grid>
+      <SearchForm
+        onChange={(newSearchParams) => setSearchParams(newSearchParams)}
+        loading={loading}
+      />
 
       <TopBottomPagination
         total={data?.data.total}
@@ -166,24 +56,19 @@ const MessagePage: React.FC = () => {
               <strong>ID:{message.id}</strong>{' '}
               {dayjs(message.createdAt).format('YYYY.MM.DD HH:mm:ss')}
             </Typography>
-            <Chip
-              label={message.teacher.name}
-              icon={<Person />}
-              size="small"
-              sx={{ my: 1 }}
-              onClick={() => setValue('teacherId', message.teacher.id)}
-            />
+            <CopyableChip
+              copyText={message.teacher.id}
+              defaultIcon={<Person />}
+            >
+              {message.teacher.name}
+            </CopyableChip>
             <Typography sx={{ whiteSpace: 'pre-wrap' }}>
               {message.message}
             </Typography>
             {message.students.map((student) => (
-              <Chip
-                key={student.id}
-                label={student.defaultRemark}
-                size="small"
-                sx={{ mr: 0.5, mt: 0.5 }}
-                onClick={() => setValue('studentId', student.id)}
-              />
+              <CopyableChip copyText={student.id}>
+                {student.defaultRemark}
+              </CopyableChip>
             ))}
           </Paper>
         ))}
