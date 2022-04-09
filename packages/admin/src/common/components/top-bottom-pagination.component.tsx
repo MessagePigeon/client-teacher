@@ -39,10 +39,7 @@ const TopBottomPagination: React.FC<TopBottomPaginationProps> = ({
         <Pagination
           count={count}
           page={page}
-          onChange={(_, newPage) => {
-            onChange(newPage);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
+          onChange={(_, newPage) => onChange(newPage)}
           disabled={loading}
         />
       </Grid>
