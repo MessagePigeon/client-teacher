@@ -1,6 +1,6 @@
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Alert, Grid, Tab } from '@mui/material';
-import { useRequest } from 'ahooks';
+import { useRequest, useUpdateEffect } from 'ahooks';
 import React, { useState } from 'react';
 import TopBottomPagination from '~/common/components/top-bottom-pagination.component';
 import { PAGE_SIZE } from '~/common/constants';
@@ -32,6 +32,8 @@ const TeacherPage: React.FC = () => {
       }),
     { refreshDeps: [page, searchParams] },
   );
+
+  useUpdateEffect(() => setPage(1), [searchParams]);
 
   return (
     <>
