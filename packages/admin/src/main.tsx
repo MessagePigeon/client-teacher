@@ -5,8 +5,8 @@ import App from './app';
 
 if (import.meta.env.VITE_MOCK) {
   const { worker } = await import('./mocks/browser');
-  const { generateFakeDatabase } = await import('./mocks/database');
-  generateFakeDatabase();
+  const { generateMockDatabase } = await import('./mocks/database');
+  generateMockDatabase();
   worker.start();
 }
 

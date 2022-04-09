@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker';
+import faker from '@faker-js/faker';
 import dayjs from 'dayjs';
 import { Message, RegisterCode, Teacher } from '~/http/types';
 import { getRandomMessage } from './helpers/get-random-message.helper';
@@ -7,15 +7,15 @@ import {
   getRandomTeacher,
 } from './helpers/get-random-teacher-or-student.helper';
 
-type FakeDatabase = {
+type MockDatabase = {
   messages: Message[];
   registerCodes: RegisterCode[];
   teachers: Teacher[];
 };
 
-export let db: FakeDatabase = { messages: [], registerCodes: [], teachers: [] };
+export let db: MockDatabase = { messages: [], registerCodes: [], teachers: [] };
 
-export const generateFakeDatabase = () => {
+export const generateMockDatabase = () => {
   generateMessages();
   generateRegisterCodes();
   generateTeachers();
