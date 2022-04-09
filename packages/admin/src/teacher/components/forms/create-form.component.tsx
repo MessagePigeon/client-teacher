@@ -1,5 +1,5 @@
 import { useCheckPhone } from '@mpigeon/client-shared';
-import { Button, Grid, TextField } from '@mui/material';
+import { Button, Grid, TextField, Typography } from '@mui/material';
 import { useBoolean, useRequest } from 'ahooks';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -47,12 +47,23 @@ const CreateForm: React.FC<CreateFormProps> = ({ onSuccess }) => {
           reset();
         })}
       >
+        <Grid item container xs={12}>
+          <Typography variant="caption" color="text.secondary">
+            Password will be automatically generated
+          </Typography>
+        </Grid>
         <Grid item xs={12} md={6}>
           <Controller
             control={control}
             name="username"
-            render={({ field }) => (
-              <TextField label="Username" fullWidth {...field} />
+            rules={{ required: true }}
+            render={({ field, fieldState: { invalid } }) => (
+              <TextField
+                label="Username"
+                fullWidth
+                error={invalid}
+                {...field}
+              />
             )}
           />
         </Grid>
@@ -60,8 +71,9 @@ const CreateForm: React.FC<CreateFormProps> = ({ onSuccess }) => {
           <Controller
             control={control}
             name="name"
-            render={({ field }) => (
-              <TextField label="Name" fullWidth {...field} />
+            rules={{ required: true }}
+            render={({ field, fieldState: { invalid } }) => (
+              <TextField label="Name" fullWidth error={invalid} {...field} />
             )}
           />
         </Grid>
