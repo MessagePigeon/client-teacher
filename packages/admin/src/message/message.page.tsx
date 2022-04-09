@@ -1,12 +1,10 @@
 import { useCheckPhone } from '@mpigeon/client-shared';
-import { Clear, Person } from '@mui/icons-material';
+import { Person } from '@mui/icons-material';
 import {
   Alert,
   Button,
   Chip,
   Grid,
-  IconButton,
-  InputAdornment,
   Paper,
   TextField,
   Typography,
@@ -25,27 +23,27 @@ type SearchParams = {
   studentId: string;
   startTime: string | null;
   endTime: string | null;
+  message: string;
+};
+
+const defaultSearchParam: SearchParams = {
+  teacherId: '',
+  studentId: '',
+  startTime: null,
+  endTime: null,
+  message: '',
 };
 
 const MessagePage: React.FC = () => {
   const isPhone = useCheckPhone();
 
   const [page, setPage] = useState(1);
-  const [searchParams, setSearchParams] = useState<SearchParams>({
-    teacherId: '',
-    studentId: '',
-    startTime: null,
-    endTime: null,
-  });
+  const [searchParams, setSearchParams] =
+    useState<SearchParams>(defaultSearchParam);
 
-  const { control, handleSubmit, reset, resetField, watch, setValue } =
+  const { control, handleSubmit, reset, watch, setValue } =
     useForm<SearchParams>({
-      defaultValues: {
-        teacherId: '',
-        studentId: '',
-        startTime: null,
-        endTime: null,
-      },
+      defaultValues: defaultSearchParam,
     });
   const formStartTime = watch('startTime');
   const formEndTime = watch('endTime');
@@ -59,13 +57,12 @@ const MessagePage: React.FC = () => {
         studentId: searchParams.studentId || undefined,
         startTime: searchParams.startTime || undefined,
         endTime: searchParams.endTime || undefined,
+        message: searchParams.message || undefined,
       }),
     { refreshDeps: [searchParams, page] },
   );
 
-  useUpdateEffect(() => {
-    setPage(1);
-  }, [searchParams]);
+  useUpdateEffect(() => setPage(1), [searchParams]);
 
   return (
     <>
@@ -85,20 +82,7 @@ const MessagePage: React.FC = () => {
             control={control}
             name="teacherId"
             render={({ field }) => (
-              <TextField
-                label="Teacher ID"
-                fullWidth
-                InputProps={{
-                  endAdornment: field.value ? (
-                    <InputAdornment position="end">
-                      <IconButton onClick={() => resetField('teacherId')}>
-                        <Clear />
-                      </IconButton>
-                    </InputAdornment>
-                  ) : undefined,
-                }}
-                {...field}
-              />
+              <TextField label="Teacher ID" fullWidth {...field} />
             )}
           />
         </Grid>
@@ -107,20 +91,7 @@ const MessagePage: React.FC = () => {
             control={control}
             name="studentId"
             render={({ field }) => (
-              <TextField
-                label="Student ID"
-                fullWidth
-                InputProps={{
-                  endAdornment: field.value ? (
-                    <InputAdornment position="end">
-                      <IconButton onClick={() => resetField('studentId')}>
-                        <Clear />
-                      </IconButton>
-                    </InputAdornment>
-                  ) : undefined,
-                }}
-                {...field}
-              />
+              <TextField label="Student ID" fullWidth {...field} />
             )}
           />
         </Grid>
@@ -149,6 +120,15 @@ const MessagePage: React.FC = () => {
                 onChange={(newDate) => onChange(newDate)}
                 minDate={formStartTime || undefined}
               />
+            )}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Controller
+            control={control}
+            name="message"
+            render={({ field }) => (
+              <TextField label="Message" fullWidth multiline {...field} />
             )}
           />
         </Grid>

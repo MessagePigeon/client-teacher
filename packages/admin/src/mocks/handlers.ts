@@ -33,6 +33,7 @@ export const handlers = [
     const studentId = req.url.searchParams.get('studentId');
     const startTime = req.url.searchParams.get('startTime');
     const endTime = req.url.searchParams.get('endTime');
+    const messageParam = req.url.searchParams.get('message');
 
     const filteredMessages = db.messages.filter((message) => {
       if (teacherId && message.teacher.id !== teacherId) {
@@ -48,6 +49,9 @@ export const handlers = [
         return false;
       }
       if (endTime && dayjs(message.createdAt).isAfter(dayjs(endTime))) {
+        return false;
+      }
+      if (messageParam && !message.message.includes(messageParam)) {
         return false;
       }
       return true;

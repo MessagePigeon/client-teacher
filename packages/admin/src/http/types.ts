@@ -12,6 +12,7 @@ export type MessagesRequest = PaginationRequest & {
   studentId?: string;
   startTime?: string;
   endTime?: string;
+  message?: string;
 };
 export type Message = {
   id: number;
