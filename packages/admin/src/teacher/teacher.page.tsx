@@ -79,7 +79,7 @@ const TeacherPage: React.FC = () => {
   return (
     <>
       <Alert severity="info" sx={{ mb: 3 }}>
-        Click student to copy its id
+        Click student to copy id
       </Alert>
 
       <TabContext value={formTab}>
