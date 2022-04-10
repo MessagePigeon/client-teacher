@@ -88,10 +88,10 @@ const TeacherPage: React.FC = () => {
           <Tab label="Create" value="create" />
         </TabList>
         <TabPanel value="search">
-          <SearchForm onChange={setSearchParams} disabled={loading} />
+          <SearchForm onChange={setSearchParams} loading={loading} />
         </TabPanel>
         <TabPanel value="create">
-          <CreateForm onSuccess={refresh} />
+          <CreateForm refresh={refresh} />
         </TabPanel>
       </TabContext>
 

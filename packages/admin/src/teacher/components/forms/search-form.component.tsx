@@ -7,10 +7,10 @@ export type SearchParams = { id: string; username: string; name: string };
 
 interface SearchFormProps {
   onChange: (newSearchParams: SearchParams) => void;
-  disabled: boolean;
+  loading: boolean;
 }
 
-const SearchForm: React.FC<SearchFormProps> = ({ onChange, disabled }) => {
+const SearchForm: React.FC<SearchFormProps> = ({ onChange, loading }) => {
   const isPhone = useCheckPhone();
 
   const { control, reset, handleSubmit } = useForm({
@@ -59,7 +59,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onChange, disabled }) => {
           variant="contained"
           color="secondary"
           onClick={() => reset()}
-          disabled={disabled}
+          disabled={loading}
         >
           Reset
         </Button>
@@ -69,7 +69,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onChange, disabled }) => {
           fullWidth={isPhone}
           type="submit"
           variant="contained"
-          disabled={disabled}
+          disabled={loading}
         >
           Search
         </Button>

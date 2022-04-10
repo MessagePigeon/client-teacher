@@ -7,10 +7,10 @@ import { API } from '~/http/apis';
 import UserNamePasswordDialog from '../dialogs/username-password-dialog.component';
 
 interface CreateFormProps {
-  onSuccess: () => void;
+  refresh: () => void;
 }
 
-const CreateForm: React.FC<CreateFormProps> = ({ onSuccess }) => {
+const CreateForm: React.FC<CreateFormProps> = ({ refresh }) => {
   const isPhone = useCheckPhone();
 
   const [isDialogOpen, { setTrue: openDialog, setFalse: closeDialog }] =
@@ -32,7 +32,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ onSuccess }) => {
         password: response.data.password,
       });
       openDialog();
-      onSuccess();
+      refresh();
     },
   });
 
