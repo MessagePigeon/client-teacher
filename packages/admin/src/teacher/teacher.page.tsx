@@ -165,7 +165,6 @@ const TeacherPage: React.FC = () => {
 
       {isRenameDialogOpen && (
         <RenameDialog
-          open
           onClose={closeRenameDialog}
           id={renameTeacher.id}
           oldName={renameTeacher.oldName}

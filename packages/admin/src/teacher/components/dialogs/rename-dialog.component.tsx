@@ -13,7 +13,6 @@ import { toast } from 'react-toastify';
 import { API } from '~/http/apis';
 
 interface RenameDialogProps {
-  open: boolean;
   id: string;
   oldName: string;
   onClose: () => void;
@@ -21,7 +20,6 @@ interface RenameDialogProps {
 }
 
 const RenameDialog: React.FC<RenameDialogProps> = ({
-  open,
   id,
   oldName,
   onClose,
@@ -36,12 +34,12 @@ const RenameDialog: React.FC<RenameDialogProps> = ({
     onSuccess() {
       onClose();
       refresh();
-      toast.success('Rename Success');
+      toast.success('Rename Teacher Success');
     },
   });
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open onClose={onClose}>
       <form onSubmit={handleSubmit((data) => run({ id, ...data }))}>
         <DialogTitle>Rename</DialogTitle>
         <DialogContent>
