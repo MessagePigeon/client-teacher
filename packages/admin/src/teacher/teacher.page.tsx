@@ -98,7 +98,7 @@ const TeacherPage: React.FC = () => {
       <TopBottomPagination
         page={page}
         loading={loading}
-        onChange={(newPage) => setPage(newPage)}
+        onChange={setPage}
         total={teachersData?.data.total}
       >
         <Grid container spacing={2} sx={{ my: 2 }}>

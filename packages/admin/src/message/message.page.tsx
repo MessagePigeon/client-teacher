@@ -39,10 +39,7 @@ const MessagePage: React.FC = () => {
         Click teacher or student to copy id
       </Alert>
 
-      <SearchForm
-        onChange={(newSearchParams) => setSearchParams(newSearchParams)}
-        loading={loading}
-      />
+      <SearchForm onChange={setSearchParams} loading={loading} />
 
       <TopBottomPagination
         total={data?.data.total}

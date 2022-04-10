@@ -68,7 +68,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onChange, loading }) => {
             <DateTimePicker
               label="Start Time"
               value={value}
-              onChange={(newDate) => onChange(newDate)}
+              onChange={onChange}
               maxDate={formEndTime || undefined}
             />
           )}
@@ -82,7 +82,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onChange, loading }) => {
             <DateTimePicker
               label="End Time"
               value={value}
-              onChange={(newDate) => onChange(newDate)}
+              onChange={onChange}
               minDate={formStartTime || undefined}
             />
           )}
