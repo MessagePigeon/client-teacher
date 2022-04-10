@@ -32,7 +32,10 @@ const CreateForm: React.FC<CreateFormProps> = ({ refresh }) => {
         spacing={2}
         component="form"
         onSubmit={handleSubmit((data) => {
-          run(data);
+          run({
+            defaultRemark: data.defaultRemark,
+            key: data.key || undefined,
+          });
           reset();
         })}
       >
