@@ -13,6 +13,7 @@ import RenameDialog from './components/dialogs/rename-dialog.component';
 import UserNamePasswordDialog from './components/dialogs/username-password-dialog.component';
 import CreateForm from './components/forms/create-form.component';
 import SearchForm, {
+  defaultSearchParams,
   SearchParams,
 } from './components/forms/search-form.component';
 
@@ -20,11 +21,8 @@ const TeacherPage: React.FC = () => {
   const [formTab, setFormTab] = useState<'search' | 'create'>('search');
 
   const [page, setPage] = useState(1);
-  const [searchParams, setSearchParams] = useState<SearchParams>({
-    id: '',
-    name: '',
-    username: '',
-  });
+  const [searchParams, setSearchParams] =
+    useState<SearchParams>(defaultSearchParams);
   useUpdateEffect(() => setPage(1), [searchParams]);
   const {
     data: teachersData,

@@ -5,6 +5,12 @@ import { Controller, useForm } from 'react-hook-form';
 
 export type SearchParams = { id: string; username: string; name: string };
 
+export const defaultSearchParams: SearchParams = {
+  id: '',
+  username: '',
+  name: '',
+};
+
 interface SearchFormProps {
   onChange: (newSearchParams: SearchParams) => void;
   loading: boolean;
@@ -14,11 +20,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onChange, loading }) => {
   const isPhone = useCheckPhone();
 
   const { control, reset, handleSubmit } = useForm({
-    defaultValues: {
-      id: '',
-      username: '',
-      name: '',
-    },
+    defaultValues: defaultSearchParams,
   });
 
   return (
