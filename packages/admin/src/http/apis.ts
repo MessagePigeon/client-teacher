@@ -1,10 +1,15 @@
 import { createAxiosService } from '@mpigeon/client-shared';
 import {
+  CreateStudentRequest,
+  CreateStudentResponse,
   CreateTeacherRequest,
   CreateTeacherResponse,
   DeleteRegisterCodeRequest,
+  DeleteStudentRequest,
   DeleteTeacherRequest,
   FindRegisterCodesResponse,
+  FindStudentsRequest,
+  FindStudentsResponse,
   FindTeachersRequest,
   FindTeachersResponse,
   GenerateRegisterCodesRequest,
@@ -13,6 +18,7 @@ import {
   MessagesRequest,
   MessagesResponse,
   ModifyConnectionRequest,
+  ModifyStudentRequest,
   ModifyTeacherNameRequest,
   PaginationRequest,
   ResetTeacherPasswordRequest,
@@ -70,5 +76,17 @@ export class API {
   }
   static async deleteTeacher(params: DeleteTeacherRequest) {
     return await service.delete('/teacher', { params });
+  }
+  static async getStudents(params: FindStudentsRequest) {
+    return await service.get<FindStudentsResponse>('/students', { params });
+  }
+  static async createStudent(body: CreateStudentRequest) {
+    return await service.post<CreateStudentResponse>('/student', body);
+  }
+  static async modifyStudent(body: ModifyStudentRequest) {
+    return await service.patch('/student', body);
+  }
+  static async deleteStudent(params: DeleteStudentRequest) {
+    return await service.delete('/student', { params });
   }
 }

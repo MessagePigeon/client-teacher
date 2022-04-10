@@ -2,8 +2,8 @@ export type LoginRequest = { password: string };
 export type LoginResponse = { token: string };
 
 export type PaginationRequest = { skip: number; take: number };
-type PaginationResponse<T> = {
-  data: T[];
+type PaginationResponse<E> = {
+  data: E[];
   total: number;
 };
 
@@ -51,4 +51,25 @@ export type ResetTeacherPasswordRequest = { id: string };
 export type ResetTeacherPasswordResponse = {
   username: string;
   newPassword: string;
+};
+
+export type Student = {
+  id: string;
+  defaultRemark: string;
+  key: string;
+  online: boolean;
+  teachers: Array<{ id: string; name: string }>;
+};
+export type FindStudentsRequest = PaginationRequest & {
+  id?: string;
+  defaultRemark?: string;
+};
+export type FindStudentsResponse = PaginationResponse<Student>;
+export type CreateStudentRequest = { defaultRemark: string; key?: string };
+export type CreateStudentResponse = { defaultRemark: string; key: string };
+export type DeleteStudentRequest = { id: string };
+export type ModifyStudentRequest = {
+  id: string;
+  key?: string;
+  defaultRemark?: string;
 };
