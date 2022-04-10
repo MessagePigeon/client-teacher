@@ -27,8 +27,8 @@ const TeacherPage: React.FC = () => {
   });
   useUpdateEffect(() => setPage(1), [searchParams]);
   const {
-    data: getTeachersData,
-    loading: getLoading,
+    data: teachersData,
+    loading,
     refresh,
   } = useRequest(
     () =>
@@ -88,7 +88,7 @@ const TeacherPage: React.FC = () => {
           <Tab label="Create" value="create" />
         </TabList>
         <TabPanel value="search">
-          <SearchForm onChange={setSearchParams} disabled={getLoading} />
+          <SearchForm onChange={setSearchParams} disabled={loading} />
         </TabPanel>
         <TabPanel value="create">
           <CreateForm onSuccess={refresh} />
@@ -97,12 +97,12 @@ const TeacherPage: React.FC = () => {
 
       <TopBottomPagination
         page={page}
-        loading={getLoading}
+        loading={loading}
         onChange={(newPage) => setPage(newPage)}
-        total={getTeachersData?.data.total}
+        total={teachersData?.data.total}
       >
         <Grid container spacing={2} sx={{ my: 2 }}>
-          {getTeachersData?.data.data.map((teacher) => (
+          {teachersData?.data.data.map((teacher) => (
             <Grid item key={teacher.id} xs={12} md={6}>
               <UserCard
                 id={teacher.id}
