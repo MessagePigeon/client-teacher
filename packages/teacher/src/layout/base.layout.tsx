@@ -47,7 +47,7 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
         { text: '中文', language: 'zh' },
         { text: 'English', language: 'en' },
       ]}
-      onChangeLanguage={(language) => i18n.changeLanguage(language)}
+      onChangeLanguage={i18n.changeLanguage}
       currentLanguage={i18n.language}
     >
       <Outlet />
