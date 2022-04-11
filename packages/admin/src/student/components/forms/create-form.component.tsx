@@ -3,6 +3,7 @@ import { Button, Grid, TextField } from '@mui/material';
 import { useRequest } from 'ahooks';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { API } from '~/http/apis';
 
@@ -11,6 +12,8 @@ interface CreateFormProps {
 }
 
 const CreateForm: React.FC<CreateFormProps> = ({ refresh }) => {
+  const { t } = useTranslation();
+
   const isPhone = useCheckPhone();
 
   const { control, handleSubmit, reset } = useForm({
@@ -21,7 +24,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ refresh }) => {
     manual: true,
     onSuccess() {
       refresh();
-      toast.success('Create Student Success');
+      toast.success(t('student.toast.create-success'));
     },
   });
 
@@ -45,7 +48,12 @@ const CreateForm: React.FC<CreateFormProps> = ({ refresh }) => {
             name="defaultRemark"
             rules={{ required: true }}
             render={({ field, fieldState: { invalid } }) => (
-              <TextField label="Remark" fullWidth error={invalid} {...field} />
+              <TextField
+                label={t('student.remark')}
+                fullWidth
+                error={invalid}
+                {...field}
+              />
             )}
           />
         </Grid>
@@ -57,7 +65,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ refresh }) => {
               <TextField
                 label="Key"
                 fullWidth
-                helperText="If empty, the key will be automatically generated"
+                helperText={t('student.form.create.tip')}
                 {...field}
               />
             )}
@@ -70,7 +78,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ refresh }) => {
             variant="contained"
             disabled={loading}
           >
-            Create
+            {t('common.create')}
           </Button>
         </Grid>
       </Grid>

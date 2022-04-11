@@ -2,6 +2,7 @@ import { useCheckPhone } from '@mpigeon/client-shared';
 import { Button, Grid, TextField } from '@mui/material';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 export type SearchParams = { id: string; username: string; name: string };
 
@@ -17,6 +18,8 @@ interface SearchFormProps {
 }
 
 const SearchForm: React.FC<SearchFormProps> = ({ onChange, loading }) => {
+  const { t } = useTranslation();
+
   const isPhone = useCheckPhone();
 
   const { control, reset, handleSubmit } = useForm({
@@ -42,7 +45,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onChange, loading }) => {
           control={control}
           name="username"
           render={({ field }) => (
-            <TextField label="Username" fullWidth {...field} />
+            <TextField label={t('teacher.username')} fullWidth {...field} />
           )}
         />
       </Grid>
@@ -51,7 +54,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onChange, loading }) => {
           control={control}
           name="name"
           render={({ field }) => (
-            <TextField label="Name" fullWidth {...field} />
+            <TextField label={t('teacher.name')} fullWidth {...field} />
           )}
         />
       </Grid>
@@ -63,7 +66,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onChange, loading }) => {
           onClick={() => reset()}
           disabled={loading}
         >
-          Reset
+          {t('common.reset')}
         </Button>
       </Grid>
       <Grid item container xs={6} justifyContent="flex-end">
@@ -73,7 +76,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onChange, loading }) => {
           variant="contained"
           disabled={loading}
         >
-          Search
+          {t('common.search')}
         </Button>
       </Grid>
     </Grid>

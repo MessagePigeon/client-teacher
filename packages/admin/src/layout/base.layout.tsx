@@ -1,6 +1,7 @@
 import { Layout, NavigationItem } from '@mpigeon/client-shared';
 import { Breakpoint } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Outlet, useLocation } from 'react-router-dom';
 
 interface LayoutBaseProps {
@@ -20,6 +21,8 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
   mainContainerMaxWidth,
   hideNavigation,
 }) => {
+  const { t, i18n } = useTranslation();
+
   const location = useLocation();
   const [navCurrentPath, setNavCurrentPath] = useState('');
   useEffect(() => {
@@ -29,8 +32,8 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
 
   return (
     <Layout
-      title="Message Pigeon Admin"
-      username="Admin"
+      title={t('layout.title')}
+      username={t('layout.username')}
       github="https://github.com/MessagePigeon/client-teacher"
       navigation={navigation}
       isLogin={isLogin}
@@ -39,6 +42,14 @@ const LayoutBase: React.FC<LayoutBaseProps> = ({
       onLogout={onLogout}
       mainContainerMaxWidth={mainContainerMaxWidth}
       hideNavigation={hideNavigation}
+      welcomeText={t('layout.welcome')}
+      logoutText={t('layout.logout')}
+      languageMenu={[
+        { text: '中文', language: 'zh' },
+        { text: 'English', language: 'en' },
+      ]}
+      onChangeLanguage={i18n.changeLanguage}
+      currentLanguage={i18n.language}
     >
       <Outlet />
     </Layout>

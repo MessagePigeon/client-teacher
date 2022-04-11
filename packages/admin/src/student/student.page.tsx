@@ -8,6 +8,7 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Alert, Grid, Tab, Typography } from '@mui/material';
 import { useBoolean, useRequest, useSet, useUpdateEffect } from 'ahooks';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import TopBottomPagination from '~/common/components/top-bottom-pagination.component';
 import UserCard from '~/common/components/user-card.component';
@@ -22,6 +23,8 @@ import SearchForm, {
 } from './components/forms/search-form.component';
 
 const StudentPage: React.FC = () => {
+  const { t } = useTranslation();
+
   const [formTab, setFormTab] = useState<'search' | 'create'>('search');
 
   const [
@@ -52,7 +55,7 @@ const StudentPage: React.FC = () => {
     manual: true,
     onSuccess() {
       refresh();
-      toast.info('Delete Student Success');
+      toast.info(t('student.toast.delete-success'));
     },
   });
 
@@ -68,13 +71,13 @@ const StudentPage: React.FC = () => {
   return (
     <>
       <Alert severity="info" sx={{ mb: 3 }}>
-        Click teacher to copy id
+        {t('student.tip')}
       </Alert>
 
       <TabContext value={formTab}>
         <TabList onChange={(_, newTab) => setFormTab(newTab)} centered>
-          <Tab label="Search" value="search" />
-          <Tab label="Create" value="create" />
+          <Tab label={t('common.search')} value="search" />
+          <Tab label={t('common.create')} value="create" />
         </TabList>
         <TabPanel value="search">
           <SearchForm onChange={setSearchParams} loading={loading} />
@@ -100,8 +103,8 @@ const StudentPage: React.FC = () => {
                 actions={[
                   {
                     tooltip: showingKeyIds.has(student.id)
-                      ? 'Hide Key'
-                      : 'Show Key',
+                      ? t('student.actions.hide-key')
+                      : t('student.actions.show-key'),
                     icon: showingKeyIds.has(student.id) ? (
                       <VisibilityOff />
                     ) : (
@@ -116,7 +119,7 @@ const StudentPage: React.FC = () => {
                     },
                   },
                   {
-                    tooltip: 'Modify',
+                    tooltip: t('student.modify'),
                     icon: <DriveFileRenameOutline />,
                     onClick() {
                       setModifyStudent({
@@ -127,11 +130,13 @@ const StudentPage: React.FC = () => {
                     },
                   },
                   {
-                    tooltip: 'Delete',
+                    tooltip: t('common.delete'),
                     icon: <Delete />,
                     onClick() {
                       confirmToast(
-                        `Are you sure to delete ${student.defaultRemark}`,
+                        t('student.toast.delete-confirm', {
+                          remark: student.defaultRemark,
+                        }),
                         () => runDelete({ id: student.id }),
                       );
                     },
@@ -139,7 +144,8 @@ const StudentPage: React.FC = () => {
                 ]}
               >
                 <Typography>
-                  <strong>Remark:</strong> {student.defaultRemark}
+                  <strong>{t('student.remark')}:</strong>{' '}
+                  {student.defaultRemark}
                 </Typography>
                 <Typography>
                   <strong>Key:</strong>{' '}

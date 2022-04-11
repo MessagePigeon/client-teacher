@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import { useBoolean } from 'ahooks';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import CopyableChip from './copyable-chip.component';
 
 type Action = {
@@ -32,6 +33,8 @@ const UserCard: React.FC<UserCardProps> = ({
   connectedUsers,
   actions,
 }) => {
+  const { t } = useTranslation();
+
   const [isIdCopied, { set: setIsIdCopied }] = useBoolean();
 
   return (
@@ -39,7 +42,11 @@ const UserCard: React.FC<UserCardProps> = ({
       <Box sx={{ flexGrow: 1 }}>
         <Box>
           <Tooltip
-            title={isIdCopied ? 'Copied!' : 'Copy'}
+            title={
+              isIdCopied
+                ? (t('common.copied') as string)
+                : (t('common.copy') as string)
+            }
             placement="top"
             arrow
           >
@@ -61,7 +68,7 @@ const UserCard: React.FC<UserCardProps> = ({
             variant="caption"
             sx={{ ml: 0.5 }}
           >
-            {online ? 'Online' : 'Offline'}
+            {online ? t('common.online') : t('common.offline')}
           </Typography>
         </Box>
         <Box>{children}</Box>

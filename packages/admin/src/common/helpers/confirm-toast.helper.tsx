@@ -1,15 +1,22 @@
 import { Box, Button, Typography } from '@mui/material';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
-export function confirmToast(text: string, onConfirm: () => void) {
-  toast.warn(
-    <div>
+const Content: React.FC<{ text: string; onConfirm: () => void }> = ({
+  text,
+  onConfirm,
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <>
       <Typography color="inherit" fontWeight="bold">
         {text}
       </Typography>
       <Box my={1} ml={1}>
         <Button color="inherit" variant="outlined" size="small">
-          No
+          {t('common.no')}
         </Button>
         <Button
           color="inherit"
@@ -18,9 +25,13 @@ export function confirmToast(text: string, onConfirm: () => void) {
           size="small"
           sx={{ ml: 1 }}
         >
-          Yes
+          {t('common.yes')}
         </Button>
       </Box>
-    </div>,
+    </>
   );
+};
+
+export function confirmToast(text: string, onConfirm: () => void) {
+  toast.warn(<Content text={text} onConfirm={onConfirm} />);
 }

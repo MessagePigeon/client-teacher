@@ -9,6 +9,7 @@ import {
 import { useRequest } from 'ahooks';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { API } from '~/http/apis';
 
@@ -25,6 +26,8 @@ const RenameDialog: React.FC<RenameDialogProps> = ({
   onClose,
   refresh,
 }) => {
+  const { t } = useTranslation();
+
   const { control, handleSubmit } = useForm({
     defaultValues: { newName: oldName },
   });
@@ -34,14 +37,14 @@ const RenameDialog: React.FC<RenameDialogProps> = ({
     onSuccess() {
       onClose();
       refresh();
-      toast.success('Rename Teacher Success');
+      toast.success(t('teacher.toast.rename-success'));
     },
   });
 
   return (
     <Dialog open onClose={onClose}>
       <form onSubmit={handleSubmit((data) => run({ id, ...data }))}>
-        <DialogTitle>Rename</DialogTitle>
+        <DialogTitle>{t('teacher.dialog.rename.rename')}</DialogTitle>
         <DialogContent>
           <Controller
             control={control}
@@ -49,7 +52,7 @@ const RenameDialog: React.FC<RenameDialogProps> = ({
             rules={{ required: true, validate: (value) => value !== oldName }}
             render={({ field, fieldState: { invalid } }) => (
               <TextField
-                label="New Name"
+                label={t('teacher.dialog.rename.new-name')}
                 variant="standard"
                 error={invalid}
                 fullWidth
@@ -60,10 +63,10 @@ const RenameDialog: React.FC<RenameDialogProps> = ({
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose} disabled={loading}>
-            Cancel
+            {t('common.cancel')}
           </Button>
           <Button type="submit" disabled={loading}>
-            Rename
+            {t('teacher.dialog.rename.rename')}
           </Button>
         </DialogActions>
       </form>

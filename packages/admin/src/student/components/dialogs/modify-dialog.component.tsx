@@ -9,6 +9,7 @@ import {
 import { useRequest } from 'ahooks';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { API } from '~/http/apis';
 
@@ -25,6 +26,8 @@ const ModifyDialog: React.FC<ModifyDialogProps> = ({
   onClose,
   refresh,
 }) => {
+  const { t } = useTranslation();
+
   const { control, handleSubmit } = useForm({
     defaultValues: { defaultRemark: oldRemark, key: '' },
   });
@@ -34,7 +37,7 @@ const ModifyDialog: React.FC<ModifyDialogProps> = ({
     onSuccess() {
       onClose();
       refresh();
-      toast.success('Modify Student Success');
+      toast.success(t('student.toast.modify-success'));
     },
   });
 
@@ -51,14 +54,14 @@ const ModifyDialog: React.FC<ModifyDialogProps> = ({
           });
         })}
       >
-        <DialogTitle>Modify</DialogTitle>
+        <DialogTitle>{t('student.modify')}</DialogTitle>
         <DialogContent>
           <Controller
             control={control}
             name="defaultRemark"
             render={({ field }) => (
               <TextField
-                label="Remark"
+                label={t('student.remark')}
                 variant="standard"
                 fullWidth
                 {...field}
@@ -81,10 +84,10 @@ const ModifyDialog: React.FC<ModifyDialogProps> = ({
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose} disabled={loading}>
-            Cancel
+            {t('common.cancel')}
           </Button>
           <Button type="submit" disabled={loading}>
-            Modify
+            {t('student.modify')}
           </Button>
         </DialogActions>
       </form>

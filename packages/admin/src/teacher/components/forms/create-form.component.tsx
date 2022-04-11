@@ -3,6 +3,7 @@ import { Button, Grid, TextField, Typography } from '@mui/material';
 import { useBoolean, useRequest } from 'ahooks';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { API } from '~/http/apis';
 import UserNamePasswordDialog from '../dialogs/username-password-dialog.component';
 
@@ -11,6 +12,8 @@ interface CreateFormProps {
 }
 
 const CreateForm: React.FC<CreateFormProps> = ({ refresh }) => {
+  const { t } = useTranslation();
+
   const isPhone = useCheckPhone();
 
   const [isDialogOpen, { setTrue: openDialog, setFalse: closeDialog }] =
@@ -49,7 +52,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ refresh }) => {
       >
         <Grid item container xs={12}>
           <Typography variant="caption" color="text.secondary">
-            Password will be automatically generated
+            {t('teacher.form.create.tip')}
           </Typography>
         </Grid>
         <Grid item xs={12} md={6}>
@@ -59,7 +62,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ refresh }) => {
             rules={{ required: true }}
             render={({ field, fieldState: { invalid } }) => (
               <TextField
-                label="Username"
+                label={t('teacher.username')}
                 fullWidth
                 error={invalid}
                 {...field}
@@ -73,7 +76,12 @@ const CreateForm: React.FC<CreateFormProps> = ({ refresh }) => {
             name="name"
             rules={{ required: true }}
             render={({ field, fieldState: { invalid } }) => (
-              <TextField label="Name" fullWidth error={invalid} {...field} />
+              <TextField
+                label={t('teacher.name')}
+                fullWidth
+                error={invalid}
+                {...field}
+              />
             )}
           />
         </Grid>
@@ -84,12 +92,12 @@ const CreateForm: React.FC<CreateFormProps> = ({ refresh }) => {
             variant="contained"
             disabled={loading}
           >
-            Create
+            {t('common.create')}
           </Button>
         </Grid>
       </Grid>
       <UserNamePasswordDialog
-        title="Create Success"
+        title={t('teacher.dialog.username-password.title.create')}
         open={isDialogOpen}
         onClose={closeDialog}
         {...newTeacher}

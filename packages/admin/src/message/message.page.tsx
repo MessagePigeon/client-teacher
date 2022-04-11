@@ -3,6 +3,7 @@ import { Alert, Paper, Typography } from '@mui/material';
 import { useRequest, useUpdateEffect } from 'ahooks';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import CopyableChip from '~/common/components/copyable-chip.component';
 import TopBottomPagination from '~/common/components/top-bottom-pagination.component';
 import { PAGE_SIZE } from '~/common/constants';
@@ -13,6 +14,8 @@ import SearchForm, {
 } from './components/search-form.component';
 
 const MessagePage: React.FC = () => {
+  const { t } = useTranslation();
+
   const [page, setPage] = useState(1);
   const [searchParams, setSearchParams] =
     useState<SearchParams>(defaultSearchParams);
@@ -36,7 +39,7 @@ const MessagePage: React.FC = () => {
   return (
     <>
       <Alert severity="info" sx={{ mb: 3 }}>
-        Click teacher or student to copy id
+        {t('message.tip')}
       </Alert>
 
       <SearchForm onChange={setSearchParams} loading={loading} />

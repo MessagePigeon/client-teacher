@@ -3,10 +3,13 @@ import { Button, Grid, TextField } from '@mui/material';
 import { useRequest } from 'ahooks';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { API } from '~/http/apis';
 
 const ConnectionPage: React.FC = () => {
+  const { t } = useTranslation();
+
   const isPhone = useCheckPhone();
 
   const { control, handleSubmit, reset } = useForm({
@@ -19,7 +22,7 @@ const ConnectionPage: React.FC = () => {
       reset();
     },
     onSuccess() {
-      toast.success('Modify Connection Success');
+      toast.success(t('connection.toast.success'));
     },
   });
 
@@ -32,7 +35,7 @@ const ConnectionPage: React.FC = () => {
           rules={{ required: true }}
           render={({ field, fieldState: { invalid } }) => (
             <TextField
-              label="Teacher ID"
+              label={t('common.teacher-id')}
               error={invalid}
               fullWidth
               {...field}
@@ -47,7 +50,7 @@ const ConnectionPage: React.FC = () => {
           rules={{ required: true }}
           render={({ field, fieldState: { invalid } }) => (
             <TextField
-              label="Student ID"
+              label={t('common.student-id')}
               error={invalid}
               fullWidth
               {...field}
@@ -62,7 +65,7 @@ const ConnectionPage: React.FC = () => {
           fullWidth={isPhone}
           onClick={handleSubmit((data) => run(data, 'disconnect'))}
         >
-          Disconnect
+          {t('connection.disconnect')}
         </Button>
       </Grid>
       <Grid item container xs={6} justifyContent="flex-end">
@@ -72,7 +75,7 @@ const ConnectionPage: React.FC = () => {
           fullWidth={isPhone}
           onClick={handleSubmit((data) => run(data, 'connect'))}
         >
-          Connect
+          {t('connection.connect')}
         </Button>
       </Grid>
     </Grid>

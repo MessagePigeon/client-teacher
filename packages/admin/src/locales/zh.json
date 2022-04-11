@@ -1,0 +1,115 @@
+{
+  "common": {
+    "teacher-id": "教师ID",
+    "student-id": "学生ID",
+    "reset": "重置",
+    "search": "搜索",
+    "create": "创建",
+    "password": "密码",
+    "copy": "复制",
+    "copied": "已复制 !",
+    "delete": "删除",
+    "cancel": "取消",
+    "no": "否",
+    "yes": "是",
+    "online": "在线",
+    "offline": "离线"
+  },
+  "layout": {
+    "title": "飞鸽传书后台",
+    "username": "管理员",
+    "welcome": "欢迎您",
+    "logout": "退出登录",
+    "navigation": {
+      "connection": "连接",
+      "message": "消息",
+      "teacher": "教师",
+      "student": "学生",
+      "register-code": "注册码"
+    },
+    "toast": {
+      "logout-success": "登出成功"
+    }
+  },
+  "login": {
+    "login": "登录",
+    "toast": {
+      "success": "登录成功"
+    }
+  },
+  "connection": {
+    "disconnect": "断开连接",
+    "connect": "连接",
+    "toast": {
+      "success": "修改连接成功"
+    }
+  },
+  "message": {
+    "tip": "点击教师或学生以复制ID",
+    "form": {
+      "start-time": "开始时间",
+      "end-time": "结束时间",
+      "message": "消息内容"
+    }
+  },
+  "register-code": {
+    "count": "数量",
+    "generate": "生成"
+  },
+  "teacher": {
+    "tip": "点击学生以复制ID",
+    "name": "姓名",
+    "username": "用户名",
+    "actions": {
+      "modify-name": "修改姓名",
+      "reset-password": "重置密码"
+    },
+    "form": {
+      "create": {
+        "tip": "密码将随机生成"
+      }
+    },
+    "dialog": {
+      "username-password": {
+        "title": {
+          "reset": "重置密码成功",
+          "create": "创建成功"
+        },
+        "show-password": "显示密码",
+        "hide-password": "隐藏密码",
+        "copy-password": "复制密码",
+        "copy-all": "复制全部"
+      },
+      "rename": {
+        "rename": "修改姓名",
+        "new-name": "新姓名"
+      }
+    },
+    "toast": {
+      "rename-success": "修改教师姓名成功",
+      "reset-password-confirm": "你确定要重置 {{name}} 的密码吗",
+      "delete-confirm": "你确定要删除 {{name}} 吗",
+      "delete-success": "删除教师成功"
+    }
+  },
+  "student": {
+    "tip": "点击教师以复制ID",
+    "remark": "备注",
+    "modify": "修改",
+    "actions": {
+      "show-key": "显示Key",
+      "hide-key": "隐藏Key"
+    },
+    "toast": {
+      "delete-success": "删除学生成功",
+      "delete-confirm": "你确定要删除 {{remark}} 吗",
+      "modify-success": "修改学生成功",
+      "create-success": "创建学生成功"
+    },
+    "form": {
+      "create": {
+        "tip": "如果为空, 将随机生成Key"
+      }
+    }
+  }
+}

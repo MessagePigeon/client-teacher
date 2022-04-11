@@ -15,11 +15,14 @@ import {
 import { useRequest } from 'ahooks';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import TopBottomPagination from '~/common/components/top-bottom-pagination.component';
 import { PAGE_SIZE } from '~/common/constants';
 import { API } from '~/http/apis';
 
 const RegisterCodePage: React.FC = () => {
+  const { t } = useTranslation();
+
   const isPhone = useCheckPhone();
 
   const [page, setPage] = useState(1);
@@ -70,7 +73,7 @@ const RegisterCodePage: React.FC = () => {
           name="count"
           render={({ field: { onChange, value } }) => (
             <TextField
-              label="Count"
+              label={t('register-code.count')}
               type="number"
               InputProps={{ inputProps: { min: 1 } }}
               fullWidth
@@ -86,7 +89,7 @@ const RegisterCodePage: React.FC = () => {
           sx={{ my: 2 }}
           disabled={generateLoading || getLoading}
         >
-          Generate
+          {t('register-code.generate')}
         </Button>
       </Box>
       <TopBottomPagination
@@ -113,7 +116,11 @@ const RegisterCodePage: React.FC = () => {
                   </TableCell>
                   <TableCell align="right">
                     <Tooltip
-                      title={copiedId === id ? 'Copied!' : 'Copy'}
+                      title={
+                        copiedId === id
+                          ? (t('common.copied') as string)
+                          : (t('common.copy') as string)
+                      }
                       arrow
                       placement="left"
                     >
@@ -133,7 +140,11 @@ const RegisterCodePage: React.FC = () => {
                         )}
                       </IconButton>
                     </Tooltip>
-                    <Tooltip title="Delete" arrow placement="right">
+                    <Tooltip
+                      title={t('common.delete') as string}
+                      arrow
+                      placement="right"
+                    >
                       <IconButton
                         size="small"
                         onClick={() => runDelete({ id: `${id}` })}

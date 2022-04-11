@@ -1,0 +1,116 @@
+{
+  "common": {
+    "teacher-id": "Teacher ID",
+    "student-id": "Student ID",
+    "reset": "Reset",
+    "search": "Search",
+    "create": "Create",
+    "password": "Password",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "no": "No",
+    "yes": "Yes",
+    "online": "Online",
+    "offline": "Offline"
+  },
+  "layout": {
+    "title": "Message Pigeon Admin",
+    "username": "Admin",
+    "welcome": "Welcome",
+    "logout": "Logout",
+    "navigation": {
+      "connection": "Connection",
+      "message": "Message",
+      "teacher": "Teacher",
+      "student": "Student",
+      "register-code": "Register Code"
+    },
+    "toast": {
+      "logout-success": "Logout Success"
+    }
+  },
+  "login": {
+    "login": "Login",
+    "toast": {
+      "success": "Login Success"
+    }
+  },
+  "connection": {
+    "disconnect": "Disconnect",
+    "connect": "Connect",
+    "toast": {
+      "success": "Modify Connection Success"
+    }
+  },
+  "message": {
+    "tip": "Click teacher or student to copy id",
+    "form": {
+      "start-time": "Start Time",
+      "end-time": "End Time",
+      "message": "Message"
+    }
+  },
+  "register-code": {
+    "count": "Count",
+    "generate": "Generate"
+  },
+  "teacher": {
+    "tip": "Click student to copy id",
+    "name": "Name",
+    "username": "Username",
+    "actions": {
+      "modify-name": "Modify Name",
+      "reset-password": "Reset Password"
+    },
+    "form": {
+      "create": {
+        "tip": "Password will be randomly generated"
+      }
+    },
+    "dialog": {
+      "username-password": {
+        "title": {
+          "reset": "Reset Password Success",
+          "create": "Create Success"
+        },
+        "show-password": "Show Password",
+        "hide-password": "Hide Password",
+        "copy-password": "Copy Password",
+        "copy-all": "Copy All"
+      },
+      "rename": {
+        "rename": "Rename",
+        "new-name": "New Name"
+      }
+    },
+    "toast": {
+      "rename-success": "Rename Teacher Success",
+      "reset-password-confirm": "Are you sure to reset password for {{name}}",
+      "delete-confirm": "Are you sure to delete {{name}}",
+      "delete-success": "Delete Teacher Success"
+    }
+  },
+  "student": {
+    "tip": "Click teacher to copy id",
+    "remark": "Remark",
+    "key": "Key",
+    "modify": "Modify",
+    "actions": {
+      "show-key": "Show Key",
+      "hide-key": "Hide Key"
+    },
+    "toast": {
+      "delete-success": "Delete Student Success",
+      "delete-confirm": "Are you sure to delete {{remark}}",
+      "modify-success": "Modify Student Success",
+      "create-success": "Create Student Success"
+    },
+    "form": {
+      "create": {
+        "tip": "If empty, the key will be randomly generated"
+      }
+    }
+  }
+}

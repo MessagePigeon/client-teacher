@@ -2,6 +2,7 @@ import { useCheckPhone } from '@mpigeon/client-shared';
 import { Button, Grid, TextField } from '@mui/material';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import DateTimePicker from './date-time-picker.component';
 
 export type SearchParams = {
@@ -26,6 +27,8 @@ interface SearchFormProps {
 }
 
 const SearchForm: React.FC<SearchFormProps> = ({ onChange, loading }) => {
+  const { t } = useTranslation();
+
   const isPhone = useCheckPhone();
 
   const { control, handleSubmit, reset, watch } = useForm<SearchParams>({
@@ -47,7 +50,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onChange, loading }) => {
           control={control}
           name="teacherId"
           render={({ field }) => (
-            <TextField label="Teacher ID" fullWidth {...field} />
+            <TextField label={t('common.teacher-id')} fullWidth {...field} />
           )}
         />
       </Grid>
@@ -56,7 +59,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onChange, loading }) => {
           control={control}
           name="studentId"
           render={({ field }) => (
-            <TextField label="Student ID" fullWidth {...field} />
+            <TextField label={t('common.student-id')} fullWidth {...field} />
           )}
         />
       </Grid>
@@ -66,7 +69,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onChange, loading }) => {
           name="startTime"
           render={({ field: { onChange, value } }) => (
             <DateTimePicker
-              label="Start Time"
+              label={t('message.form.start-time')}
               value={value}
               onChange={onChange}
               maxDate={formEndTime || undefined}
@@ -80,7 +83,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onChange, loading }) => {
           name="endTime"
           render={({ field: { onChange, value } }) => (
             <DateTimePicker
-              label="End Time"
+              label={t('message.form.end-time')}
               value={value}
               onChange={onChange}
               minDate={formStartTime || undefined}
@@ -93,7 +96,12 @@ const SearchForm: React.FC<SearchFormProps> = ({ onChange, loading }) => {
           control={control}
           name="message"
           render={({ field }) => (
-            <TextField label="Message" fullWidth multiline {...field} />
+            <TextField
+              label={t('message.form.message')}
+              fullWidth
+              multiline
+              {...field}
+            />
           )}
         />
       </Grid>
@@ -104,7 +112,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onChange, loading }) => {
           color="secondary"
           onClick={() => reset()}
         >
-          Reset
+          {t('common.reset')}
         </Button>
       </Grid>
       <Grid item container xs={6} justifyContent="flex-end">
@@ -114,7 +122,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onChange, loading }) => {
           variant="contained"
           disabled={loading}
         >
-          Search
+          {t('common.search')}
         </Button>
       </Grid>
     </Grid>

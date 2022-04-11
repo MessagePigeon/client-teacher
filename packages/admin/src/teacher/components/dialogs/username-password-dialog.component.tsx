@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import { useBoolean } from 'ahooks';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface UserNamePasswordDialogProps {
   title: string;
@@ -24,6 +25,8 @@ const UserNamePasswordDialog: React.FC<UserNamePasswordDialogProps> = ({
   username,
   password,
 }) => {
+  const { t } = useTranslation();
+
   const [showPassword, { toggle: toggleShowPassword }] = useBoolean();
 
   return (
@@ -31,29 +34,32 @@ const UserNamePasswordDialog: React.FC<UserNamePasswordDialogProps> = ({
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
         <Typography>
-          <strong>Username:</strong> {username}
+          <strong>{t('teacher.username')}:</strong> {username}
         </Typography>
         <Typography>
-          <strong>Password:</strong> {showPassword ? password : '●●●●●●●●'}
+          <strong>{t('common.password')}:</strong>{' '}
+          {showPassword ? password : '●●●●●●●●'}
         </Typography>
       </DialogContent>
       <DialogActions>
         <Button onClick={toggleShowPassword}>
-          {showPassword ? 'Hide Password' : 'Show Password'}
+          {showPassword
+            ? t('teacher.dialog.username-password.hide-password')
+            : t('teacher.dialog.username-password.show-password')}
         </Button>
         <Button
           onClick={async () => {
             await navigator.clipboard.writeText(password);
           }}
         >
-          Copy Password
+          {t('teacher.dialog.username-password.copy-password')}
         </Button>
         <Button
           onClick={async () => {
             await navigator.clipboard.writeText(`${username}\n${password}`);
           }}
         >
-          Copy All
+          {t('teacher.dialog.username-password.copy-all')}
         </Button>
       </DialogActions>
     </Dialog>

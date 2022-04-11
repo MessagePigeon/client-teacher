@@ -8,12 +8,15 @@ import {
 } from '@mui/icons-material';
 import { useRequest } from 'ahooks';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { API } from '~/http/apis';
 import LayoutBase from './base.layout';
 
 const AdminLayout: React.FC = () => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
 
   const { run, loading } = useRequest(API.init, {
@@ -28,19 +31,27 @@ const AdminLayout: React.FC = () => {
       <LayoutBase
         navigation={[
           {
-            title: 'Connection',
+            title: t('layout.navigation.connection'),
             icon: <ConnectWithoutContact />,
             path: 'connection',
           },
           {
-            title: 'Message',
+            title: t('layout.navigation.message'),
             icon: <Message />,
             path: 'message',
           },
-          { title: 'Teacher', icon: <SupervisorAccount />, path: 'teacher' },
-          { title: 'Student', icon: <Badge />, path: 'student' },
           {
-            title: 'Register Code',
+            title: t('layout.navigation.teacher'),
+            icon: <SupervisorAccount />,
+            path: 'teacher',
+          },
+          {
+            title: t('layout.navigation.student'),
+            icon: <Badge />,
+            path: 'student',
+          },
+          {
+            title: t('layout.navigation.register-code'),
             icon: <ReceiptLong />,
             path: 'register-code',
           },
@@ -48,7 +59,7 @@ const AdminLayout: React.FC = () => {
         onLogout={() => {
           localStorage.removeItem('token');
           navigate('/login');
-          toast.info('Logout Success');
+          toast.info(t('layout.toast.logout-success'));
         }}
         onNavigate={(path) => {
           run();

@@ -3,6 +3,7 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Alert, Grid, Tab, Typography } from '@mui/material';
 import { useBoolean, useRequest, useUpdateEffect } from 'ahooks';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import TopBottomPagination from '~/common/components/top-bottom-pagination.component';
 import UserCard from '~/common/components/user-card.component';
@@ -18,6 +19,8 @@ import SearchForm, {
 } from './components/forms/search-form.component';
 
 const TeacherPage: React.FC = () => {
+  const { t } = useTranslation();
+
   const [formTab, setFormTab] = useState<'search' | 'create'>('search');
 
   const [page, setPage] = useState(1);
@@ -61,7 +64,7 @@ const TeacherPage: React.FC = () => {
     manual: true,
     onSuccess() {
       refresh();
-      toast.info('Delete Teacher Success');
+      toast.info(t('teacher.toast.delete-success'));
     },
   });
 
@@ -77,13 +80,13 @@ const TeacherPage: React.FC = () => {
   return (
     <>
       <Alert severity="info" sx={{ mb: 3 }}>
-        Click student to copy id
+        {t('teacher.tip')}
       </Alert>
 
       <TabContext value={formTab}>
         <TabList onChange={(_, newTab) => setFormTab(newTab)} centered>
-          <Tab label="Search" value="search" />
-          <Tab label="Create" value="create" />
+          <Tab label={t('common.search')} value="search" />
+          <Tab label={t('common.create')} value="create" />
         </TabList>
         <TabPanel value="search">
           <SearchForm onChange={setSearchParams} loading={loading} />
@@ -111,17 +114,19 @@ const TeacherPage: React.FC = () => {
                 }))}
                 actions={[
                   {
-                    tooltip: 'Reset Password',
+                    tooltip: t('teacher.actions.reset-password'),
                     icon: <Password />,
                     onClick() {
                       confirmToast(
-                        `Are you sure to reset password for ${teacher.name}`,
+                        t('teacher.toast.reset-password-confirm', {
+                          name: teacher.name,
+                        }),
                         () => runResetPassword({ id: teacher.id }),
                       );
                     },
                   },
                   {
-                    tooltip: 'Modify Name',
+                    tooltip: t('teacher.actions.modify-name'),
                     icon: <DriveFileRenameOutline />,
                     async onClick() {
                       setRenameTeacher({
@@ -132,11 +137,13 @@ const TeacherPage: React.FC = () => {
                     },
                   },
                   {
-                    tooltip: 'Delete',
+                    tooltip: t('common.delete'),
                     icon: <Delete />,
                     onClick() {
                       confirmToast(
-                        `Are you sure to delete ${teacher.name}`,
+                        t('teacher.toast.delete-confirm', {
+                          name: teacher.name,
+                        }),
                         () => runDelete({ id: teacher.id }),
                       );
                     },
@@ -144,10 +151,10 @@ const TeacherPage: React.FC = () => {
                 ]}
               >
                 <Typography>
-                  <strong>Name:</strong> {teacher.name}
+                  <strong>{t('teacher.name')}:</strong> {teacher.name}
                 </Typography>
                 <Typography>
-                  <strong>Username:</strong> {teacher.username}
+                  <strong>{t('teacher.username')}:</strong> {teacher.username}
                 </Typography>
               </UserCard>
             </Grid>
@@ -157,7 +164,7 @@ const TeacherPage: React.FC = () => {
 
       <UserNamePasswordDialog
         open={isResetPasswordSuccessDialogOpen}
-        title="Reset Password Success"
+        title={t('teacher.dialog.username-password.title.reset')}
         onClose={closeResetPasswordSuccessDialog}
         username={resetPasswordData?.data.username || ''}
         password={resetPasswordData?.data.newPassword || ''}
