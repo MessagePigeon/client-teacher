@@ -9,6 +9,7 @@ import {
 import { useBoolean } from 'ahooks';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 interface UserNamePasswordDialogProps {
   title: string;
@@ -50,6 +51,7 @@ const UserNamePasswordDialog: React.FC<UserNamePasswordDialogProps> = ({
         <Button
           onClick={async () => {
             await navigator.clipboard.writeText(password);
+            toast.info(t('teacher.toast.copy-password-success'));
           }}
         >
           {t('teacher.dialog.username-password.copy-password')}
@@ -57,6 +59,7 @@ const UserNamePasswordDialog: React.FC<UserNamePasswordDialogProps> = ({
         <Button
           onClick={async () => {
             await navigator.clipboard.writeText(`${username}\n${password}`);
+            toast.info(t('teacher.toast.copy-all-success'));
           }}
         >
           {t('teacher.dialog.username-password.copy-all')}

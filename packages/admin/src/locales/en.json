@@ -89,7 +89,9 @@
       "rename-success": "Rename Teacher Success",
       "reset-password-confirm": "Are you sure to reset password for {{name}}",
       "delete-confirm": "Are you sure to delete {{name}}",
-      "delete-success": "Delete Teacher Success"
+      "delete-success": "Delete Teacher Success",
+      "copy-password-success": "Copy Password Success",
+      "copy-all-success": "Copy All Success"
     }
   },
   "student": {

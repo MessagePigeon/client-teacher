@@ -89,7 +89,9 @@
       "rename-success": "修改教师姓名成功",
       "reset-password-confirm": "你确定要重置 {{name}} 的密码吗",
       "delete-confirm": "你确定要删除 {{name}} 吗",
-      "delete-success": "删除教师成功"
+      "delete-success": "删除教师成功",
+      "copy-password-success": "复制密码成功",
+      "copy-all-success": "复制全部成功"
     }
   },
   "student": {
