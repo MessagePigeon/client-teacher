@@ -7,6 +7,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { LockedIdsProvider } from './connection/context/locked-ids.context';
 import Routers from './routers';
 
 const theme = createTheme({ palette: { primary: indigo, secondary: pink } });
@@ -19,9 +20,11 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={DateAdapter}>
-        <CssBaseline />
-        <Routers />
-        <ToastContainer position="top-center" theme="colored" newestOnTop />
+        <LockedIdsProvider>
+          <CssBaseline />
+          <Routers />
+          <ToastContainer position="top-center" theme="colored" newestOnTop />
+        </LockedIdsProvider>
       </LocalizationProvider>
     </ThemeProvider>
   );

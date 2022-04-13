@@ -38,6 +38,7 @@
     }
   },
   "connection": {
+    "tip": "锁定ID可避免在切换页面或提交时被清除",
     "disconnect": "断开连接",
     "connect": "连接",
     "toast": {

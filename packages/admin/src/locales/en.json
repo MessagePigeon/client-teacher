@@ -38,6 +38,7 @@
     }
   },
   "connection": {
+    "tip": "Lock the ID to prevent it from being cleared when switching pages or submitting",
     "disconnect": "Disconnect",
     "connect": "Connect",
     "toast": {
