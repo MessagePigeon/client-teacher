@@ -41,7 +41,8 @@
     "disconnect": "Disconnect",
     "connect": "Connect",
     "toast": {
-      "success": "Modify Connection Success"
+      "connect-success": "Connect Success",
+      "disconnect-success": "Disconnect Success"
     }
   },
   "message": {
@@ -97,7 +98,6 @@
   "student": {
     "tip": "Click teacher to copy id",
     "remark": "Remark",
-    "key": "Key",
     "modify": "Modify",
     "actions": {
       "show-key": "Show Key",

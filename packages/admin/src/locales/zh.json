@@ -41,7 +41,8 @@
     "disconnect": "断开连接",
     "connect": "连接",
     "toast": {
-      "success": "修改连接成功"
+      "connect-success": "连接成功",
+      "disconnect-success": "断开连接成功"
     }
   },
   "message": {

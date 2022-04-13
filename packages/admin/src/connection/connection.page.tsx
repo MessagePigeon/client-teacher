@@ -12,17 +12,18 @@ const ConnectionPage: React.FC = () => {
 
   const isPhone = useCheckPhone();
 
-  const { control, handleSubmit, reset } = useForm({
+  const { control, handleSubmit } = useForm({
     defaultValues: { teacherId: '', studentId: '' },
   });
 
   const { run } = useRequest(API.modifyConnection, {
     manual: true,
-    onFinally() {
-      reset();
-    },
-    onSuccess() {
-      toast.success(t('connection.toast.success'));
+    onSuccess(_, [, action]) {
+      if (action === 'connect') {
+        toast.success(t('connection.toast.connect-success'));
+      } else {
+        toast.info(t('connection.toast.disconnect-success'));
+      }
     },
   });
 
