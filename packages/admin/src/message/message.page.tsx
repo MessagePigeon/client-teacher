@@ -66,7 +66,7 @@ const MessagePage: React.FC = () => {
               {message.message}
             </Typography>
             {message.students.map((student) => (
-              <CopyableChip copyText={student.id}>
+              <CopyableChip key={student.id} copyText={student.id}>
                 {student.defaultRemark}
               </CopyableChip>
             ))}
