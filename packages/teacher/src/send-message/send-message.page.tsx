@@ -125,7 +125,7 @@ const SendMessagePage: React.FC = () => {
         name="message"
         label={t('send-message.message.label')}
         multiline
-        rows={5}
+        minRows={5}
       />
       <Controller
         control={control}

@@ -3,58 +3,48 @@ import {
   IconButton,
   InputAdornment,
   TextField as MuiTextField,
+  TextFieldProps,
 } from '@mui/material';
 import { useBoolean } from 'ahooks';
 import {
   Control,
   Controller,
   FieldPath,
-  FieldValues,
+  FieldValues as HookFormFieldValues,
   RegisterOptions,
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 type Rules<
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  FieldValues extends HookFormFieldValues = HookFormFieldValues,
+  Name extends FieldPath<FieldValues> = FieldPath<FieldValues>,
 > = Omit<
-  RegisterOptions<TFieldValues, TName>,
+  RegisterOptions<FieldValues, Name>,
   'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
 >;
 
-interface FormTextFieldProps<
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
-> {
-  name: TName;
-  label: string;
-  control: Control<TFieldValues>;
-  rules?: Rules<TFieldValues, TName>;
+type FormTextFieldProps<
+  FieldValues extends HookFormFieldValues = HookFormFieldValues,
+  Name extends FieldPath<FieldValues> = FieldPath<FieldValues>,
+> = {
+  name: Name;
+  control: Control<FieldValues>;
+  rules?: Rules<FieldValues, Name>;
   defaultHelperText?: string;
-  autoComplete?: string;
-  autoFocus?: boolean;
   password?: boolean;
-  variant?: 'standard' | 'filled' | 'outlined';
-  multiline?: boolean;
-  rows?: number;
-}
+} & TextFieldProps;
 
 const FormTextField = <
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  FieldValues extends HookFormFieldValues = HookFormFieldValues,
+  Name extends FieldPath<FieldValues> = FieldPath<FieldValues>,
 >({
   name,
-  label,
   control,
   rules,
   defaultHelperText,
-  autoComplete,
-  autoFocus,
   password,
-  variant,
-  multiline,
-  rows,
-}: FormTextFieldProps<TFieldValues, TName>) => {
+  ...props
+}: FormTextFieldProps<FieldValues, Name>) => {
   const { t } = useTranslation();
 
   const [showPassword, { toggle: toggleShowPassword }] = useBoolean();
@@ -69,18 +59,13 @@ const FormTextField = <
       }}
       render={({ field, fieldState: { invalid, error } }) => (
         <MuiTextField
+          {...props}
           margin="normal"
           fullWidth
-          label={label}
           id={name}
-          autoComplete={autoComplete}
-          autoFocus={autoFocus}
           error={invalid}
           helperText={invalid ? error?.message : defaultHelperText}
           type={password ? (showPassword ? 'text' : 'password') : undefined}
-          variant={variant}
-          multiline={multiline}
-          minRows={rows}
           InputProps={
             password
               ? {
