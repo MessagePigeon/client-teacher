@@ -7,11 +7,7 @@ const IndexPage: React.FC = () => {
   const navigate = useNavigate();
   useMount(() => {
     const token = localStorage.getItem('token');
-    if (token) {
-      navigate('/connection');
-    } else {
-      navigate('/login');
-    }
+    navigate(token ? '/connection' : '/login');
   });
 
   return <LoadingModal open />;

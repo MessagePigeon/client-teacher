@@ -7,11 +7,7 @@ const IndexPage: React.FC = () => {
   const navigate = useNavigate();
   useMount(() => {
     const token = localStorage.getItem('token');
-    if (token) {
-      navigate('/send-message');
-    } else {
-      navigate('/login');
-    }
+    navigate(token ? '/send-message' : '/login');
   });
   return <LoadingModal open />;
 };
