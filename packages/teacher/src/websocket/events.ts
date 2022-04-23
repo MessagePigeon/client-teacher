@@ -3,9 +3,9 @@ import i18n from '~/i18n';
 import { connectedStudentsActions } from '~/state/slices/connected-students.slice';
 import { messagesActions } from '~/state/slices/messages.slice';
 import { pendingStudentsActions } from '~/state/slices/pending-students.slice';
-import { store } from '~/state/store';
+import { RootState, store } from '~/state/store';
 
-let state: ReturnType<typeof store.getState>;
+let state: RootState;
 store.subscribe(() => {
   state = store.getState();
 });
