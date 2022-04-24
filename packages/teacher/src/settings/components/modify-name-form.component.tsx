@@ -56,7 +56,7 @@ const ModifyNameForm: React.FC = () => {
         sx={{ mt: 1 }}
         disabled={loading}
       >
-        {t('settings.change-password.form.submit')}
+        {t('settings.modify-name.form.submit')}
       </Button>
     </Paper>
   );
