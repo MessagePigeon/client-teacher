@@ -127,7 +127,8 @@ const SendMessagePage: React.FC = () => {
         multiline
         minRows={5}
       />
-      <Controller
+      {/* Voice broadcast (tts) is unavailable in tauri student client */}
+      {/* <Controller
         control={control}
         name="tts"
         render={({ field: { onChange } }) => (
@@ -137,9 +138,10 @@ const SendMessagePage: React.FC = () => {
             onChange={onChange}
             defaultValue={3}
             maxValue={30}
+            disabled
           />
         )}
-      />
+      /> */}
       <Controller
         control={control}
         name="closeDelay"
