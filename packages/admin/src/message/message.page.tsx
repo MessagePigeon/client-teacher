@@ -62,7 +62,7 @@ const MessagePage: React.FC = () => {
             >
               {message.teacher.name}
             </CopyableChip>
-            <Typography sx={{ whiteSpace: 'pre-wrap', my: 2 }}>
+            <Typography sx={{ whiteSpace: 'pre-wrap', my: 1 }}>
               {message.message}
             </Typography>
             {message.students.map((student) => (
