@@ -12,5 +12,5 @@ export default defineConfig({
     },
   },
   envDir: '../../',
-  build: { outDir: '../../dist/admin' },
+  build: { outDir: '../../dist/teacher' },
 });
