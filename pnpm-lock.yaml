@@ -80,7 +80,7 @@ importers:
   packages/admin:
     specifiers:
       '@date-io/dayjs': ^2.13.1
-      '@mpigeon/client-shared': workspace:^0.1.0
+      '@mpigeon/client-shared': workspace:^0.0.0
     dependencies:
       '@date-io/dayjs': 2.13.1_dayjs@1.11.0
       '@mpigeon/client-shared': link:../shared
@@ -90,7 +90,7 @@ importers:
 
   packages/teacher:
     specifiers:
-      '@mpigeon/client-shared': workspace:^0.1.0
+      '@mpigeon/client-shared': workspace:^0.0.0
       '@reduxjs/toolkit': ^1.8.0
       react-redux: ^7.2.6
     dependencies:

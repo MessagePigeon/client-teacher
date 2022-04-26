@@ -10,7 +10,7 @@
     "lint": "eslint \"**/*.{ts,tsx}\" --fix"
   },
   "dependencies": {
-    "@mpigeon/client-shared": "workspace:^0.1.0",
+    "@mpigeon/client-shared": "workspace:^0.0.0",
     "@reduxjs/toolkit": "^1.8.0",
     "react-redux": "^7.2.6"
   }
