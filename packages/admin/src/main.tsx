@@ -5,10 +5,12 @@ import App from './app';
 import './i18n';
 
 if (import.meta.env.VITE_MOCK) {
-  const { worker } = await import('./mocks/browser');
-  const { generateMockDatabase } = await import('./mocks/database');
-  generateMockDatabase();
-  worker.start();
+  (async () => {
+    const { worker } = await import('./mocks/browser');
+    const { generateMockDatabase } = await import('./mocks/database');
+    generateMockDatabase();
+    worker.start();
+  })();
 }
 
 ReactDOM.render(
