@@ -33,3 +33,11 @@ pnpm run dev:mock
 # Start with backend
 pnpm run dev
 ```
+
+## Production
+
+```
+pnpm run build
+```
+
+The distributable files will be generated in `/dist/teacher` and `/dist/admin`
