@@ -7,7 +7,8 @@
     "preinstall": "npx only-allow pnpm",
     "postinstall": "simple-git-hooks",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
-    "lint": "eslint \"**/*.{ts,tsx}\" --fix"
+    "lint": "eslint \"**/*.{ts,tsx}\" --fix",
+    "build": "pnpm --filter @mpigeon/client-teacher run build && pnpm --filter @mpigeon/client-admin run build "
   },
   "author": "Justin Sun",
   "license": "AGPL-3.0",
