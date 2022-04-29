@@ -13,6 +13,7 @@ const MainContainer: React.FC<{ maxWidth?: Breakpoint }> = ({
         mt: 10,
         mb: { xs: 10, md: 2 },
         minHeight: { xs: 'calc(100vh - 160px)', md: 0 },
+        pl: { md: 30, lg: 0 },
       }}
     >
       {children}
