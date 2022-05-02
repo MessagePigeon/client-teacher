@@ -41,7 +41,7 @@ const SideNav: React.FC<SideNavProps> = ({
           width: drawerWidth,
           boxSizing: 'border-box',
         },
-        display: { xs: 'none', md: 'block' },
+        display: { xs: 'none', lg: 'block' },
       }}
     >
       <Toolbar />

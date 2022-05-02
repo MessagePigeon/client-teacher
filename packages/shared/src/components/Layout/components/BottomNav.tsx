@@ -20,7 +20,7 @@ const BottomNav: React.FC<BottomNavProps> = ({
         bottom: 0,
         left: 0,
         right: 0,
-        display: { xs: 'block', md: 'none' },
+        display: { xs: 'block', lg: 'none' },
         zIndex: (theme) => theme.zIndex.drawer + 1,
       }}
       elevation={3}
