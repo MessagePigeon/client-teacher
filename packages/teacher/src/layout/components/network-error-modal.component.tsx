@@ -1,8 +1,11 @@
 import { Alert, Backdrop } from '@mui/material';
 import { useBoolean, useNetwork, useUpdateEffect } from 'ahooks';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const NetworkErrorModal: React.FC = () => {
+  const { t } = useTranslation();
+
   const { online } = useNetwork();
   const [shouldRefresh, { setTrue: setShouldRefreshTrue }] = useBoolean();
 
@@ -22,7 +25,7 @@ const NetworkErrorModal: React.FC = () => {
       sx={{ zIndex: (theme) => theme.zIndex.drawer + 999 }}
     >
       <Alert severity="warning" variant="filled">
-        Network Offline
+        {t('layout.network-offline')}
       </Alert>
     </Backdrop>
   );

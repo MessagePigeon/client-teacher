@@ -22,7 +22,8 @@
     },
     "toast": {
       "logout": "Logout Success"
-    }
+    },
+    "network-offline": "Network Offline"
   },
   "login": {
     "title": "Login",

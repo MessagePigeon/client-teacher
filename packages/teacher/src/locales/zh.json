@@ -22,7 +22,8 @@
     },
     "toast": {
       "logout": "登出成功"
-    }
+    },
+    "network-offline": "网络断开"
   },
   "login": {
     "title": "登录",
