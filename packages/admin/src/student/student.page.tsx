@@ -1,5 +1,5 @@
 import {
-  Delete,
+  Block,
   DriveFileRenameOutline,
   Visibility,
   VisibilityOff,
@@ -13,7 +13,6 @@ import { toast } from 'react-toastify';
 import TopBottomPagination from '~/common/components/top-bottom-pagination.component';
 import UserCard from '~/common/components/user-card.component';
 import { PAGE_SIZE } from '~/common/constants';
-import { confirmToast } from '~/common/helpers/confirm-toast.helper';
 import { API } from '~/http/apis';
 import ModifyDialog from './components/dialogs/modify-dialog.component';
 import CreateForm from './components/forms/create-form.component';
@@ -51,11 +50,15 @@ const StudentPage: React.FC = () => {
     { refreshDeps: [page, searchParams] },
   );
 
-  const { run: runDelete } = useRequest(API.deleteStudent, {
+  const { run: runBan } = useRequest(API.banStudent, {
     manual: true,
-    onSuccess() {
+    onSuccess(_, [body]) {
+      toast.info(
+        body.ban
+          ? t('student.toast.ban-success')
+          : t('student.toast.unban-success'),
+      );
       refresh();
-      toast.info(t('student.toast.delete-success'));
     },
   });
 
@@ -100,6 +103,7 @@ const StudentPage: React.FC = () => {
                 id={student.id}
                 online={student.online}
                 connectedUsers={student.teachers}
+                ban={student.ban}
                 actions={[
                   {
                     tooltip: showingKeyIds.has(student.id)
@@ -130,15 +134,10 @@ const StudentPage: React.FC = () => {
                     },
                   },
                   {
-                    tooltip: t('common.delete'),
-                    icon: <Delete />,
+                    tooltip: student.ban ? t('common.unban') : t('common.ban'),
+                    icon: <Block />,
                     onClick() {
-                      confirmToast(
-                        t('student.toast.delete-confirm', {
-                          remark: student.defaultRemark,
-                        }),
-                        () => runDelete({ id: student.id }),
-                      );
+                      runBan({ id: student.id, ban: !student.ban });
                     },
                   },
                 ]}

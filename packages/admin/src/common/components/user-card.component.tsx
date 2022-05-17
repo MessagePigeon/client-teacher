@@ -24,6 +24,7 @@ interface UserCardProps {
   online: boolean;
   connectedUsers: Array<{ name: string; id: string }>;
   actions: Action[];
+  ban: boolean;
 }
 
 const UserCard: React.FC<UserCardProps> = ({
@@ -32,13 +33,21 @@ const UserCard: React.FC<UserCardProps> = ({
   children,
   connectedUsers,
   actions,
+  ban,
 }) => {
   const { t } = useTranslation();
 
   const [isIdCopied, { set: setIsIdCopied }] = useBoolean();
 
   return (
-    <Paper sx={{ p: 2, display: 'flex' }} variant="outlined">
+    <Paper
+      sx={{
+        p: 2,
+        display: 'flex',
+        borderColor: ban ? 'error.main' : undefined,
+      }}
+      variant="outlined"
+    >
       <Box sx={{ flexGrow: 1 }}>
         <Box>
           <Tooltip

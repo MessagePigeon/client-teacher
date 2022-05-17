@@ -5,8 +5,8 @@ import {
   CreateTeacherRequest,
   CreateTeacherResponse,
   DeleteRegisterCodeRequest,
-  DeleteStudentRequest,
-  DeleteTeacherRequest,
+  BanStudentRequest,
+  BanTeacherRequest,
   FindRegisterCodesResponse,
   FindStudentsRequest,
   FindStudentsResponse,
@@ -74,8 +74,8 @@ export class API {
       body,
     );
   }
-  static async deleteTeacher(params: DeleteTeacherRequest) {
-    return await service.delete('/teacher', { params });
+  static async banTeacher(body: BanTeacherRequest) {
+    return await service.patch('/teacher/ban', body);
   }
   static async getStudents(params: FindStudentsRequest) {
     return await service.get<FindStudentsResponse>('/students', { params });
@@ -86,7 +86,7 @@ export class API {
   static async modifyStudent(body: ModifyStudentRequest) {
     return await service.patch('/student', body);
   }
-  static async deleteStudent(params: DeleteStudentRequest) {
-    return await service.delete('/student', { params });
+  static async banStudent(body: BanStudentRequest) {
+    return await service.patch('/student/ban', body);
   }
 }

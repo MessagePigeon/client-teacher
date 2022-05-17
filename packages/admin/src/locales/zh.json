@@ -8,12 +8,13 @@
     "password": "密码",
     "copy": "复制",
     "copied": "已复制 !",
-    "delete": "删除",
     "cancel": "取消",
     "no": "否",
     "yes": "是",
     "online": "在线",
-    "offline": "离线"
+    "offline": "离线",
+    "ban": "封禁",
+    "unban": "取消封禁"
   },
   "layout": {
     "title": "飞鸽传书后台",
@@ -56,7 +57,8 @@
   },
   "register-code": {
     "count": "数量",
-    "generate": "生成"
+    "generate": "生成",
+    "delete": "删除"
   },
   "teacher": {
     "tip": "点击学生以复制ID",
@@ -90,8 +92,8 @@
     "toast": {
       "rename-success": "修改教师姓名成功",
       "reset-password-confirm": "你确定要重置 {{name}} 的密码吗",
-      "delete-confirm": "你确定要删除 {{name}} 吗",
-      "delete-success": "删除教师成功",
+      "ban-success": "封禁教师成功",
+      "unban-success": "取消封禁教师成功",
       "copy-password-success": "复制密码成功",
       "copy-all-success": "复制全部成功"
     }
@@ -105,8 +107,8 @@
       "hide-key": "隐藏Key"
     },
     "toast": {
-      "delete-success": "删除学生成功",
-      "delete-confirm": "你确定要删除 {{remark}} 吗",
+      "ban-success": "封禁学生成功",
+      "unban-success": "取消封禁学生成功",
       "modify-success": "修改学生成功",
       "create-success": "创建学生成功"
     },

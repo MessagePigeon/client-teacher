@@ -141,7 +141,7 @@ const RegisterCodePage: React.FC = () => {
                       </IconButton>
                     </Tooltip>
                     <Tooltip
-                      title={t('common.delete') as string}
+                      title={t('register-code.delete') as string}
                       arrow
                       placement="right"
                     >

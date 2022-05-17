@@ -1,9 +1,12 @@
 import faker from '@faker-js/faker';
 import { rest, RestRequest } from 'msw';
-import { CreateStudentRequest, ModifyStudentRequest } from '~/http/types';
+import {
+  BanStudentRequest,
+  CreateStudentRequest,
+  ModifyStudentRequest,
+} from '~/http/types';
 import { DEFAULT_SUCCESS_RESPONSE } from '../constants';
 import { db } from '../database';
-import { deleteById } from '../utils/delete-by-id.util';
 import { updateById } from '../utils/update-by-id.util';
 
 export const studentHandlers = [
@@ -19,6 +22,7 @@ export const studentHandlers = [
         id: faker.datatype.uuid(),
         online: false,
         teachers: [],
+        ban: false,
       });
       return res(ctx.json(payload));
     },
@@ -45,11 +49,14 @@ export const studentHandlers = [
 
     return res(ctx.json({ data, total }));
   }),
-  rest.delete('/mock/student', (req, res, ctx) => {
-    const id = req.url.searchParams.get('id')!;
-    deleteById(db.students, id);
-    return res(ctx.json(DEFAULT_SUCCESS_RESPONSE));
-  }),
+  rest.patch(
+    '/mock/student/ban',
+    (req: RestRequest<BanStudentRequest>, res, ctx) => {
+      const { id, ban } = req.body;
+      console.log('update ban:', updateById(db.students, id, { ban }));
+      return res(ctx.json(DEFAULT_SUCCESS_RESPONSE));
+    },
+  ),
   rest.patch(
     '/mock/student',
     (req: RestRequest<ModifyStudentRequest>, res, ctx) => {

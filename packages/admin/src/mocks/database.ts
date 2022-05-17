@@ -57,6 +57,7 @@ const generateTeachers = () => {
     name: faker.name.firstName(),
     online: faker.datatype.boolean(),
     students: getRandomStudents(),
+    ban: false,
   }));
   db.teachers = teachers;
 };
@@ -68,6 +69,7 @@ const generateStudents = () => {
     key: faker.datatype.string(),
     online: faker.datatype.boolean(),
     teachers: getRandomTeachers(),
+    ban: false,
   }));
   db.students = students;
 };

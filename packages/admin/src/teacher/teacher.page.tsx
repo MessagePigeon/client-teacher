@@ -1,4 +1,4 @@
-import { Delete, DriveFileRenameOutline, Password } from '@mui/icons-material';
+import { Block, DriveFileRenameOutline, Password } from '@mui/icons-material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Alert, Grid, Tab, Typography } from '@mui/material';
 import { useBoolean, useRequest, useUpdateEffect } from 'ahooks';
@@ -60,11 +60,15 @@ const TeacherPage: React.FC = () => {
     },
   );
 
-  const { run: runDelete } = useRequest(API.deleteTeacher, {
+  const { run: runBan } = useRequest(API.banTeacher, {
     manual: true,
-    onSuccess() {
+    onSuccess(_, [body]) {
+      toast.info(
+        body.ban
+          ? t('teacher.toast.ban-success')
+          : t('teacher.toast.unban-success'),
+      );
       refresh();
-      toast.info(t('teacher.toast.delete-success'));
     },
   });
 
@@ -112,6 +116,7 @@ const TeacherPage: React.FC = () => {
                   id: student.id,
                   name: student.defaultRemark,
                 }))}
+                ban={teacher.ban}
                 actions={[
                   {
                     tooltip: t('teacher.actions.reset-password'),
@@ -137,15 +142,10 @@ const TeacherPage: React.FC = () => {
                     },
                   },
                   {
-                    tooltip: t('common.delete'),
-                    icon: <Delete />,
+                    tooltip: teacher.ban ? t('common.unban') : t('common.ban'),
+                    icon: <Block />,
                     onClick() {
-                      confirmToast(
-                        t('teacher.toast.delete-confirm', {
-                          name: teacher.name,
-                        }),
-                        () => runDelete({ id: teacher.id }),
-                      );
+                      runBan({ id: teacher.id, ban: !teacher.ban });
                     },
                   },
                 ]}
